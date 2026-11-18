@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Painel · Fluxofy Checkout</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{/* troque --co/--co2/--ac para mudar as cores do painel */--bg:#f5f6f3;--card:#fff;--ink:#0b1220;--mut:#5b6478;--line:#e2e8f0;--co:#111827;--co2:#000000;--ac:#84cc16;--zone:#f1f9e4;--ok:#0f8a5f;--okbg:#e2f6ee;--warn:#8a5a00;--warnbg:#fff3d6;--err:#c62828;--errbg:#fdecec;--r:14px}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,system-ui,sans-serif}
+h1,h2,h3,.logo{font-family:"Space Grotesk",Inter,sans-serif}
+h1{font-size:26px;margin:0 0 4px;line-height:1.15}h2{font-size:19px;margin:0 0 14px}h3{font-size:16px;margin:0}
+a{color:var(--co)}button{font:inherit}
+.oculto{display:none!important}
+/* layout: menu lateral + conteúdo */
+.app{display:grid;grid-template-columns:248px minmax(0,1fr);min-height:100vh}
+.lateral{background:#fff;border-right:1px solid var(--line);padding:22px 16px;display:flex;flex-direction:column;gap:18px;position:sticky;top:0;height:100vh}
+.logo{font-weight:700;font-size:20px;display:flex;gap:10px;align-items:center;text-decoration:none;color:var(--ink)}
+.logo i{width:40px;height:40px;border-radius:12px;background:var(--co);box-shadow:inset -10px -10px 0 var(--ac)}
+.saldo{padding:0 6px}.saldo small{color:var(--mut);font-size:12.5px;display:block}.saldo b{font:700 20px "Space Grotesk",sans-serif;color:var(--co)}.saldo b::after{content:"";display:block;width:28px;height:3px;border-radius:3px;background:var(--ac);margin-top:6px}
+nav.abas{display:flex;flex-direction:column;gap:4px}
+nav.abas a{display:flex;gap:10px;align-items:center;padding:11px 12px;border-radius:10px;text-decoration:none;color:var(--mut);font-weight:500}
+nav.abas a svg{width:18px;height:18px;flex:none}
+nav.abas a:hover{background:var(--bg);color:var(--ink)}
+nav.abas a.on{background:var(--co);color:#fff;border-left:3px solid var(--ac);box-shadow:0 6px 16px -6px #0000004d}
+.lateral .rodape-lat{margin-top:auto;display:grid;gap:8px}
+.barra{display:flex;justify-content:flex-end;align-items:center;gap:14px;padding:14px 28px;border-bottom:1px solid var(--line);background:#ffffffcc;backdrop-filter:blur(8px);position:sticky;top:0;z-index:5}
+.avatar{width:38px;height:38px;border-radius:50%;background:var(--ac);color:#111827;display:grid;place-items:center;font-weight:700}
+.quem{display:flex;gap:10px;align-items:center}.quem small{display:block;color:var(--mut);font-size:12px;line-height:1.2}
+@media(max-width:900px){.app{grid-template-columns:minmax(0,1fr)}.lateral{position:static;height:auto;flex-direction:row;flex-wrap:wrap;align-items:center;padding:12px 16px;gap:10px}
+  .saldo,.lateral .rodape-lat{display:none}nav.abas{flex-direction:row;overflow-x:auto;width:100%}nav.abas a{white-space:nowrap;padding:9px 12px;flex:none}.barra{padding:10px 16px}main{padding:20px 16px 50px}}
+main{max-width:1180px;margin:0 auto;padding:26px 28px 60px;width:100%}
+.sub{color:var(--mut);margin:0 0 22px}
+.cab{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+/* dashboard */
+.ola{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.periodo{display:flex;gap:8px;align-items:center}.periodo select{width:auto;min-width:150px}
+.icone-btn{width:42px;height:42px;border-radius:10px;border:1px solid var(--line);background:#fff;display:grid;place-items:center;cursor:pointer;color:var(--co)}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:14px}
+@media(max-width:1000px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:560px){.kpis{grid-template-columns:minmax(0,1fr)}}
+.kpi .t{display:flex;justify-content:space-between;align-items:center;color:var(--ink);font-weight:500;gap:8px}
+.kpi .v{font:700 26px "Space Grotesk",sans-serif;color:var(--co);margin-top:8px;white-space:nowrap;transition:filter .2s}
+.kpi .v.oculto-valor{filter:blur(9px);user-select:none}
+.olhinho{border:0;background:none;color:var(--mut);cursor:pointer;padding:4px}
+.trilha{height:8px;border-radius:999px;background:#e6ebf3;margin-top:10px;overflow:hidden}.trilha i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#4d7c0f,var(--ac))}
+.marcos{display:flex;justify-content:space-between;font-size:12px;color:var(--mut);margin-top:6px}
+.fig{position:relative;height:280px;margin-top:8px}.fig svg{position:absolute;inset:0;width:100%;height:100%}
+.dica-graf{position:absolute;background:var(--ink);color:#fff;font-size:12px;padding:6px 9px;border-radius:8px;pointer-events:none;white-space:nowrap;transform:translate(-50%,-110%)}
+/* elementos */
+.card{background:var(--card);border-radius:var(--r);border:1px solid var(--line);padding:20px}
+.grid2{display:grid;grid-template-columns:minmax(0,350px) minmax(0,1fr);gap:18px;align-items:start}
+.col{display:grid;gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media(max-width:860px){.grid2,.grid3{grid-template-columns:minmax(0,1fr)}}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:42px;padding:0 18px;border-radius:10px;border:1.5px solid transparent;font-weight:600;cursor:pointer;text-decoration:none}
+.btn.pri{background:var(--co);color:#fff}.btn.pri:hover{background:var(--co2)}.btn.pri:disabled{opacity:.55;cursor:wait}
+.btn.sec{background:#fff;border-color:var(--line);color:var(--ink)}.btn.sec:hover{border-color:var(--co);color:var(--co)}
+.btn.perigo{background:#fff;border-color:var(--err);color:var(--err);width:100%}
+.btn.peq{min-height:34px;padding:0 12px;font-size:13px}
+.voltar{display:inline-flex;gap:6px;color:var(--co);text-decoration:none;font-weight:500;margin-bottom:14px}
+label.l{display:block;font-size:14px;color:var(--mut);margin:14px 0 6px}
+input,select{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:9px;font-size:15px;background:#fff;color:var(--ink)}
+input:focus,select:focus,.btn:focus-visible,a:focus-visible{outline:none;border-color:var(--co);box-shadow:0 0 0 3px #84cc1655}
+.campo-olho{position:relative}.campo-olho input{padding-right:44px}.olho{position:absolute;right:6px;top:50%;transform:translateY(-50%);border:0;background:none;color:var(--co);cursor:pointer;padding:8px}
+.dica{font-size:12.5px;color:var(--mut);margin-top:6px;display:flex;gap:6px}
+.lin2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.chip{display:inline-block;font-size:12px;font-weight:600;padding:2px 9px;border-radius:999px;background:var(--zone);color:var(--co)}
+.chip.ok{background:var(--okbg);color:var(--ok)}.chip.warn{background:var(--warnbg);color:var(--warn)}.chip.err{background:var(--errbg);color:var(--err)}.chip.cinza{background:#eef0f4;color:var(--mut)}
+.marca{display:flex;gap:10px;align-items:center}.marca .ic{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;flex:none}
+.desc{color:var(--mut);font-size:14px;margin:10px 0 6px}
+.item{display:flex;gap:12px;align-items:flex-start}
+.item .ic{width:36px;height:36px;border-radius:50%;background:var(--zone);display:grid;place-items:center;flex:none;color:var(--co)}
+.item .t{flex:1}.item small{color:var(--mut);display:block}
+.caixa{background:var(--bg);border-radius:10px;padding:12px 14px;margin-top:12px;font-size:14px}
+.tog{display:flex;align-items:center;gap:12px;margin-top:6px;cursor:pointer;user-select:none}
+.tog input{display:none}.tog .tr{width:42px;height:24px;border-radius:999px;background:#d6dae4;position:relative;transition:.15s;flex:none}
+.tog .tr::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:.15s;box-shadow:0 1px 2px #0003}
+.tog input:checked+.tr{background:var(--co)}.tog input:checked+.tr::after{left:21px}
+.info{display:inline-grid;place-items:center;width:16px;height:16px;border-radius:50%;border:1.2px solid var(--mut);color:var(--mut);font-size:10px;font-weight:700;cursor:help;margin-left:4px;vertical-align:1px}
+.code{position:relative;background:#0b0d12;color:#dfe5ff;border-radius:10px;padding:14px 14px 14px;font:13px/1.55 ui-monospace,Menlo,monospace;margin-top:10px;white-space:pre-wrap;word-break:break-all;padding-right:74px}
+.copiar{position:absolute;right:8px;top:8px;background:#232a44;color:#fff;border:0;border-radius:7px;padding:5px 10px;font-size:12px;cursor:pointer}
+.res{margin-top:12px;padding:12px 14px;border-radius:10px;font-size:14px}
+.res.ok{background:var(--okbg);color:var(--ok)}.res.err{background:var(--errbg);color:var(--err)}
+/* integrações */
+.integ{display:flex;flex-direction:column;gap:10px;text-decoration:none;color:inherit;transition:.15s}
+.integ:hover{border-color:var(--co);transform:translateY(-1px)}
+/* checklist */
+.passo{display:flex;gap:12px;padding:14px 0;border-top:1px solid var(--line);align-items:center}.passo:first-of-type{border-top:0}
+.bola{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:13px;flex:none;background:#eef0f4;color:var(--mut)}
+.bola.ok{background:var(--ok);color:#fff}
+.passo .t{flex:1}.passo small{display:block;color:var(--mut)}
+.num{font:700 26px "Space Grotesk",sans-serif;white-space:nowrap}
+/* tabelas */
+table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;padding:11px 8px;border-bottom:1px solid var(--line)}th{color:var(--mut);font-weight:600;font-size:13px}
+td.r,th.r{text-align:right;white-space:nowrap}tbody tr{cursor:pointer}tbody tr:hover{background:#f8f9fc}
+.vazio{text-align:center;color:var(--mut);padding:30px}
+@media(max-width:640px){.tabela thead{display:none}.tabela tr{display:grid;grid-template-columns:1fr auto;padding:10px 0;border-bottom:1px solid var(--line)}.tabela td{border:0;padding:2px 0}.tabela td.r{text-align:right}}
+/* produtos meta */
+.prod{display:flex;gap:12px;padding:12px 0;border-top:1px solid var(--line);align-items:center;flex-wrap:wrap}
+.prod img,.prod .ph{width:44px;height:44px;border-radius:8px;object-fit:cover;background:#eef0f4;flex:none}
+.prod .t{flex:1;min-width:160px}
+/* gaveta */
+.fundo{position:fixed;inset:0;background:#0b0d1266;z-index:20;display:flex;justify-content:flex-end}
+.gaveta{background:#fff;width:min(520px,100%);height:100%;overflow:auto;padding:24px}
+.ev{font-size:13px;padding:8px 0;border-top:1px solid var(--line)}.ev b{display:block}
+/* login */
+.entrada{min-height:100vh;display:grid;place-items:center;padding:20px}
+.entrada .card{width:min(420px,100%);padding:28px}
+.troca{text-align:center;margin-top:16px;font-size:14px;color:var(--mut)}
+.erro{color:var(--err);font-size:14px;margin-top:12px;min-height:18px}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:11px 18px;border-radius:10px;font-size:14px;z-index:30}
+</style>
+</head>
+<body>
+
+<!-- ============ ENTRAR / CADASTRAR ============ -->
+<div class="entrada oculto" id="telaEntrada">
+  <div class="card">
+    <a class="logo" href="/" style="margin-bottom:18px"><i></i>Fluxofy</a>
+    <div id="fEntrar">
+      <h1>Entrar no painel</h1><p class="sub" style="margin-bottom:6px">Configure suas integrações e acompanhe seus pedidos.</p>
+      <label class="l">E-mail</label><input id="eEmail" type="email" autocomplete="email">
+      <label class="l">Senha</label><input id="eSenha" type="password" autocomplete="current-password">
+      <button class="btn pri" style="width:100%;margin-top:18px" id="btnEntrar">Entrar</button>
+      <div class="troca">Não tem conta? <a href="#" id="irCadastro">Criar conta</a></div>
+    </div>
+    <div id="fCadastro" class="oculto">
+      <h1>Criar conta</h1><p class="sub" style="margin-bottom:6px">Leva 1 minuto. Você conecta a Shopify e a Cielo depois.</p>
+      <label class="l">Seu nome</label><input id="cNome" autocomplete="name">
+      <label class="l">Nome da loja</label><input id="cLoja" placeholder="Ex.: Lionz Store">
+      <label class="l">E-mail</label><input id="cEmail" type="email" autocomplete="email">
+      <label class="l">Senha (mínimo 8 caracteres)</label><input id="cSenha" type="password" autocomplete="new-password">
+      <div id="blocoConvite" class="oculto"><label class="l">Código de convite</label><input id="cConvite"></div>
+      <button class="btn pri" style="width:100%;margin-top:18px" id="btnCadastrar">Criar conta</button>
+      <div class="troca">Já tem conta? <a href="#" id="irEntrar">Entrar</a></div>
+    </div>
+    <div class="erro" id="erroEntrada"></div>
+  </div>
+</div>
+
+<!-- ============ PAINEL ============ -->
+<div id="telaPainel" class="oculto app">
+<aside class="lateral">
+  <a class="logo" href="#inicio"><i></i>Fluxofy</a>
+  <div class="saldo"><small>Receita nos últimos 30 dias</small><b id="saldoLat">R$ 0,00</b></div>
+  <nav class="abas" id="abas">
+    <a href="#inicio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>Dashboard</a>
+    <a href="#pedidos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2 11h11l2-8H6"/><circle cx="9" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/></svg>Vendas</a>
+    <a href="#integracoes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 7V3M15 7V3M7 7h10v4a5 5 0 0 1-10 0zM12 16v5"/></svg>Integrações</a>
+    <a href="#checkout"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg>Checkout</a>
+    <a href="#admin" id="abaAdmin" class="oculto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l8 3v6c0 5-4 8-8 9-4-1-8-4-8-9V6z"/></svg>Admin</a>
+  </nav>
+  <div class="rodape-lat"><a class="btn sec peq" href="/" target="_blank">Ver site</a></div>
+</aside>
+<div>
+<header class="barra">
+  <span class="chip cinza" id="chipAmbiente">Simulação</span>
+  <div class="quem"><div class="avatar" id="avatar">L</div><div><b id="quemLoja" style="font-size:14px"></b><small>Loja</small></div></div>
+  <button class="btn sec peq" id="btnSair">Sair</button>
+</header>
+<main>
+<div class="res err oculto" id="avisoBloqueio" style="margin:0 0 18px">O checkout desta loja está bloqueado pelo administrador da plataforma. Entre em contato com o suporte.</div>
+<!-- DASHBOARD -->
+<section data-v="inicio">
+  <h1 style="margin-bottom:16px">Dashboard</h1>
+  <div class="card ola">
+    <div><h2 style="margin:0" id="ola">Olá 👋</h2><p class="desc" style="margin:4px 0 0">Que bom te ver por aqui!</p></div>
+    <div class="periodo">
+      <button class="icone-btn" id="recarregar" title="Atualizar" aria-label="Atualizar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 11a8 8 0 0 0-14-5l-2 2M4 13a8 8 0 0 0 14 5l2-2M4 4v4h4M20 20v-4h-4"/></svg></button>
+      <select id="periodo"><option value="7">Últimos 7 dias</option><option value="30" selected>Últimos 30 dias</option><option value="90">Últimos 90 dias</option></select>
+    </div>
+  </div>
+  <div class="kpis">
+    <div class="card kpi"><div class="t"><span>Total de vendas</span><button class="olhinho" id="olhoVendas" aria-label="Mostrar ou esconder valores">👁</button></div><div class="v" id="kVendas">—</div><small style="color:var(--mut)" id="kVendasSub"></small></div>
+    <div class="card kpi"><div class="t"><span>Ticket médio</span></div><div class="v" id="kTicket">—</div><small style="color:var(--mut)">por pedido pago</small></div>
+    <div class="card kpi"><div class="t"><span>Pedidos pagos</span></div><div class="v" id="kPagos">—</div><small style="color:var(--mut)" id="kConv"></small></div>
+    <div class="card kpi"><div class="t"><span>Painel de conquistas</span></div><div style="font-weight:600;margin-top:8px" id="kMeta">—</div><div class="trilha"><i id="kTrilha" style="width:0"></i></div><div class="marcos"><span id="kMarcoA"></span><span id="kMarcoB"></span></div></div>
+  </div>
+  <div class="card" style="margin-top:14px">
+    <div class="cab"><h2 style="margin:0">Receita total</h2><span class="desc" style="margin:0" id="totalGraf"></span></div>
+    <div class="fig" id="graf"><svg id="grafSvg"></svg></div>
+  </div>
+  <div class="grid2" style="margin-top:14px">
+    <div class="card"><h2>Primeiros passos</h2><div id="passos"></div></div>
+    <div class="card"><h2>Seu checkout</h2>
+      <p class="desc" style="margin-top:0">Endereço do checkout da sua loja. O script do tema leva o carrinho para cá.</p>
+      <div class="code" id="urlCheckoutIni"></div>
+      <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap"><a class="btn sec peq" id="abrirCheckoutIni" target="_blank">Abrir checkout de teste</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- INTEGRAÇÕES (lista) -->
+<section data-v="integracoes">
+  <h1>Integrações</h1><p class="sub">Conecte sua loja e seu meio de pagamento.</p>
+  <div class="grid3">
+    <a class="card integ" href="#shopify">
+      <div class="marca"><div class="ic" style="background:#eef7e3"><svg width="20" height="22" viewBox="0 0 20 22"><path d="M3 6l2-4h10l2 4v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z" fill="#95bf47"/><path d="M7 6V5a3 3 0 0 1 6 0v1" stroke="#fff" stroke-width="1.6" fill="none"/></svg></div><h3>Shopify</h3><span class="chip cinza" id="stShopifyLista">Inativo</span></div>
+      <p class="desc" style="margin:0">Leva o carrinho da loja para o checkout e cria os pedidos pagos.</p>
+    </a>
+    <a class="card integ" href="#cielo">
+      <div class="marca"><div class="ic" style="background:#eef0ea"><svg width="22" height="16" viewBox="0 0 22 16"><rect x="1" y="1" width="20" height="14" rx="3" fill="#111827"/><path d="M1 5h20" stroke="#fff" stroke-width="2"/></svg></div><h3>Cielo</h3><span class="chip cinza" id="stCieloLista">Simulação</span></div>
+      <p class="desc" style="margin:0">Cartão de crédito parcelado e Pix, direto na sua conta Cielo.</p>
+    </a>
+  </div>
+</section>
+
+<!-- SHOPIFY (detalhe, no formato do exemplo) -->
+<section data-v="shopify">
+  <a class="voltar" href="#integracoes">‹ Voltar</a>
+  <div class="cab"><div><h1>Detalhes do app</h1><p class="sub">Configure abaixo os dados da aplicação</p></div><button class="btn pri" id="salvarShopify">Salvar</button></div>
+  <div class="grid2">
+    <div class="col">
+      <div class="card">
+        <div class="marca"><div class="ic" style="background:#eef7e3"><svg width="20" height="22" viewBox="0 0 20 22"><path d="M3 6l2-4h10l2 4v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z" fill="#95bf47"/><path d="M7 6V5a3 3 0 0 1 6 0v1" stroke="#fff" stroke-width="1.6" fill="none"/></svg></div><h3>Shopify</h3><span class="chip cinza" id="stShopify">Inativo</span></div>
+        <p class="desc">Conecte sua loja Shopify para integrar o checkout e automatizar o processamento de pagamentos.</p>
+        <a href="/#int-shopify" target="_blank">Como integrar</a>
+      </div>
+      <div class="card">
+        <div class="item"><div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M3 7l9 5 9-5M12 12v10"/></svg></div>
+          <div class="t"><b>Produto</b> <span class="chip ok" id="stProduto">Tempo real</span><small>Preço e estoque lidos da Shopify a cada compra</small></div></div>
+        <div class="caixa" id="caixaEmb"></div>
+        <div class="caixa oculto" id="formEmb">
+          <label class="l" style="margin-top:0">Nome</label><input id="embNome">
+          <div class="lin2"><div><label class="l">Altura (cm)</label><input id="embA" inputmode="decimal"></div><div><label class="l">Largura (cm)</label><input id="embL" inputmode="decimal"></div></div>
+          <div class="lin2"><div><label class="l">Comprimento (cm)</label><input id="embC" inputmode="decimal"></div><div><label class="l">Peso (g)</label><input id="embP" inputmode="numeric"></div></div>
+          <p class="dica">Usado para cálculo de frete. Clique em Salvar no topo para gravar.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="item"><div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20c4 0 6-2 6-5l9-9-3-3-9 9c-3 0-5 2-5 5z"/></svg></div>
+          <div class="t"><b>Tema</b><small>Cole uma vez no <code>theme.liquid</code>, antes de <code>&lt;/body&gt;</code>. Mudanças feitas aqui valem sozinhas.</small></div></div>
+        <div class="code" id="codScript"></div>
+      </div>
+      <button class="btn perigo" id="desinstalarShopify">Desinstalar integração</button>
+    </div>
+    <div class="col">
+      <div class="card">
+        <h2>Informações básicas</h2>
+        <label class="l" style="margin-top:0">URL da loja Shopify</label>
+        <input id="shLoja" placeholder="minhaloja.myshopify.com" autocomplete="off">
+        <div class="dica">ⓘ A URL não pode conter os seguintes valores: www., https://, http://, /, .br</div>
+        <label class="l">API Key (Client ID)</label><input id="shId" autocomplete="off">
+        <label class="l">Client Secret</label>
+        <div class="campo-olho"><input id="shSecret" type="password" autocomplete="new-password"><button class="olho" type="button" data-olho="shSecret" aria-label="Mostrar">👁</button></div>
+        <label class="l">Pular carrinho <span class="info" title="Ao clicar em Comprar, o cliente vai direto para o checkout, sem passar pela página do carrinho.">i</span></label>
+        <label class="tog"><input type="checkbox" id="shPular"><span class="tr"></span><span data-txt>Inativo</span></label>
+        <label class="l">Criar apenas pedidos pagos <span class="info" title="Ativo: o pedido só aparece na Shopify depois do pagamento. Inativo: Pix gerado já cria o pedido como pendente, e ele é marcado como pago quando o Pix cair.">i</span></label>
+        <label class="tog"><input type="checkbox" id="shPagos"><span class="tr"></span><span data-txt>Inativo</span></label>
+        <label class="l">Enviar confirmação do pedido da Shopify <span class="info" title="A Shopify envia ao cliente o e-mail padrão de confirmação do pedido.">i</span></label>
+        <label class="tog"><input type="checkbox" id="shConf"><span class="tr"></span><span data-txt>Inativo</span></label>
+        <div style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap"><button class="btn sec" id="testarShopify">Testar conexão</button></div>
+        <div id="resShopify"></div>
+      </div>
+      <div class="card">
+        <h2>Links para anúncios da Meta</h2>
+        <p class="desc" style="margin-top:-6px">Link que leva o cliente direto ao checkout com o produto escolhido. Use nos anúncios para encurtar o caminho até a compra.</p>
+        <div style="display:flex;gap:10px"><input id="buscaProd" placeholder="Buscar produto pelo nome"><button class="btn sec" id="btnBuscaProd">Buscar</button></div>
+        <div id="listaProd"><p class="desc">Conecte a Shopify e clique em Buscar para listar seus produtos.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CIELO -->
+<section data-v="cielo">
+  <a class="voltar" href="#integracoes">‹ Voltar</a>
+  <div class="cab"><div><h1>Cielo</h1><p class="sub">Credenciais da API E-commerce Cielo 3.0</p></div><button class="btn pri" id="salvarCielo">Salvar</button></div>
+  <div class="grid2">
+    <div class="col">
+      <div class="card">
+        <div class="marca"><div class="ic" style="background:#eef0ea"><svg width="22" height="16" viewBox="0 0 22 16"><rect x="1" y="1" width="20" height="14" rx="3" fill="#111827"/><path d="M1 5h20" stroke="#fff" stroke-width="2"/></svg></div><h3>Cielo</h3><span class="chip cinza" id="stCielo">Simulação</span></div>
+        <p class="desc">Sem credenciais, o checkout roda em simulação: cartões terminados em 0, 1 ou 4 são aprovados e o Pix tem botão de teste.</p>
+        <a href="/#int-cielo" target="_blank">Como integrar</a>
+      </div>
+      <div class="card">
+        <b>URL de notificação (webhook)</b>
+        <p class="desc">Peça ao suporte e-commerce da Cielo para cadastrar este endereço. Ele confirma o Pix automaticamente.</p>
+        <div class="code" id="codWebhook"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Credenciais</h2>
+      <label class="l" style="margin-top:0">Ambiente</label>
+      <select id="ciAmb"><option value="sandbox">Sandbox (testes)</option><option value="production">Produção (vendas reais)</option></select>
+      <div class="lin2">
+        <div><label class="l">MerchantId</label><input id="ciMid" autocomplete="off"></div>
+        <div><label class="l">MerchantKey</label><div class="campo-olho"><input id="ciKey" type="password" autocomplete="new-password"><button class="olho" type="button" data-olho="ciKey">👁</button></div></div>
+      </div>
+      <div class="lin2">
+        <div><label class="l">Silent Order Post: ClientId <span class="info" title="Enviado pelo suporte da Cielo ao habilitar o Silent Order Post. Necessário para cartão.">i</span></label><input id="ciSid" autocomplete="off"></div>
+        <div><label class="l">Silent Order Post: ClientSecret</label><div class="campo-olho"><input id="ciSsec" type="password" autocomplete="new-password"><button class="olho" type="button" data-olho="ciSsec">👁</button></div></div>
+      </div>
+      <label class="l">Cartão de crédito</label><label class="tog"><input type="checkbox" id="ciCartao"><span class="tr"></span><span data-txt>Inativo</span></label>
+      <label class="l">Pix</label><label class="tog"><input type="checkbox" id="ciPix"><span class="tr"></span><span data-txt>Inativo</span></label>
+      <div style="margin-top:20px"><button class="btn sec" id="testarCielo">Testar credenciais</button></div>
+      <div id="resCielo"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CHECKOUT -->
+<section data-v="checkout">
+  <div class="cab"><div><h1>Checkout</h1><p class="sub">Aparência, parcelamento e frete</p></div><button class="btn pri" id="salvarCheckout">Salvar</button></div>
+  <div class="grid2">
+    <div class="card">
+      <h2>Marca</h2>
+      <label class="l" style="margin-top:0">Nome da loja</label><input id="mkNome">
+      <label class="l">Cor principal</label><div style="display:flex;gap:10px"><input type="color" id="mkCor" style="width:56px;padding:4px;height:44px"><input id="mkCorTxt" maxlength="7"></div>
+      <label class="l">Link “voltar para a loja”</label><input id="ckLojaUrl" placeholder="https://minhaloja.com.br">
+      <div style="margin-top:18px"><a class="btn sec" id="abrirCheckout" target="_blank">Ver meu checkout</a></div>
+    </div>
+    <div class="card">
+      <h2>Parcelamento</h2>
+      <div class="lin2">
+        <div><label class="l" style="margin-top:0">Máximo de parcelas</label><select id="ckMax"></select></div>
+        <div><label class="l" style="margin-top:0">Parcelas sem juros</label><select id="ckSem"></select></div>
+      </div>
+      <div class="lin2">
+        <div><label class="l">Juros ao mês (%)</label><input id="ckJuros" inputmode="decimal"></div>
+        <div><label class="l">Nome na fatura <span class="info" title="Até 13 letras ou números, sem espaços.">i</span></label><input id="ckSoft" maxlength="13"></div>
+      </div>
+      <h2 style="margin-top:24px">Frete</h2>
+      <div class="lin2">
+        <div><label class="l" style="margin-top:0">Frete fixo (R$)</label><input id="ckFrete" inputmode="decimal"></div>
+        <div><label class="l" style="margin-top:0">Frete grátis acima de (R$)</label><input id="ckGratis" inputmode="decimal"></div>
+      </div>
+      <p class="dica">Deixe 0 para frete grátis em todas as compras.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PEDIDOS -->
+<section data-v="pedidos">
+  <div class="cab"><div><h1>Pedidos</h1><p class="sub">Últimos 200 pedidos do seu checkout</p></div><button class="btn sec" id="atualizarPedidos">Atualizar</button></div>
+  <div class="card" style="padding:8px 16px">
+    <table class="tabela"><thead><tr><th>Pedido</th><th>Cliente</th><th>Pagamento</th><th>Status</th><th>Shopify</th><th class="r">Total</th></tr></thead><tbody id="tbPedidos"></tbody></table>
+  </div>
+</section>
+
+<!-- ADMIN DA PLATAFORMA -->
+<section data-v="admin">
+  <div class="cab"><div><h1>Admin da plataforma</h1><p class="sub">Todas as lojas e pedidos · últimos 30 dias</p></div><button class="btn sec" id="atualizarAdmin">Atualizar</button></div>
+  <div class="grid3" id="admResumo" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr))"></div>
+  <div class="card" style="margin-top:16px;padding:8px 16px">
+    <h2 style="margin:12px 0 4px">Lojas</h2>
+    <div style="margin:8px 0"><input id="admBusca" placeholder="Buscar por loja, dono ou e-mail"></div>
+    <table class="tabela"><thead><tr><th>Loja</th><th>Dono</th><th>Shopify</th><th>Cielo</th><th class="r">Pedidos 30d</th><th class="r">Receita 30d</th><th></th></tr></thead><tbody id="admLojas"></tbody></table>
+  </div>
+  <div class="card" style="margin-top:16px;padding:8px 16px">
+    <h2 style="margin:12px 0 4px">Últimos pedidos (todas as lojas)</h2>
+    <table class="tabela"><thead><tr><th>Pedido</th><th>Loja</th><th>Pagamento</th><th>Status</th><th>Shopify</th><th class="r">Total</th></tr></thead><tbody id="admPedidos"></tbody></table>
+  </div>
+</section>
+</main>
+</div>
+</div>
+
+<div class="fundo oculto" id="fundo"><div class="gaveta" id="gaveta"></div></div>
+
+<script>
+{
+const $ = (id) => document.getElementById(id);
+const brl = (c) => (c / 100).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+const esc = (t) => String(t ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const data = (iso) => iso ? new Date(iso).toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" }) : "—";
+let estado = null, souAdmin = false, admLojas = [];
+
+async function api(caminho, metodo = "GET", corpo) {
+  const r = await fetch(caminho, { method: metodo, headers: corpo !== undefined ? { "Content-Type": "application/json" } : {}, body: corpo !== undefined ? JSON.stringify(corpo) : undefined });
+  const d = await r.json().catch(() => ({}));
+  if (r.status === 401) { mostrarEntrada(); throw new Error(d.erro || "Faça login"); }
+  if (!r.ok) throw new Error(d.erro || "Erro inesperado");
+  return d;
+}
+function toast(msg) { const t = document.createElement("div"); t.className = "toast"; t.textContent = msg; document.body.appendChild(t); setTimeout(() => t.remove(), 2600); }
+function ocupado(btn, sim) { btn.disabled = sim; btn.dataset.txt ??= btn.textContent; btn.textContent = sim ? "Aguarde…" : btn.dataset.txt; }
+
+// ---------- entrada ----------
+function mostrarEntrada() { $("telaPainel").classList.add("oculto"); $("telaEntrada").classList.remove("oculto"); }
+$("irCadastro").onclick = (e) => { e.preventDefault(); $("fEntrar").classList.add("oculto"); $("fCadastro").classList.remove("oculto"); $("erroEntrada").textContent = ""; };
+$("irEntrar").onclick = (e) => { e.preventDefault(); $("fCadastro").classList.add("oculto"); $("fEntrar").classList.remove("oculto"); $("erroEntrada").textContent = ""; };
+$("btnEntrar").onclick = async () => {
+  ocupado($("btnEntrar"), true);
+  try { await api("/api/conta/entrar", "POST", { email: $("eEmail").value, senha: $("eSenha").value }); await iniciar(); }
+  catch (e) { $("erroEntrada").textContent = e.message; } finally { ocupado($("btnEntrar"), false); }
+};
+$("eSenha").onkeydown = (e) => { if (e.key === "Enter") $("btnEntrar").click(); };
+$("btnCadastrar").onclick = async () => {
+  ocupado($("btnCadastrar"), true);
+  try {
+    await api("/api/conta/cadastrar", "POST", { nome: $("cNome").value, nomeLoja: $("cLoja").value, email: $("cEmail").value, senha: $("cSenha").value, convite: $("cConvite").value });
+    await iniciar(); location.hash = "#inicio";
+  } catch (e) { $("erroEntrada").textContent = e.message; } finally { ocupado($("btnCadastrar"), false); }
+};
+$("btnSair").onclick = async () => { await api("/api/conta/sair", "POST", {}); location.hash = ""; mostrarEntrada(); };
+
+// ---------- carregar ----------
+async function iniciar() {
+  const eu = await fetch("/api/conta/eu").then((r) => r.json());
+  if (!eu.logado) { if (eu.conviteObrigatorio) $("blocoConvite").classList.remove("oculto"); return mostrarEntrada(); }
+  $("telaEntrada").classList.add("oculto"); $("telaPainel").classList.remove("oculto");
+  $("quemLoja").textContent = eu.loja?.nome || "";
+  souAdmin = !!eu.admin; $("abaAdmin").classList.toggle("oculto", !souAdmin);
+  $("avisoBloqueio").classList.toggle("oculto", !eu.loja?.bloqueada);
+  $("ola").textContent = `Olá, ${eu.usuario.nome.split(" ")[0]} 👋`;
+  $("avatar").textContent = (eu.loja?.nome || eu.usuario.nome).trim().charAt(0).toUpperCase();
+  estado = await api("/api/painel/config");
+  preencher(); rota();
+}
+
+function preencher() {
+  const c = estado.config, s = estado.status, u = estado.urls;
+  // status
+  const shChip = s.shopify ? (s.shopifyConectadoEm ? ["Ativo", "ok"] : ["Não testado", "warn"]) : ["Inativo", "cinza"];
+  for (const id of ["stShopify", "stShopifyLista"]) { $(id).textContent = shChip[0]; $(id).className = "chip " + shChip[1]; }
+  const ciChip = s.cielo === "simulacao" ? ["Simulação", "cinza"] : s.cielo === "production" ? ["Produção", "ok"] : ["Sandbox", "warn"];
+  for (const id of ["stCielo", "stCieloLista", "chipAmbiente"]) { $(id).textContent = ciChip[0]; $(id).className = "chip " + ciChip[1]; }
+  // shopify
+  $("shLoja").value = c.shopify.loja; $("shId").value = c.shopify.clientId;
+  $("shSecret").value = ""; $("shSecret").placeholder = c.shopify.clientSecretSalvo ? `Salvo (${c.shopify.clientSecret}). Deixe vazio para manter` : "";
+  $("shPular").checked = c.shopify.pularCarrinho; $("shPagos").checked = c.shopify.apenasPagos; $("shConf").checked = c.shopify.enviarConfirmacao;
+  const em = c.shopify.embalagem;
+  $("embNome").value = em.nome; $("embA").value = em.alturaCm; $("embL").value = em.larguraCm; $("embC").value = em.comprimentoCm; $("embP").value = em.pesoGramas;
+  $("caixaEmb").innerHTML = `<div style="display:flex;justify-content:space-between;gap:8px"><b style="font-size:16px">${esc(em.nome)}</b><button class="olho" style="position:static;transform:none;padding:0" id="editEmb" aria-label="Editar">✎</button></div>
+    Altura: <b>${em.alturaCm}cm</b> Largura: <b>${em.larguraCm}cm</b><br>Comprimento: <b>${em.comprimentoCm}cm</b> Peso: <b>${em.pesoGramas}g</b>`;
+  $("editEmb").onclick = () => $("formEmb").classList.toggle("oculto");
+  codigo("codScript", `<script src="${u.script}" defer><\/script>`);
+  codigo("codWebhook", u.webhook);
+  // cielo
+  $("ciAmb").value = c.cielo.ambiente; $("ciMid").value = c.cielo.merchantId; $("ciSid").value = c.cielo.sopClientId;
+  for (const [id, k] of [["ciKey", "merchantKey"], ["ciSsec", "sopClientSecret"]]) { $(id).value = ""; $(id).placeholder = c.cielo[k + "Salvo"] ? `Salvo (${c.cielo[k]})` : ""; }
+  $("ciCartao").checked = c.cielo.cartao; $("ciPix").checked = c.cielo.pix;
+  // checkout
+  $("mkNome").value = estado.loja.nome; $("mkCor").value = c.marca.cor; $("mkCorTxt").value = c.marca.cor; $("ckLojaUrl").value = c.checkout.lojaUrl;
+  const op = (n) => Array.from({ length: 12 }, (_, i) => `<option ${i + 1 === n ? "selected" : ""}>${i + 1}</option>`).join("");
+  $("ckMax").innerHTML = op(c.checkout.maxParcelas); $("ckSem").innerHTML = op(c.checkout.parcelasSemJuros);
+  $("ckJuros").value = c.checkout.jurosMes; $("ckSoft").value = c.checkout.softDescriptor; $("ckFrete").value = c.checkout.freteFixo; $("ckGratis").value = c.checkout.freteGratisAcima;
+  $("abrirCheckout").href = s.shopify ? u.checkout : "/checkout?itens=111:2,222:1"; $("abrirCheckoutIni").href = s.shopify ? u.checkout : "/checkout?itens=111:2,222:1";
+  $("urlCheckoutIni").textContent = u.checkout;
+  document.querySelectorAll(".tog input").forEach(atualizarTog);
+  passos();
+}
+function codigo(id, texto) {
+  $(id).innerHTML = `<button class="copiar" type="button">Copiar</button>${esc(texto)}`;
+  $(id).querySelector(".copiar").onclick = async (e) => { try { await navigator.clipboard.writeText(texto); e.target.textContent = "Copiado"; } catch { e.target.textContent = "Selecione e copie"; } setTimeout(() => (e.target.textContent = "Copiar"), 1600); };
+}
+function atualizarTog(inp) { inp.parentElement.querySelector("[data-txt]").textContent = inp.checked ? "Ativo" : "Inativo"; }
+document.querySelectorAll(".tog input").forEach((i) => (i.onchange = () => atualizarTog(i)));
+document.querySelectorAll("[data-olho]").forEach((b) => (b.onclick = () => { const i = $(b.dataset.olho); i.type = i.type === "password" ? "text" : "password"; }));
+$("mkCor").oninput = () => ($("mkCorTxt").value = $("mkCor").value);
+$("mkCorTxt").oninput = () => { if (/^#[0-9a-f]{6}$/i.test($("mkCorTxt").value)) $("mkCor").value = $("mkCorTxt").value; };
+
+function passos() {
+  const s = estado.status;
+  const lista = [
+    ["Conectar a Shopify", s.shopifyConectadoEm ? `Conectada em ${data(s.shopifyConectadoEm)}` : "URL da loja, Client ID e Client Secret", !!s.shopifyConectadoEm, "#shopify"],
+    ["Configurar a Cielo", s.cielo === "simulacao" ? "Sem credenciais: checkout em simulação" : `Ambiente: ${s.cielo === "production" ? "produção" : "sandbox"}${s.cieloTestadoEm ? " · testado" : ""}`, s.cielo !== "simulacao" && !!s.cieloTestadoEm, "#cielo"],
+    ["Instalar o script no tema", "Copie o código na página da Shopify e cole no theme.liquid", false, "#shopify"],
+    ["Cadastrar o webhook na Cielo", "Confirma o Pix automaticamente", false, "#cielo"],
+    ["Ir para produção", "Troque o ambiente da Cielo para produção", s.cielo === "production", "#cielo"],
+  ];
+  $("passos").innerHTML = lista.map(([t, d, ok, h], i) => `<div class="passo"><div class="bola ${ok ? "ok" : ""}">${ok ? "✓" : i + 1}</div><div class="t"><b>${t}</b><small>${d}</small></div><a class="btn sec peq" href="${h}">${ok ? "Ver" : "Abrir"}</a></div>`).join("");
+}
+
+let esconder = false; try { esconder = localStorage.getItem("esconderValores") === "1"; } catch {}
+function aplicarOlho() { ["kVendas", "saldoLat"].forEach((id) => $(id).classList.toggle("oculto-valor", esconder)); }
+$("olhoVendas").onclick = () => { esconder = !esconder; try { localStorage.setItem("esconderValores", esconder ? "1" : "0"); } catch {} aplicarOlho(); };
+$("periodo").onchange = () => carregarResumo();
+$("recarregar").onclick = () => carregarResumo();
+let serieAtual = [];
+const MARCOS = [0, 1e6, 1e7, 5e7, 1e8, 1e9, 1e10]; // em centavos: 0, 10 mil, 100 mil, 500 mil, 1 Mi, 10 Mi, 100 Mi
+const curto = (c) => { const r = c / 100; return r >= 1e6 ? `${r / 1e6} Mi` : r >= 1e3 ? `${r / 1e3} mil` : `R$ ${r}`; };
+async function carregarResumo() {
+  try {
+    const r = await api("/api/painel/resumo?dias=" + $("periodo").value);
+    $("kVendas").textContent = brl(r.receita);
+    $("kVendasSub").textContent = `${r.pedidos} pedido${r.pedidos === 1 ? "" : "s"} no período`;
+    $("kTicket").textContent = brl(r.ticket);
+    $("kPagos").textContent = r.pagos;
+    $("kConv").textContent = r.pedidos ? `${Math.round((r.pagos / r.pedidos) * 100)}% de aprovação` : "sem pedidos no período";
+    if ($("periodo").value === "30") $("saldoLat").textContent = brl(r.receita);
+    const i = Math.max(MARCOS.findIndex((m) => r.receitaTotal < m), 1), de = MARCOS[i - 1], ate = MARCOS[i];
+    $("kMeta").textContent = `${brl(r.receitaTotal)} vendidos`;
+    $("kTrilha").style.width = Math.min(100, ((r.receitaTotal - de) / (ate - de)) * 100) + "%";
+    $("kMarcoA").textContent = de ? curto(de) : "Início"; $("kMarcoB").textContent = curto(ate);
+    $("totalGraf").textContent = `${brl(r.receita)} em ${r.dias} dias`;
+    serieAtual = r.serie; desenharGrafico(); aplicarOlho();
+  } catch (e) { toast(e.message); }
+}
+function desenharGrafico() {
+  const svg = $("grafSvg"), W = svg.clientWidth, H = svg.clientHeight;
+  if (!W || !serieAtual.length) return;
+  const d = serieAtual, max = Math.max(...d.map((x) => x.receita), 1);
+  const pl = 58, pr = 12, pt = 14, pb = 26, w = W - pl - pr, h = H - pt - pb;
+  const x = (i) => pl + (d.length === 1 ? w / 2 : (i / (d.length - 1)) * w), y = (v) => pt + h - (v / max) * h;
+  const linhas = [0, 0.5, 1].map((f) => `<line x1="${pl}" x2="${W - pr}" y1="${y(max * f)}" y2="${y(max * f)}" stroke="#e6ebf3"/><text x="${pl - 8}" y="${y(max * f) + 4}" text-anchor="end" font-size="11" fill="#5b6478">${max * f >= 100000 ? (max * f / 100000).toFixed(max * f >= 1e6 ? 0 : 1) + " mil" : "R$ " + Math.round(max * f / 100)}</text>`).join("");
+  const passo = Math.ceil(d.length / (W < 520 ? 4 : 7));
+  const rot = d.map((p, i) => i % passo === 0 || i === d.length - 1 ? `<text x="${x(i)}" y="${H - 6}" text-anchor="middle" font-size="11" fill="#5b6478">${p.dia.slice(8, 10)}/${p.dia.slice(5, 7)}</text>` : "").join("");
+  const pts = d.map((p, i) => `${x(i)},${y(p.receita)}`).join(" ");
+  svg.innerHTML = `<defs><linearGradient id="gArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#84cc16" stop-opacity=".45"/><stop offset="1" stop-color="#84cc16" stop-opacity="0"/></linearGradient></defs>
+    ${linhas}<polygon points="${x(0)},${pt + h} ${pts} ${x(d.length - 1)},${pt + h}" fill="url(#gArea)"/>
+    <polyline points="${pts}" fill="none" stroke="#111827" stroke-width="2.5" stroke-linejoin="round"/>${rot}
+    <line id="gCursor" y1="${pt}" y2="${pt + h}" stroke="#94a3b8" stroke-dasharray="3 3" opacity="0"/><circle id="gPonto" r="5" fill="#84cc16" stroke="#fff" stroke-width="2" opacity="0"/>`;
+  const fig = $("graf"); let tip = fig.querySelector(".dica-graf");
+  if (!tip) { tip = document.createElement("div"); tip.className = "dica-graf oculto"; fig.appendChild(tip); }
+  svg.onmousemove = (e) => {
+    const bx = e.offsetX, i = Math.max(0, Math.min(d.length - 1, Math.round(((bx - pl) / w) * (d.length - 1))));
+    const p = d[i], cx = x(i), cy = y(p.receita);
+    svg.querySelector("#gCursor").setAttribute("x1", cx); svg.querySelector("#gCursor").setAttribute("x2", cx); svg.querySelector("#gCursor").setAttribute("opacity", 1);
+    const pt2 = svg.querySelector("#gPonto"); pt2.setAttribute("cx", cx); pt2.setAttribute("cy", cy); pt2.setAttribute("opacity", 1);
+    tip.classList.remove("oculto"); tip.style.left = cx + "px"; tip.style.top = cy + "px";
+    tip.textContent = `${p.dia.slice(8, 10)}/${p.dia.slice(5, 7)} · ${esconder ? "•••" : brl(p.receita)} · ${p.pagos} pago${p.pagos === 1 ? "" : "s"}`;
+  };
+  svg.onmouseleave = () => { tip.classList.add("oculto"); svg.querySelector("#gCursor")?.setAttribute("opacity", 0); svg.querySelector("#gPonto")?.setAttribute("opacity", 0); };
+}
+new ResizeObserver(desenharGrafico).observe($("graf"));
+
+// ---------- salvar ----------
+async function salvar(btn, secao, dados, msg = "Salvo") {
+  ocupado(btn, true);
+  try { estado = await api("/api/painel/config", "PUT", { secao, dados }); preencher(); toast(msg); return true; }
+  catch (e) { toast(e.message); return false; } finally { ocupado(btn, false); }
+}
+$("salvarShopify").onclick = () => salvar($("salvarShopify"), "shopify", {
+  loja: $("shLoja").value, clientId: $("shId").value, clientSecret: $("shSecret").value,
+  pularCarrinho: $("shPular").checked, apenasPagos: $("shPagos").checked, enviarConfirmacao: $("shConf").checked,
+  embalagem: { nome: $("embNome").value, alturaCm: $("embA").value, larguraCm: $("embL").value, comprimentoCm: $("embC").value, pesoGramas: $("embP").value },
+}, "Shopify salva. Clique em Testar conexão.");
+$("salvarCielo").onclick = () => salvar($("salvarCielo"), "cielo", {
+  ambiente: $("ciAmb").value, merchantId: $("ciMid").value, merchantKey: $("ciKey").value, sopClientId: $("ciSid").value, sopClientSecret: $("ciSsec").value,
+  cartao: $("ciCartao").checked, pix: $("ciPix").checked,
+}, "Cielo salva. Clique em Testar credenciais.");
+$("salvarCheckout").onclick = async () => {
+  // lê os dois blocos antes de salvar (salvar recarrega o formulário)
+  const marca = { nome: $("mkNome").value, cor: $("mkCorTxt").value };
+  const checkout = {
+    maxParcelas: $("ckMax").value, parcelasSemJuros: $("ckSem").value, jurosMes: $("ckJuros").value, softDescriptor: $("ckSoft").value,
+    freteFixo: $("ckFrete").value, freteGratisAcima: $("ckGratis").value, lojaUrl: $("ckLojaUrl").value,
+  };
+  if (await salvar($("salvarCheckout"), "marca", marca, "Salvo")) await salvar($("salvarCheckout"), "checkout", checkout, "Checkout salvo");
+  $("quemLoja").textContent = estado.loja.nome;
+};
+
+// ---------- testes ----------
+$("testarShopify").onclick = async () => {
+  ocupado($("testarShopify"), true); $("resShopify").innerHTML = "";
+  try {
+    const r = await api("/api/painel/shopify/testar", "POST", {});
+    $("resShopify").innerHTML = r.ok ? `<div class="res ok">Conectado à loja <b>${esc(r.loja)}</b> (${esc(r.dominio)}).</div>` : `<div class="res err">${esc(r.motivo)}</div>`;
+    estado = await api("/api/painel/config"); preencher();
+  } catch (e) { $("resShopify").innerHTML = `<div class="res err">${esc(e.message)}</div>`; } finally { ocupado($("testarShopify"), false); }
+};
+$("testarCielo").onclick = async () => {
+  ocupado($("testarCielo"), true); $("resCielo").innerHTML = "";
+  try {
+    const r = await api("/api/painel/cielo/testar", "POST", {});
+    let h = r.ok ? `<div class="res ok">Credenciais aceitas pela Cielo.</div>` : `<div class="res err">${esc(r.motivo)}</div>`;
+    if (r.ok && r.sop === false) h += `<div class="res err">Silent Order Post recusado: ${esc(r.motivoSop)}</div>`;
+    if (r.ok && r.sop === true) h += `<div class="res ok">Silent Order Post funcionando (cartão liberado).</div>`;
+    $("resCielo").innerHTML = h;
+    estado = await api("/api/painel/config"); preencher();
+  } catch (e) { $("resCielo").innerHTML = `<div class="res err">${esc(e.message)}</div>`; } finally { ocupado($("testarCielo"), false); }
+};
+$("desinstalarShopify").onclick = () => {
+  gaveta(`<h2>Desinstalar integração?</h2><p class="desc">As credenciais da Shopify serão apagadas deste painel e o checkout deixa de ler os carrinhos da loja. Os pedidos já feitos continuam na Shopify. Lembre de remover o script do tema.</p>
+    <div style="display:flex;gap:10px;margin-top:18px"><button class="btn sec" id="cancelarDes">Cancelar</button><button class="btn pri" style="background:var(--err)" id="confirmarDes">Desinstalar</button></div>`);
+  $("cancelarDes").onclick = fecharGaveta;
+  $("confirmarDes").onclick = async () => { estado = await api("/api/painel/shopify/desinstalar", "POST", {}); preencher(); fecharGaveta(); toast("Integração removida"); };
+};
+
+// ---------- links Meta ----------
+$("btnBuscaProd").onclick = async () => {
+  $("listaProd").innerHTML = `<p class="desc">Buscando…</p>`;
+  try {
+    const prods = await api("/api/painel/shopify/produtos?q=" + encodeURIComponent($("buscaProd").value));
+    if (!prods.length) return ($("listaProd").innerHTML = `<p class="desc">Nenhum produto encontrado.</p>`);
+    $("listaProd").innerHTML = prods.flatMap((p) => p.variantes.map((v) => {
+      const link = `${estado.urls.checkout}&itens=${v.id}:1&utm_source=meta&utm_medium=paid`;
+      return `<div class="prod">${p.imagem ? `<img src="${esc(p.imagem)}" alt="">` : '<div class="ph"></div>'}<div class="t"><b>${esc(p.titulo)}</b>${v.titulo !== "Default Title" ? ` · ${esc(v.titulo)}` : ""}<br><small style="color:var(--mut)">${brl(v.precoCentavos)}${v.disponivel ? "" : " · esgotado"}</small></div><button class="btn sec peq" data-link="${esc(link)}">Copiar link</button></div>`;
+    })).join("");
+    $("listaProd").querySelectorAll("[data-link]").forEach((b) => (b.onclick = async () => { try { await navigator.clipboard.writeText(b.dataset.link); b.textContent = "Copiado"; } catch { b.textContent = "Erro ao copiar"; } setTimeout(() => (b.textContent = "Copiar link"), 1600); }));
+  } catch (e) { $("listaProd").innerHTML = `<div class="res err">${esc(e.message)}</div>`; }
+};
+$("buscaProd").onkeydown = (e) => { if (e.key === "Enter") $("btnBuscaProd").click(); };
+
+// ---------- pedidos ----------
+const ST = { pago: ["Pago", "ok"], pendente: ["Aguardando", "warn"], autorizado: ["Autorizado", "warn"], recusado: ["Recusado", "err"], criado: ["Criado", "cinza"] };
+async function carregarPedidos() {
+  $("tbPedidos").innerHTML = `<tr><td colspan="6" class="vazio">Carregando…</td></tr>`;
+  const lista = await api("/api/painel/pedidos");
+  if (!lista.length) return ($("tbPedidos").innerHTML = `<tr><td colspan="6" class="vazio">Nenhum pedido ainda. Faça uma compra de teste no seu checkout.</td></tr>`);
+  $("tbPedidos").innerHTML = lista.map((p) => {
+    const st = ST[p.status] || [p.status, "cinza"];
+    const sh = p.shopifyPago ? `<span class="chip ok">${esc(p.shopify)}</span>` : p.erroShopify ? `<span class="chip err">Erro</span>` : p.shopify ? `<span class="chip warn">${esc(p.shopify)} pendente</span>` : "—";
+    return `<tr data-id="${p.id}"><td><b>${p.id}</b><br><small style="color:var(--mut)">${data(p.criadoEm)}</small></td><td>${esc(p.cliente)}<br><small style="color:var(--mut)">${esc(p.email)}</small></td>
+      <td>${p.metodo === "pix" ? "Pix" : `Cartão ${p.parcelas}x`}</td><td><span class="chip ${st[1]}">${st[0]}</span></td><td>${sh}</td><td class="r"><b>${brl(p.totalCentavos)}</b></td></tr>`;
+  }).join("");
+  $("tbPedidos").querySelectorAll("tr[data-id]").forEach((tr) => (tr.onclick = () => abrirPedido(tr.dataset.id)));
+}
+$("atualizarPedidos").onclick = carregarPedidos;
+async function abrirPedido(id) {
+  const p = await api("/api/painel/pedido?id=" + encodeURIComponent(id));
+  const st = ST[p.status] || [p.status, "cinza"], e = p.endereco;
+  gaveta(`<div style="display:flex;justify-content:space-between;align-items:center"><h2 style="margin:0">${p.id}</h2><button class="btn sec peq" id="fecharG">Fechar</button></div>
+    <p><span class="chip ${st[1]}">${st[0]}</span> · ${p.metodo === "pix" ? "Pix" : `Cartão ${p.parcelas}x`} · <b>${brl(p.totalCentavos)}</b></p>
+    <div class="caixa"><b>${esc(p.cliente.nome)}</b><br>${esc(p.cliente.email)} · CPF ${esc(p.cliente.cpf)}${e ? `<br>${esc(e.rua)}, ${esc(e.numero)} ${esc(e.complemento || "")} · ${esc(e.bairro)} · ${esc(e.cidade)}/${esc(e.uf)} · ${esc(e.cep)}` : ""}</div>
+    <div class="caixa">${p.itens.map((i) => `${i.quantidade}× ${esc(i.nome)} <span style="float:right">${brl(i.precoCentavos * i.quantidade)}</span>`).join("<br>")}${p.freteCentavos ? `<br>Frete <span style="float:right">${brl(p.freteCentavos)}</span>` : ""}</div>
+    <div class="caixa"><b>Shopify:</b> ${p.shopifyPago ? `pedido ${esc(p.shopifyPedido)} pago` : p.shopifyPedido ? `pedido ${esc(p.shopifyPedido)} pendente` : "ainda não enviado"}${p.erroShopify ? `<div class="res err">${esc(p.erroShopify)}</div>` : ""}
+      ${p.status === "pago" && p.enviarParaShopify && !p.shopifyPago ? `<div style="margin-top:10px"><button class="btn pri peq" id="reproc">Enviar para a Shopify agora</button></div>` : ""}</div>
+    <h3 style="margin:18px 0 6px">Histórico</h3>${p.eventos.map((v) => `<div class="ev"><b>${esc(v.tipo)}</b>${esc(v.detalhe || "")} <small style="color:var(--mut)">· ${data(v.criado_em)}</small></div>`).join("")}`);
+  $("fecharG").onclick = fecharGaveta;
+  if ($("reproc")) $("reproc").onclick = async () => { const r = await api("/api/painel/pedido/reprocessar?id=" + p.id, "POST", {}); toast(r.shopifyPago ? `Enviado: ${r.shopify}` : "Ainda com erro"); abrirPedido(p.id); carregarPedidos(); };
+}
+function gaveta(html) { $("gaveta").innerHTML = html; $("fundo").classList.remove("oculto"); }
+function fecharGaveta() { $("fundo").classList.add("oculto"); }
+$("fundo").onclick = (e) => { if (e.target === $("fundo")) fecharGaveta(); };
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") fecharGaveta(); });
+
+// ---------- admin ----------
+async function carregarAdmin() {
+  const [r, lojas, peds] = await Promise.all([api("/api/admin/resumo"), api("/api/admin/lojas"), api("/api/admin/pedidos")]);
+  $("admResumo").innerHTML = [["Lojas", r.lojas], ["Pedidos 30d", r.pedidos], ["Pagos 30d", r.pagos], ["Receita 30d", brl(r.receita)], ["Erros na Shopify", r.errosShopify]]
+    .map(([t, v]) => `<div class="card"><small style="color:var(--mut)">${t}</small><div class="num">${v}</div></div>`).join("");
+  admLojas = lojas; desenharLojas();
+  $("admPedidos").innerHTML = peds.length ? peds.map((p) => {
+    const st = ST[p.status] || [p.status, "cinza"];
+    const sh = p.shopifyPago ? `<span class="chip ok">${esc(p.shopify)}</span>` : p.erroShopify ? `<span class="chip err" title="${esc(p.erroShopify)}">Erro</span>` : p.shopify ? `<span class="chip warn">${esc(p.shopify)}</span>` : "—";
+    return `<tr><td><b>${p.id}</b><br><small style="color:var(--mut)">${data(p.criadoEm)} · ${esc(p.cliente)}</small></td><td>${esc(p.loja)}</td><td>${p.metodo === "pix" ? "Pix" : `Cartão ${p.parcelas}x`}</td><td><span class="chip ${st[1]}">${st[0]}</span></td><td>${sh}</td><td class="r"><b>${brl(p.totalCentavos)}</b></td></tr>`;
+  }).join("") : `<tr><td colspan="6" class="vazio">Nenhum pedido ainda.</td></tr>`;
+}
+function desenharLojas() {
+  const q = $("admBusca").value.trim().toLowerCase();
+  const lista = admLojas.filter((l) => !q || [l.nome, l.slug, l.dono, l.email, l.shopifyLoja].join(" ").toLowerCase().includes(q));
+  const chipSh = { conectada: "ok", "não testada": "warn", "não configurada": "cinza" };
+  const chipCi = { production: ["Produção", "ok"], sandbox: ["Sandbox", "warn"], simulacao: ["Simulação", "cinza"] };
+  $("admLojas").innerHTML = lista.length ? lista.map((l) => `<tr style="cursor:default">
+    <td><b>${esc(l.nome)}</b>${l.bloqueada ? ' <span class="chip err">Bloqueada</span>' : ""}<br><small style="color:var(--mut)">${esc(l.slug)} · desde ${data(l.criadoEm).split(",")[0]}</small></td>
+    <td>${esc(l.dono)}<br><small style="color:var(--mut)">${esc(l.email)}</small></td>
+    <td><span class="chip ${chipSh[l.shopify]}">${l.shopify}</span>${l.shopifyLoja ? `<br><small style="color:var(--mut)">${esc(l.shopifyLoja)}</small>` : ""}</td>
+    <td><span class="chip ${chipCi[l.cielo][1]}">${chipCi[l.cielo][0]}</span></td>
+    <td class="r">${l.pedidos30}</td><td class="r"><b>${brl(l.receita30)}</b></td>
+    <td class="r"><button class="btn sec peq" data-bloq="${l.id}" data-nome="${esc(l.nome)}" data-acao="${l.bloqueada ? 0 : 1}">${l.bloqueada ? "Desbloquear" : "Bloquear"}</button></td></tr>`).join("")
+    : `<tr><td colspan="7" class="vazio">Nenhuma loja encontrada.</td></tr>`;
+  $("admLojas").querySelectorAll("[data-bloq]").forEach((b) => (b.onclick = () => {
+    const bloquear = b.dataset.acao === "1";
+    gaveta(`<h2>${bloquear ? "Bloquear" : "Desbloquear"} ${b.dataset.nome}?</h2><p class="desc">${bloquear ? "O checkout desta loja deixa de aceitar compras até você desbloquear. O lojista vê um aviso no painel." : "O checkout volta a aceitar compras."}</p>
+      <div style="display:flex;gap:10px;margin-top:18px"><button class="btn sec" id="admCancelar">Cancelar</button><button class="btn pri" ${bloquear ? 'style="background:var(--err)"' : ""} id="admConfirmar">${bloquear ? "Bloquear" : "Desbloquear"}</button></div>`);
+    $("admCancelar").onclick = fecharGaveta;
+    $("admConfirmar").onclick = async () => { await api("/api/admin/loja/bloquear", "POST", { id: b.dataset.bloq, bloquear }); fecharGaveta(); toast(bloquear ? "Loja bloqueada" : "Loja desbloqueada"); carregarAdmin(); };
+  }));
+}
+$("admBusca").oninput = desenharLojas;
+$("atualizarAdmin").onclick = () => carregarAdmin().catch((e) => toast(e.message));
+
+// ---------- rotas ----------
+function rota() {
+  if (!estado) return;
+  const v = location.hash.slice(1) || "inicio";
+  let valida = document.querySelector(`section[data-v="${v}"]`) ? v : "inicio";
+  if (valida === "admin" && !souAdmin) valida = "inicio";
+  document.querySelectorAll("main section").forEach((s) => s.classList.toggle("oculto", s.dataset.v !== valida));
+  const aba = { shopify: "integracoes", cielo: "integracoes" }[valida] || valida;
+  document.querySelectorAll("#abas a").forEach((a) => a.classList.toggle("on", a.getAttribute("href") === "#" + aba));
+  if (valida === "pedidos") carregarPedidos().catch((e) => toast(e.message));
+  if (valida === "inicio") carregarResumo();
+  if (valida === "admin") carregarAdmin().catch((e) => toast(e.message));
+  window.scrollTo(0, 0);
+}
+addEventListener("hashchange", rota);
+iniciar().catch((e) => toast(e.message));
+}
+</script>
+</body>
+</html>

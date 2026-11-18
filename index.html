@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fluxofy Checkout</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* VOICE: confiante e técnico, como a ficha de um produto bem feito
+   IDEA: uma ficha técnica de engenharia — o checkout como peça com especificações
+   PICTURE: o próprio checkout (cartão/Pix) entre o carrinho Shopify e o pedido sincronizado
+   COLOUR and TYPE: cobalto #111827, branco, preto, zonas #f1f9e4; Space Grotesk + Inter
+   LAYOUT: faixa de título cobalto, grade densa de painéis alinhados; guia de integração em coluna */
+:root{color-scheme:light dark;--bg:light-dark(#fff,#0a0d18);--ink:light-dark(#0b0d12,#eef1fb);--mut:light-dark(#4a5164,#9aa3bd);--line:light-dark(#d9deec,#232a44);--zone:light-dark(#f1f9e4,#121831);--co:light-dark(#111827,#84cc16);--co2:light-dark(#000,#a3e635);--ac:#84cc16;--ok:#11845b;--card:light-dark(#fff,#0f1426)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Inter,system-ui,sans-serif;overflow-x:clip}
+h1,h2,h3,.gro{font-family:"Space Grotesk",Inter,sans-serif;letter-spacing:-.01em}
+h1{font-size:clamp(34px,5vw,52px);line-height:1.05;margin:0 0 18px;text-wrap:balance;font-weight:700}
+h2{font-size:clamp(26px,3.4vw,36px);line-height:1.1;margin:0 0 12px;text-wrap:balance;font-weight:600}
+h3{font-size:19px;margin:0 0 6px;font-weight:600}
+p{margin:0 0 12px}a{color:var(--co2)}
+.band{padding:clamp(28px,4vw,64px) max(5vw,16px)}.wrap{max-width:1240px;margin:0 auto}
+pre,.scroll{overflow-x:auto}.scroll a{flex:none}code{overflow-wrap:anywhere}html{scroll-padding-top:80px;scroll-behavior:smooth}@media(min-width:900px){html{scroll-padding-top:160px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important}}
+nav.top{position:sticky;top:12px;z-index:5;padding:0 max(3vw,12px);pointer-events:none}
+nav.top .wrap{pointer-events:auto;max-width:1120px;display:flex;align-items:center;gap:22px;padding:10px 12px 10px 18px;flex-wrap:wrap;background:light-dark(#ffffffe6,#0f1426e6);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:999px;box-shadow:0 10px 30px -18px #0b1a4d55}
+.logo{font:700 21px "Space Grotesk",sans-serif;color:var(--ink);text-decoration:none;display:flex;gap:9px;align-items:center}
+.logo i{width:34px;height:34px;border-radius:10px;background:#111827;display:inline-block;box-shadow:inset -9px -9px 0 #84cc16}
+.links{display:flex;gap:20px;flex-wrap:wrap;flex:1;justify-content:center}.links a{color:var(--ink);text-decoration:none;font-weight:500;font-size:15px;padding:8px 0}
+.links a:hover,.links a.on{color:var(--co2)}
+nav.top .btn{border-radius:999px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 20px;border-radius:10px;font-weight:600;text-decoration:none;border:1.5px solid transparent;font-size:15px;cursor:pointer}
+.btn.pri{background:#111827;color:#fff}.btn.pri:hover{background:#000}
+.btn.sec{border-color:currentColor;color:inherit;background:transparent}
+.btn:focus-visible,a:focus-visible,button:focus-visible{outline:3px solid #84cc16;outline-offset:2px}
+/* hero */
+.hero{position:relative;margin-top:-64px;padding-top:120px;text-align:center;overflow:hidden;
+  background:radial-gradient(60% 55% at 12% 10%,light-dark(#dcf5b8,#1c2a0b) 0,transparent 70%),radial-gradient(50% 50% at 88% 0%,light-dark(#eef9d9,#141c0a) 0,transparent 70%),linear-gradient(180deg,light-dark(#f6fbef,#0b0d08),var(--bg) 78%)}
+.hero .wrap{max-width:980px}
+.selo{display:inline-flex;gap:8px;align-items:center;border:1px solid light-dark(#bde58a,#3f5f12);background:light-dark(#ffffffb3,#0f1a36);border-radius:999px;padding:6px 14px;font-size:13px;color:var(--mut);margin-bottom:22px}
+.selo b{background:#84cc16;color:#111827;font-weight:700;padding:1px 8px;border-radius:999px}
+.hero h1{font-size:clamp(36px,6vw,62px);line-height:1.02;letter-spacing:-.02em;margin:0 auto 18px;max-width:15ch}
+.hero p.lead{font-size:clamp(17px,2vw,21px);color:var(--mut);max-width:36em;margin:0 auto}
+.hero .acts{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:26px}
+.hero .acts .btn{border-radius:999px;min-height:54px;padding:0 26px;font-size:16px}
+.hero .acts .btn.pri{background:#111827;color:#fff;box-shadow:0 12px 28px -12px #000000aa}
+/* prévia do painel */
+.previa{margin:46px auto 0;max-width:1060px;text-align:left;background:light-dark(#fff,#0f1426);border:1px solid var(--line);border-radius:22px;box-shadow:0 40px 80px -40px #0b1a4d66;display:grid;grid-template-columns:200px minmax(0,1fr);overflow:hidden}
+.previa aside{padding:18px 14px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:6px;font-size:13px}
+.previa aside .lg{width:44px;height:44px;border-radius:12px;background:#111827;box-shadow:inset -11px -11px 0 #84cc16;margin-bottom:10px}
+.previa aside small{color:var(--mut);font-size:11px}.previa aside .sd{font:700 17px "Space Grotesk",sans-serif;color:var(--co2);margin-bottom:10px}
+.previa aside span{padding:8px 10px;border-radius:8px;color:var(--mut)}.previa aside span.on{background:#111827;color:#fff;font-weight:600;border-left:3px solid #84cc16}
+.previa .ct{padding:18px 20px;background:light-dark(#f6f9fd,#0b1022)}
+.previa .tp{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--mut);margin-bottom:12px}
+.previa .tp b{color:var(--ink);font:600 18px "Space Grotesk",sans-serif}
+.previa .cx{background:light-dark(#fff,#121a33);border:1px solid var(--line);border-radius:14px;padding:14px}
+.previa .kp{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:10px 0}
+.previa .kp small{color:var(--mut);font-size:12px}.previa .kp b{display:block;font:700 20px "Space Grotesk",sans-serif;color:var(--co2);margin-top:4px;white-space:nowrap}
+.previa .tr{height:7px;border-radius:9px;background:light-dark(#e6ebf3,#24304f);margin-top:10px;overflow:hidden}.previa .tr i{display:block;height:100%;width:62%;background:linear-gradient(90deg,#4d7c0f,#84cc16)}
+.previa svg{width:100%;height:150px;display:block}
+.previa .nota-ex{font-size:12px;color:var(--mut);text-align:right;margin-top:8px}
+@media(max-width:760px){.previa{grid-template-columns:minmax(0,1fr)}.previa aside{display:none}.previa .kp{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.previa .kp>div:last-child{display:none}.links{display:none}
+  nav.top .wrap{flex-wrap:nowrap;gap:8px;padding:8px 8px 8px 12px}nav.top .btn{min-height:38px;padding:0 14px;font-size:14px}.so-desk{display:none}
+  .logo{font-size:18px}.logo i{width:28px;height:28px}.previa .kp b{font-size:16px}.previa .ct{padding:14px}}
+/* fluxo */
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin-top:26px;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.flow div{padding:22px;border-right:1px solid var(--line);background:var(--card)}.flow div:last-child{border-right:0}
+.flow .n{font:600 13px "Space Grotesk",sans-serif;color:var(--co2);display:block;margin-bottom:10px}
+.flow p{color:var(--mut);font-size:15px;margin:0}
+/* grid funcionalidades */
+.zone{background:var(--zone)}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:24px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
+.panel p{color:var(--mut);font-size:15px;margin:0}
+.tag{display:inline-block;font-size:12px;font-weight:600;padding:2px 9px;border-radius:999px;background:#e3f5ec;color:#0b6b48;margin-bottom:10px}
+.tag.prox{background:light-dark(#fff1d6,#3a2b0c);color:light-dark(#8a5a00,#ffcc66)}
+.ico{width:34px;height:34px;border-radius:9px;background:var(--zone);display:grid;place-items:center;margin-bottom:12px}
+.ico svg{width:18px;height:18px;stroke:var(--co2);fill:none;stroke-width:2}
+/* preços */
+.plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:24px}
+.plan{border:1px solid var(--line);border-radius:14px;padding:24px;background:var(--card);display:flex;flex-direction:column}
+.plan.dest{border:2px solid var(--co)}
+.plan .preco{font:700 34px "Space Grotesk",sans-serif;margin:8px 0 2px;white-space:nowrap}.plan .sub{color:var(--mut);font-size:14px;margin-bottom:16px}
+.plan ul{padding:0;margin:0 0 20px;list-style:none;font-size:15px;flex:1}.plan li{padding:7px 0;border-top:1px solid var(--line)}
+.nota{font-size:13px;color:var(--mut);margin-top:14px}
+/* faq */
+details{border-bottom:1px solid var(--line);padding:16px 0}summary{font-weight:600;cursor:pointer;font-size:17px;min-height:28px}details p{color:var(--mut);margin:10px 0 0}
+.cta{background:#0b0d12;color:#fff;text-align:center}.cta p{color:#b9c1d9}
+footer{border-top:1px solid var(--line);font-size:14px;color:var(--mut)}footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+/* guia */
+.doc-head{background:#111827;color:#fff;margin-top:-64px;padding-top:120px!important;border-bottom:4px solid #84cc16}.doc-head p{color:#d9e4c8;max-width:46em;font-size:17px}
+.toc{display:flex;gap:8px;padding:12px max(5vw,16px);border-bottom:1px solid var(--line);background:var(--bg)}
+.toc a{border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-size:14px;text-decoration:none;color:var(--ink);white-space:nowrap}
+.toc a:hover{border-color:var(--co2);color:var(--co2)}
+@media(min-width:900px){.toc{position:sticky;top:84px;z-index:4}}
+.doc{max-width:860px;margin:0 auto}
+.doc section{padding:34px 0;border-bottom:1px solid var(--line)}.doc section:last-child{border:0}
+.doc h2 .n{font:600 15px "Space Grotesk",sans-serif;color:var(--co2);display:block;margin-bottom:6px}
+.doc ol,.doc ul{padding-left:22px}.doc li{margin:6px 0}
+.code{position:relative;margin:14px 0}
+.code pre{background:#0b0d12;color:#dfe5ff;border-radius:12px;padding:18px;font:13.5px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;margin:0}
+.code button{position:absolute;top:8px;right:8px;background:#232a44;color:#fff;border:0;border-radius:7px;padding:6px 12px;font-size:13px;cursor:pointer;min-height:32px}
+.aviso{background:var(--zone);border-left:4px solid var(--co);border-radius:8px;padding:14px 16px;margin:14px 0;font-size:15px}
+table{border-collapse:collapse;width:100%;font-size:15px;margin:12px 0}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}th{font-size:13px;color:var(--mut);font-weight:600}
+td code,li code,p code{background:var(--zone);padding:1px 6px;border-radius:5px;font-size:.92em}
+.check li{list-style:none;margin-left:-22px;padding-left:28px;position:relative}.check li::before{content:"";position:absolute;left:4px;top:7px;width:12px;height:12px;border:2px solid var(--co2);border-radius:3px}
+.view[hidden]{display:none}
+@media(max-width:900px){.grid,.plans{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.flow{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.flow div:nth-child(2){border-right:0}.flow div:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+@media(max-width:600px){.hero .wrap{grid-template-columns:minmax(0,1fr)}.grid,.plans,.flow{grid-template-columns:minmax(0,1fr)}.flow div{border-right:0;border-bottom:1px solid var(--line)}
+table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-block:10px}.stack td{display:flow-root;border:0;padding:3px 0;padding-inline-start:8em;text-align:start}.stack td::before{content:attr(data-l);float:inline-start;width:7.5em;margin-inline-start:-8em;white-space:normal;color:var(--mut)}.stack td:empty{display:none}}
+</style>
+<script>new MutationObserver(()=>{for(const c of document.querySelectorAll('.stack td:not([data-l])')){let i=0,p=c;while(p=p.previousElementSibling)i+=p.colSpan;c.dataset.l=c.closest('table').rows[0].cells[i]?.textContent||''}}).observe(document,{childList:true,subtree:true})</script>
+</head>
+<body>
+<nav class="top"><div class="wrap">
+  <a class="logo" href="#inicio"><i></i>Fluxofy</a>
+  <div class="links"><a href="#funcionalidades">Funcionalidades</a><a href="#taxas">Taxas</a><a href="#integracao" data-v="integracao">Integração</a><a href="#faq">Ajuda</a></div>
+  <a class="btn sec" href="/painel" style="min-height:42px">Entrar</a><a class="btn pri" href="/painel" style="min-height:42px">Criar conta<span class="so-desk"> na Fluxofy</span></a>
+</div></nav>
+
+<!-- ================= SITE ================= -->
+<div class="view" id="v-inicio">
+<header class="hero band" id="inicio"><div class="wrap">
+  <div class="selo"><b>Novo</b> Checkout transparente para Shopify com Cielo</div>
+  <h1>Venda mais com um checkout que é seu.</h1>
+  <p class="lead">Cartão parcelado e Pix pela sua conta Cielo, pedido pago direto na Shopify e uma página de pagamento com a cara da sua marca.</p>
+  <div class="acts"><a class="btn pri" href="/painel">Criar conta agora ›</a><a class="btn sec" href="/checkout?itens=111:2,222:1" id="demo">Ver checkout de demonstração</a></div>
+  <div class="previa" aria-label="Prévia do painel com dados de exemplo">
+    <aside><div class="lg"></div><small>Receita nos últimos 30 dias</small><div class="sd">R$ 12.480,00</div>
+      <span class="on">Dashboard</span><span>Vendas</span><span>Integrações</span><span>Checkout</span></aside>
+    <div class="ct">
+      <div class="tp"><b>Dashboard</b><span>Últimos 30 dias</span></div>
+      <div class="cx"><b>Olá, Ana 👋</b><div style="font-size:13px;color:var(--mut)">Que bom te ver por aqui!</div></div>
+      <div class="kp">
+        <div class="cx"><small>Total de vendas</small><b>R$ 12.480,00</b></div>
+        <div class="cx"><small>Ticket médio</small><b>R$ 231,11</b></div>
+        <div class="cx"><small>Painel de conquistas</small><div class="tr"><i></i></div></div>
+      </div>
+      <div class="cx"><small style="color:var(--mut)">Receita total</small>
+        <svg viewBox="0 0 600 150" preserveAspectRatio="none"><defs><linearGradient id="pa" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#84cc16" stop-opacity=".45"/><stop offset="1" stop-color="#84cc16" stop-opacity="0"/></linearGradient></defs>
+          <path d="M0 120 L50 104 L100 112 L150 84 L200 92 L250 66 L300 74 L350 50 L400 60 L450 38 L500 46 L550 24 L600 30 L600 150 L0 150Z" fill="url(#pa)"/>
+          <path d="M0 120 L50 104 L100 112 L150 84 L200 92 L250 66 L300 74 L350 50 L400 60 L450 38 L500 46 L550 24 L600 30" fill="none" stroke="#111827" stroke-width="3" vector-effect="non-scaling-stroke"/></svg>
+      </div>
+      <div class="nota-ex">Dados de exemplo</div>
+    </div>
+  </div>
+</div></header>
+
+<section class="band" id="como-funciona"><div class="wrap">
+  <h2>Do carrinho ao pedido pago, em quatro passos</h2>
+  <p style="color:var(--mut);max-width:44em">A Shopify continua sendo sua vitrine e seu painel de pedidos. A Fluxofy cuida só da etapa de pagamento.</p>
+  <div class="flow">
+    <div><span class="n">Passo 1</span><h3>Carrinho na Shopify</h3><p>O botão “Finalizar compra” leva os itens do carrinho para o checkout Fluxofy.</p></div>
+    <div><span class="n">Passo 2</span><h3>Checkout com sua marca</h3><p>Dados, endereço e pagamento numa página só. Preço e frete calculados no servidor.</p></div>
+    <div><span class="n">Passo 3</span><h3>Cobrança pela Cielo</h3><p>Cartão tokenizado direto na Cielo (Silent Order Post) ou Pix com QR Code na hora.</p></div>
+    <div><span class="n">Passo 4</span><h3>Pedido pago na Shopify</h3><p>Aprovado o pagamento, o pedido é criado na sua loja já como pago, com estoque baixado.</p></div>
+  </div>
+</div></section>
+
+<section class="band zone" id="funcionalidades"><div class="wrap">
+  <h2>O que o checkout faz</h2>
+  <p style="color:var(--mut);max-width:44em">Comece com o essencial e ative os recursos de conversão conforme a loja cresce.</p>
+  <div class="grid" id="feats"></div>
+</div></section>
+
+<section class="band" id="taxas"><div class="wrap">
+  <h2>Planos simples, sem fidelidade</h2>
+  <p style="color:var(--mut);max-width:46em">As taxas de cartão e Pix são as do seu contrato com a Cielo e vão direto para você. A Fluxofy cobra só pelo uso do checkout.</p>
+  <div class="plans" id="plans"></div>
+  <p class="nota">Valores de exemplo: ajuste aos preços do seu negócio.</p>
+</div></section>
+
+<section class="band zone" id="faq"><div class="wrap" style="max-width:860px">
+  <h2>Perguntas frequentes</h2>
+  <div id="faqs"></div>
+</div></section>
+
+<section class="band cta"><div class="wrap">
+  <h2>Pronto para ligar sua loja?</h2>
+  <p>Crie a conta, conecte a Shopify e a Cielo no painel e cole uma linha no tema.</p>
+  <a class="btn pri" href="/painel" style="background:#fff;color:#111827">Criar conta</a> <a class="btn sec" href="#integracao" style="color:#fff">Ver o guia</a>
+</div></section>
+</div>
+
+<!-- ================= GUIA DE INTEGRAÇÃO ================= -->
+<div class="view" id="v-integracao" hidden>
+<header class="doc-head band"><div class="wrap" style="max-width:860px">
+  <h1 style="font-size:clamp(30px,4.4vw,44px)">Guia de integração: Shopify + Cielo</h1>
+  <p>Do cadastro à primeira venda: conectar a Shopify e a Cielo pelo painel, instalar no tema, configurar parcelas e frete, testar e ir para produção.</p>
+</div></header>
+<div class="toc scroll" id="toc"></div>
+<div class="band" style="padding-top:8px"><div class="doc">
+
+<section id="int-requisitos">
+  <h2><span class="n">1 · Visão geral</span>Como funciona</h2>
+  <p>Você cria uma conta no <b>painel</b>, conecta a sua loja Shopify e a sua conta Cielo, e cola uma linha de código no tema. A partir daí, o botão “Finalizar compra” da loja leva o cliente para o seu checkout, o pagamento cai na sua conta Cielo e o pedido aparece pago na Shopify.</p>
+  <div class="code"><button type="button">Copiar</button><pre>Loja Shopify ──(carrinho)──► Checkout Fluxofy ──► sua conta Cielo
+                                    │
+               pagamento aprovado ──┴──► pedido pago na Shopify</pre></div>
+  <p><b>Você vai precisar de:</b></p>
+  <ul class="check">
+    <li>Loja Shopify com acesso de administrador.</li>
+    <li>Conta Cielo com <b>API E-commerce 3.0</b>, com <b>Silent Order Post</b> (para cartão) e <b>Pix</b> habilitados.</li>
+  </ul>
+  <p>Sem as credenciais da Cielo, o checkout funciona em <b>modo simulação</b>, para você testar tudo antes de vender.</p>
+  <div class="aviso">A Shopify não homologa checkouts externos e considera esse uso contrário aos seus termos. A alternativa oficial são os apps da Cielo na Shopify App Store, que usam o checkout nativo. Avalie o risco antes de ir para produção.</div>
+</section>
+
+<section id="int-conta">
+  <h2><span class="n">2 · Conta</span>Criar sua conta</h2>
+  <ol>
+    <li>Clique em <a href="/painel"><b>Criar conta</b></a>, no topo deste site.</li>
+    <li>Informe seu nome, o nome da loja, e-mail e uma senha.</li>
+    <li>Você cai na tela <b>Início</b> do painel, com a lista de passos para colocar o checkout no ar.</li>
+  </ol>
+</section>
+
+<section id="int-shopify">
+  <h2><span class="n">3 · Shopify</span>Conectar a loja</h2>
+  <p>Desde janeiro de 2026, apps novos da Shopify são criados no <b>Dev Dashboard</b>. Você vai copiar um <b>Client ID</b> e um <b>Client Secret</b>.</p>
+  <ol>
+    <li>No admin da Shopify, abra <b>Configurações → Apps → Desenvolver apps</b> e clique em <b>Criar app no Dev Dashboard</b>.</li>
+    <li>Crie o app (por exemplo, “Checkout Fluxofy”).</li>
+    <li>Na versão do app, em <b>Acesso → Escopos</b>, adicione <code>read_products</code> e <code>write_orders</code>, e clique em <b>Lançar</b>.</li>
+    <li>Na página do app, clique em <b>Instalar app</b> e escolha a sua loja.</li>
+    <li>Em <b>Configurações</b> do app, copie o <b>Client ID</b> e o <b>Client Secret</b>.</li>
+    <li>No painel da Fluxofy, abra <b>Integrações → Shopify</b> e preencha:
+      <ul>
+        <li><b>URL da loja Shopify</b>: o domínio interno, como <code>minhaloja.myshopify.com</code>. Ele aparece na Shopify em Configurações → Domínios. Não use www., https://, / nem .br.</li>
+        <li><b>API Key (Client ID)</b> e <b>Client Secret</b>.</li>
+      </ul></li>
+    <li>Clique em <b>Salvar</b> e depois em <b>Testar conexão</b>. O status muda para <b>Ativo</b>.</li>
+  </ol>
+  <table class="stack"><thead><tr><th>Opção</th><th>O que faz</th></tr></thead><tbody>
+    <tr><td>Pular carrinho</td><td>Ao clicar em Comprar, o cliente vai direto para o checkout, sem passar pelo carrinho.</td></tr>
+    <tr><td>Criar apenas pedidos pagos</td><td>Ativo: o pedido só aparece na Shopify depois do pagamento. Inativo: o Pix gerado já cria o pedido como pendente, marcado como pago quando o Pix cair.</td></tr>
+    <tr><td>Enviar confirmação do pedido da Shopify</td><td>A Shopify manda ao cliente o e-mail padrão de confirmação.</td></tr>
+  </tbody></table>
+</section>
+
+<section id="int-cielo">
+  <h2><span class="n">4 · Cielo</span>Conectar o pagamento</h2>
+  <ol>
+    <li>No portal de desenvolvedores da Cielo, gere as credenciais de <b>sandbox</b> (MerchantId e MerchantKey) para testar.</li>
+    <li>Peça ao <b>suporte e-commerce da Cielo</b> para habilitar o <b>Silent Order Post</b>, que manda o ClientId e o ClientSecret, e o <b>Pix</b>.</li>
+    <li>No painel, abra <b>Integrações → Cielo</b>, escolha o ambiente, preencha as credenciais e ative Cartão e/ou Pix.</li>
+    <li>Clique em <b>Salvar</b> e depois em <b>Testar credenciais</b>.</li>
+    <li>Copie a <b>URL de notificação (webhook)</b> que aparece na mesma página e peça ao suporte da Cielo para cadastrá-la. Ela confirma o Pix automaticamente.</li>
+  </ol>
+  <p>As chaves ficam guardadas criptografadas e nunca aparecem inteiras de novo no painel.</p>
+</section>
+
+<section id="int-carrinho">
+  <h2><span class="n">5 · Tema</span>Instalar no tema da Shopify</h2>
+  <ol>
+    <li>No painel, em <b>Integrações → Shopify</b>, copie o código do cartão <b>Tema</b>. É uma linha só, parecida com esta:</li>
+  </ol>
+  <div class="code"><button type="button">Copiar</button><pre>&lt;script src="https://seudominio.com.br/s/sua-loja.js" defer&gt;&lt;/script&gt;</pre></div>
+  <ol start="2">
+    <li>Na Shopify, abra <b>Loja virtual → Temas</b>, clique em <b>Duplicar</b> e depois em <b>Editar código</b> na cópia.</li>
+    <li>Em <code>layout/theme.liquid</code>, cole a linha antes de <code>&lt;/body&gt;</code> e salve.</li>
+    <li>Visualize a cópia, coloque um produto no carrinho e clique em finalizar. Você deve cair no seu checkout.</li>
+    <li>Funcionou? Publique o tema.</li>
+  </ol>
+  <p>O código é carregado da plataforma, então mudanças feitas no painel, como ligar o “Pular carrinho”, valem sem colar de novo. Se o tema tiver um botão que não redireciona, adicione nele o atributo <code>data-checkout-externo</code>.</p>
+</section>
+
+<section id="int-checkout">
+  <h2><span class="n">6 · Checkout</span>Marca, parcelas e frete</h2>
+  <p>Na aba <b>Checkout</b> do painel você define:</p>
+  <ul>
+    <li><b>Marca</b>: nome que aparece no topo, cor principal e o link “voltar para a loja”.</li>
+    <li><b>Parcelamento</b>: máximo de parcelas, quantas sem juros, juros ao mês e o nome que aparece na fatura do cartão.</li>
+    <li><b>Frete</b>: valor fixo e frete grátis acima de um valor.</li>
+  </ul>
+  <p>Preço e estoque vêm sempre da Shopify, no momento da compra.</p>
+</section>
+
+<section id="int-meta">
+  <h2><span class="n">7 · Anúncios</span>Links para anúncios da Meta</h2>
+  <p>Em <b>Integrações → Shopify</b>, busque um produto e clique em <b>Copiar link</b>. O link abre o checkout já com o produto no carrinho, ideal para anúncios: o cliente sai do anúncio direto para o pagamento.</p>
+</section>
+
+<section id="int-testes">
+  <h2><span class="n">8 · Testes</span>Testar e ir para produção</h2>
+  <p>Com o ambiente em <b>Sandbox</b> (ou sem credenciais, em simulação), o resultado depende do final do número do cartão:</p>
+  <table class="stack"><thead><tr><th>Final do cartão</th><th>Resultado</th></tr></thead><tbody>
+    <tr><td>0, 1 ou 4</td><td>Aprovado</td></tr>
+    <tr><td>2</td><td>Não autorizado</td></tr>
+    <tr><td>Outros</td><td>Recusado ou com erro (veja a tabela completa na documentação da Cielo)</td></tr>
+  </tbody></table>
+  <ul class="check">
+    <li>Cartão aprovado, à vista e parcelado: o pedido aparece pago na Shopify.</li>
+    <li>Cartão recusado: aparece a mensagem e nenhum pedido é criado.</li>
+    <li>Pix: o QR Code aparece; ao pagar, a tela muda sozinha e o pedido é criado.</li>
+    <li>Troque o ambiente da Cielo para <b>Produção</b>, faça uma compra real de valor baixo e estorne no painel da Cielo.</li>
+  </ul>
+</section>
+
+<section id="int-pedidos">
+  <h2><span class="n">9 · Pedidos</span>Acompanhar as vendas</h2>
+  <p>A aba <b>Pedidos</b> mostra cada venda com status do pagamento e da Shopify. Clique num pedido para ver cliente, endereço, itens e o histórico completo (avisos da Cielo, mudanças de status, envio à Shopify).</p>
+  <p>Se a Shopify recusar um pedido já pago, ele aparece com <b>Erro</b>. A plataforma tenta de novo a cada 5 minutos, e você também pode clicar em <b>Enviar para a Shopify agora</b>. O pagamento nunca é estornado automaticamente.</p>
+</section>
+
+<section id="int-publicar">
+  <h2><span class="n">10 · Plataforma</span>Para quem hospeda a plataforma</h2>
+  <p>Esta parte é só para o dono da plataforma, não para os lojistas. A plataforma é um único servidor Node 22.5+ com banco SQLite, publicado no Railway a partir do GitHub.</p>
+  <ol>
+    <li>Suba o projeto para um repositório <b>privado</b> no GitHub (sem o arquivo <code>.env</code>).</li>
+    <li>No Railway: <b>New Project → Deploy from GitHub repo</b>.</li>
+    <li>Crie um <b>Volume</b> em <code>/data</code> (sem ele, contas e pedidos somem a cada atualização).</li>
+    <li>Em <b>Variables</b>, cadastre:</li>
+  </ol>
+  <div class="code"><button type="button">Copiar</button><pre>DB_ARQUIVO=/data/checkout.db
+SEGREDO_MESTRE=uma-frase-longa-e-aleatoria
+CODIGO_CONVITE=
+NIXPACKS_NODE_VERSION=22
+RAILPACK_NODE_VERSION=22</pre></div>
+  <table class="stack"><thead><tr><th>Variável</th><th>Para quê</th></tr></thead><tbody>
+    <tr><td><code>SEGREDO_MESTRE</code></td><td>Chave que criptografa as credenciais dos lojistas. Guarde uma cópia: se ela mudar, as credenciais salvas não podem ser lidas.</td></tr>
+    <tr><td><code>CODIGO_CONVITE</code></td><td>Opcional. Se preenchido, só cria conta quem tiver o código.</td></tr>
+    <tr><td><code>DB_ARQUIVO</code></td><td>Onde fica o banco. Precisa estar no volume.</td></tr>
+  </tbody></table>
+  <ol start="5">
+    <li>Em <b>Settings → Networking → Custom Domain</b>, coloque o seu domínio e cadastre o CNAME no DNS.</li>
+    <li>Rode <b>uma instância só</b> e faça backup do arquivo do banco periodicamente.</li>
+  </ol>
+</section>
+
+<section id="int-api">
+  <h2><span class="n">11 · Desenvolvedores</span>Rotas e arquivos</h2>
+  <table class="stack"><thead><tr><th>Rota</th><th>O que faz</th></tr></thead><tbody>
+    <tr><td><code>/</code></td><td>Este site</td></tr>
+    <tr><td><code>/painel</code></td><td>Painel do lojista</td></tr>
+    <tr><td><code>/checkout?loja=&amp;itens=</code></td><td>Checkout de cada loja (sem <code>loja</code> = demonstração)</td></tr>
+    <tr><td><code>/s/&lt;loja&gt;.js</code></td><td>Script instalado no tema da Shopify</td></tr>
+    <tr><td><code>POST /webhook/cielo?loja=</code></td><td>Notificação da Cielo</td></tr>
+    <tr><td><code>/api/conta/*</code>, <code>/api/painel/*</code></td><td>Cadastro, login, configurações, testes de conexão, produtos e pedidos</td></tr>
+  </tbody></table>
+  <table class="stack"><thead><tr><th>Arquivo</th><th>O que faz</th></tr></thead><tbody>
+    <tr><td><code>public/index.html</code>, <code>painel.html</code>, <code>checkout.html</code></td><td>Site, painel e checkout</td></tr>
+    <tr><td><code>server.js</code></td><td>Rotas, contas, configurações por loja, pedidos, webhook e conciliação</td></tr>
+    <tr><td><code>cielo.js</code>, <code>shopify.js</code></td><td>Integrações com a Cielo e a Shopify</td></tr>
+    <tr><td><code>db.js</code>, <code>cripto.js</code></td><td>Banco SQLite, senhas e criptografia das credenciais</td></tr>
+  </tbody></table>
+  <p>Documentação oficial: <a href="https://docs.cielo.com.br/ecommerce-cielo/v3.0-en/docs/">API E-commerce Cielo</a> · <a href="https://shopify.dev/docs/api/admin-graphql">Shopify Admin GraphQL</a></p>
+</section>
+
+
+
+</div></div>
+</div>
+
+<footer class="band" style="padding-block:28px"><div class="wrap">
+  <span><b class="gro" style="color:var(--ink)">Fluxofy</b> · Checkout para Shopify</span>
+  <span><a href="#funcionalidades">Produto</a> · <a href="#taxas">Preços</a> · <a href="#integracao">Integração</a> · Termos de uso · Privacidade</span>
+</div></footer>
+
+<script>
+{
+const ic={card:'<rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/>',pix:'<path d="M12 3l9 9-9 9-9-9z"/>',sync:'<path d="M4 12a8 8 0 0 1 14-5l2 2M20 12a8 8 0 0 1-14 5l-2-2"/>',lock:'<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',brush:'<path d="M4 20c4 0 6-2 6-5l9-9-3-3-9 9c-3 0-5 2-5 5z"/>',plus:'<path d="M12 5v14M5 12h14"/>',bolt:'<path d="M13 3L5 14h6l-1 7 8-11h-6z"/>',cart:'<path d="M3 4h2l2 11h11l2-8H6"/><circle cx="9" cy="20" r="1"/><circle cx="17" cy="20" r="1"/>',shield:'<path d="M12 3l8 3v6c0 5-4 8-8 9-4-1-8-4-8-9V6z"/>'};
+const feats=[
+ ['card','Cartão parcelado','Até 12x pela Cielo, com parcelas sem juros e juros por mês que você define.',1],
+ ['pix','Pix com QR Code','QR Code e copia e cola na tela; a página confirma sozinha quando o pagamento cai.',1],
+ ['sync','Pedido pago na Shopify','Pedido criado automaticamente, com transação registrada e estoque atualizado.',1],
+ ['lock','Cartão fora do seu servidor','Tokenização direto na Cielo (Silent Order Post) reduz seu escopo PCI.',1],
+ ['brush','Sua marca no checkout','Logo, cores e ordem dos campos com a identidade da sua loja.',1],
+ ['shield','Antifraude e 3DS','Análise de risco da Cielo e autenticação 3DS nas compras suspeitas.',0],
+ ['plus','Order bump','Oferta extra marcada com um clique antes de pagar.',0],
+ ['bolt','Upsell em 1 clique','Oferta pós-compra cobrada no mesmo cartão, sem digitar de novo.',0],
+ ['cart','Recuperação de carrinho','E-mail e WhatsApp para quem abandonou o checkout ou não pagou o Pix.',0]];
+document.getElementById('feats').innerHTML=feats.map(([i,t,d,ok])=>`<div class="panel"><div class="ico"><svg viewBox="0 0 24 24">${ic[i]}</svg></div><span class="tag ${ok?'':'prox'}">${ok?'Disponível':'Em breve'}</span><h3>${t}</h3><p>${d}</p></div>`).join('');
+
+const plans=[
+ ['Início','R$ 0','/mês + 2,5% por pedido',['Cartão e Pix pela Cielo','Pedidos sincronizados','Suporte por e-mail'],0],
+ ['Crescer','R$ 79','/mês + 1,5% por pedido',['Tudo do Início','Order bump e upsell','Recuperação de carrinho'],1],
+ ['Escala','R$ 299','/mês + 0,9% por pedido',['Tudo do Crescer','Domínio próprio do checkout','Suporte prioritário no WhatsApp'],0]];
+document.getElementById('plans').innerHTML=plans.map(([n,p,s,l,d])=>`<div class="plan ${d?'dest':''}"><h3>${n}</h3><div class="preco">${p}</div><div class="sub">${s}</div><ul>${l.map(x=>`<li>${x}</li>`).join('')}</ul><a class="btn ${d?'pri':'sec'}" href="/painel">Começar</a></div>`).join('');
+
+const faqs=[
+ ['Preciso ter conta na Cielo?','Sim. O dinheiro das vendas cai direto na sua conta Cielo, com as taxas e prazos do seu contrato. Você precisa do produto API E-commerce 3.0.'],
+ ['As minhas credenciais ficam seguras?','Sim. As chaves da Shopify e da Cielo ficam criptografadas no banco e nunca aparecem inteiras de novo no painel.'],
+ ['Os dados do cartão passam pelos servidores da Fluxofy?','Não. O cartão é enviado do navegador direto para a Cielo, que devolve um token. Só o token chega ao servidor do checkout.'],
+ ['Os pedidos aparecem na Shopify?','Sim. Cada pagamento aprovado vira um pedido pago na sua loja, com cliente, endereço, itens e a transação da Cielo.'],
+ ['Em quanto tempo recebo?','Depende do seu contrato com a Cielo. Pix costuma cair na hora; cartão segue o prazo combinado ou a antecipação contratada.'],
+ ['A Shopify aprova esse tipo de checkout?','Não. A Shopify não homologa checkouts externos. Se preferir o caminho oficial, use os apps da Cielo na App Store da Shopify.'],
+ ['Quanto tempo leva a integração?','Com as credenciais em mãos, cerca de 30 minutos: criar a conta, conectar Shopify e Cielo no painel, colar uma linha no tema e testar.']];
+document.getElementById('faqs').innerHTML=faqs.map(([q,a])=>`<details><summary>${q}</summary><p>${a}</p></details>`).join('');
+
+document.getElementById('toc').innerHTML=[...document.querySelectorAll('#v-integracao section')].map(s=>`<a href="#${s.id}">${s.querySelector('.n').textContent.split('· ')[1]}</a>`).join('');
+
+/* cópia */
+document.querySelectorAll('.code button').forEach(b=>b.onclick=async()=>{try{await navigator.clipboard.writeText(b.nextElementSibling.textContent);b.textContent='Copiado'}catch(e){b.textContent='Selecione e copie'}setTimeout(()=>b.textContent='Copiar',1800)});
+
+/* rotas por hash */
+function rota(){const h=location.hash.slice(1)||'inicio';const el=document.getElementById(h);const doc=h==='integracao'||(el&&el.closest('#v-integracao'));
+ document.getElementById('v-inicio').hidden=!!doc;document.getElementById('v-integracao').hidden=!doc;
+ document.querySelectorAll('.links a').forEach(a=>a.classList.toggle('on',doc&&a.dataset.v==='integracao'));
+ if(h==='integracao'||h==='inicio')window.scrollTo(0,0);else if(el)el.scrollIntoView();}
+addEventListener('hashchange',rota);rota();
+}
+</script>
+</body>
+</html>
