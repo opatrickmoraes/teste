@@ -1,0 +1,9 @@
+{
+  "name": "checkout-cielo",
+  "version": "1.0.0",
+  "description": "Checkout transparente com Cielo (cartão via Silent Order Post + Pix)",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=22.5" },
+  "license": "MIT"
+}
