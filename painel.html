@@ -34,6 +34,52 @@ nav.abas a.on{background:var(--co);color:#fff;border-left:3px solid var(--ac);bo
 main{max-width:1180px;margin:0 auto;padding:26px 28px 60px;width:100%}
 .sub{color:var(--mut);margin:0 0 22px}
 .cab{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+/* submenu Vendas */
+.grupo .pai{display:flex;gap:10px;align-items:center;width:100%;padding:11px 12px;border-radius:10px;border:0;background:none;color:var(--mut);font-weight:500;cursor:pointer;text-align:left}
+.grupo .pai svg{width:18px;height:18px;flex:none}.grupo .pai .seta{margin-left:auto;transition:.15s}
+.grupo .pai:hover{background:var(--bg);color:var(--ink)}.grupo.ativo .pai{color:var(--ink);font-weight:600}
+.grupo.aberto .seta{transform:rotate(180deg)}
+.subm{display:none;flex-direction:column;margin:2px 0 4px 21px;padding-left:12px;border-left:1.5px solid var(--line)}
+.grupo.aberto .subm{display:flex}
+nav.abas .subm a{padding:8px 10px;font-size:14px;border-radius:8px}
+nav.abas .subm a.on{background:none;color:var(--ink);font-weight:600;box-shadow:none;border-left:0;position:relative}
+nav.abas .subm a.on::before{content:"";position:absolute;left:-13.5px;top:8px;bottom:8px;width:3px;border-radius:3px;background:var(--ac)}
+@media(max-width:900px){.grupo{display:contents}.grupo .pai{display:none}.subm{display:contents}nav.abas .subm a{padding:9px 12px;flex:none;white-space:nowrap}nav.abas .subm a.on::before{display:none}nav.abas .subm a.on{background:var(--co);color:#fff}}
+textarea{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:9px;font:15px/1.5 Inter,system-ui,sans-serif;resize:vertical;min-height:96px}
+textarea:focus{outline:none;border-color:var(--co);box-shadow:0 0 0 3px #84cc1655}
+.fila{display:grid;gap:12px;margin-top:14px}
+.contato{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:start}
+.contato .acoes{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.contato .acoes .btn{min-height:36px;padding:0 12px;font-size:13px}
+.wa{background:#25d366!important;color:#0b2e17!important;border-color:#25d366!important}
+@media(max-width:700px){.contato{grid-template-columns:minmax(0,1fr)}.contato .acoes{justify-content:flex-start}}
+/* recompensas */
+.trofeu{display:flex;align-items:center;gap:10px;padding:8px 14px;border-radius:12px;background:#f1f9e4;border:1px solid #d6efb0;color:var(--ink);text-decoration:none;margin-right:auto}
+.trofeu svg{width:20px;height:20px}.trofeu .tb{width:110px;height:7px;border-radius:9px;background:#fff;overflow:hidden}.trofeu .tb i{display:block;height:100%;background:linear-gradient(90deg,#111827,#84cc16);border-radius:9px}
+.trofeu b{font-size:14px;white-space:nowrap}
+@media(max-width:600px){.trofeu .tb{width:56px}}
+.rkpis{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}@media(max-width:700px){.rkpis{grid-template-columns:minmax(0,1fr)}.rkpi .grande{font-size:21px}}
+.rkpi .barra2{height:8px;border-radius:9px;background:#e6ebf3;margin:12px 0 8px;overflow:hidden}.rkpi .barra2 i{display:block;height:100%;border-radius:9px;background:linear-gradient(90deg,#111827,#4d7c0f,#84cc16)}
+.rkpi .grande{font:700 24px "Space Grotesk",sans-serif;white-space:nowrap}.rkpi .grande small{font:500 13px Inter,sans-serif;color:var(--mut)}
+.trilhaR{display:grid;grid-template-columns:150px repeat(var(--n),minmax(0,1fr));gap:14px;align-items:center;margin-top:24px}
+.mascote svg{width:100%;height:auto}
+.cartaoR{position:relative;aspect-ratio:4/5;border-radius:14px;overflow:hidden;cursor:pointer;transition:transform .15s;border:3px solid transparent}
+.cartaoR:hover{transform:translateY(-3px)}.cartaoR svg{display:block;width:100%;height:100%}
+.cartaoR.atual{border-color:#84cc16;box-shadow:0 14px 30px -14px #4d7c0f}
+.cartaoR .cad{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
+.cartaoR .cad span{width:46px;height:46px;border-radius:50%;background:#0009;display:grid;place-items:center;border:1.5px solid #fff6}.cartaoR .cad svg{width:22px;height:22px}
+.cartaoR .feito{position:absolute;top:8px;right:8px;background:#84cc16;color:#111;font-size:11px;font-weight:700;padding:3px 8px;border-radius:999px}
+.passosR{display:grid;grid-template-columns:150px repeat(var(--n),minmax(0,1fr));gap:14px;margin-top:18px}
+.passosR .lin{grid-column:2/-1;display:flex;align-items:center}
+.passoR{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:13px;color:var(--mut);font-weight:600;flex:none;width:34px}
+.passoR i{width:30px;height:30px;border-radius:50%;border:2px solid #d6dae4;background:#fff;display:grid;place-items:center;color:#9aa1b2;font-style:normal;font-size:13px}
+.passoR.ok i{border-color:#4d7c0f;color:#4d7c0f}
+.trecho{flex:1;height:5px;border-radius:9px;background:#e2e6ee;margin:0 6px 22px;overflow:hidden}.trecho i{display:block;height:100%;background:linear-gradient(90deg,#111827,#84cc16)}
+@media(max-width:1000px){.trilhaR,.passosR{grid-template-columns:repeat(var(--n),minmax(150px,1fr));overflow-x:auto}.mascote{display:none}.passosR .lin{grid-column:1/-1}}
+@media(max-width:700px){.trilhaR{grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:150px;overflow-x:auto;padding-bottom:6px}.passosR{display:none}}
+.nivelLinha{display:grid;grid-template-columns:40px minmax(0,1fr) minmax(0,1.3fr) minmax(0,2fr) auto;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)}
+.nivelLinha input{height:40px;padding:0 10px;font-size:14px}
+@media(max-width:700px){.nivelLinha{grid-template-columns:1fr 1fr}}
 /* dashboard */
 .ola{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
 .periodo{display:flex;gap:8px;align-items:center}.periodo select{width:auto;min-width:150px}
@@ -82,7 +128,7 @@ input:focus,select:focus,.btn:focus-visible,a:focus-visible{outline:none;border-
 .code{position:relative;background:#0b0d12;color:#dfe5ff;border-radius:10px;padding:14px 14px 14px;font:13px/1.55 ui-monospace,Menlo,monospace;margin-top:10px;white-space:pre-wrap;word-break:break-all;padding-right:74px}
 .copiar{position:absolute;right:8px;top:8px;background:#232a44;color:#fff;border:0;border-radius:7px;padding:5px 10px;font-size:12px;cursor:pointer}
 .res{margin-top:12px;padding:12px 14px;border-radius:10px;font-size:14px}
-.res.ok{background:var(--okbg);color:var(--ok)}.res.err{background:var(--errbg);color:var(--err)}
+.res.ok{background:var(--okbg);color:var(--ok)}.res.warn{background:var(--warnbg);color:var(--warn)}.res.err{background:var(--errbg);color:var(--err)}
 /* integrações */
 .integ{display:flex;flex-direction:column;gap:10px;text-decoration:none;color:inherit;transition:.15s}
 .integ:hover{border-color:var(--co);transform:translateY(-1px)}
@@ -95,12 +141,74 @@ input:focus,select:focus,.btn:focus-visible,a:focus-visible{outline:none;border-
 /* tabelas */
 table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;padding:11px 8px;border-bottom:1px solid var(--line)}th{color:var(--mut);font-weight:600;font-size:13px}
 td.r,th.r{text-align:right;white-space:nowrap}tbody tr{cursor:pointer}tbody tr:hover{background:#f8f9fc}
+.ufs{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.ufs button{min-width:42px;height:32px;border-radius:8px;border:1.5px solid var(--line);background:#fff;font-weight:600;font-size:12.5px;cursor:pointer;color:var(--mut)}
+.ufs button.on{background:var(--co);border-color:var(--co);color:#fff}
+.atalhos{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.atalhos button{border:0;background:var(--zone);color:var(--ink);border-radius:999px;padding:5px 11px;font-size:12px;font-weight:600;cursor:pointer}
+.regra{border:1.5px solid var(--line);border-radius:12px;padding:16px;margin-bottom:12px;background:#fff}
+.regra .topo{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.regra .topo input.nome{flex:1;min-width:180px;font-weight:600}
+.lin3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media(max-width:640px){.lin3{grid-template-columns:1fr 1fr}}
+.remover{border:0;background:none;color:var(--err);cursor:pointer;font-size:13px;font-weight:600}
+.simres{margin-top:12px;display:grid;gap:6px}.simres div{display:flex;justify-content:space-between;gap:10px;border:1px solid var(--line);border-radius:10px;padding:9px 12px;font-size:14px}
+.simres small{color:var(--mut)}
+textarea.csv{width:100%;min-height:220px;font-family:ui-monospace,Menlo,monospace;font-size:13px;border:1.5px solid var(--line);border-radius:10px;padding:10px}
+.apps{padding:14px;display:grid;gap:14px}
+.apps .cat{border:1.5px solid var(--line);border-radius:12px;padding:14px 14px 8px}
+.apps .cat h3{margin:0 0 10px;font-size:15px}
+.approw{display:flex;align-items:center;gap:12px;border:1.5px solid var(--line);border-radius:10px;padding:10px 14px;margin-bottom:8px;text-decoration:none;color:var(--ink);background:#fff;transition:.12s}
+.approw:hover{border-color:var(--co)}
+.alogo{width:34px;height:34px;border-radius:9px;border:1px solid var(--line);background:#fff;display:grid;place-items:center;flex:none;position:relative;overflow:hidden;color:var(--lc)}
+.alogo img{width:26px;height:26px;object-fit:contain;position:relative;z-index:1;background:#fff}
+.alogo i{position:absolute;font-style:normal;font-weight:700;font-size:15px;color:var(--lc)}
+.approw .an{flex:1;min-width:0;display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px}
+.approw .an small{flex-basis:100%;color:var(--mut);font-size:12.5px}
+.approw .chip{font-size:11px;padding:2px 8px}
+.approw .cfg{color:#e4572e;font-size:13px;font-weight:600;white-space:nowrap}
+.gw{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:8px 2px 8px;font-size:13.5px;color:var(--mut)}
+.gw select{max-width:180px;min-height:34px;padding:0 10px}
+.estreito{max-width:900px;margin:0 auto}
+.fc{display:flex;align-items:center;gap:14px;border:1.5px solid #f3d3c8;background:var(--bg);border-radius:10px;padding:12px 16px;margin-bottom:10px}
+.fc .tog{margin:0}.fc .fn{flex:1;min-width:0}.fc .fn b{display:block;font-weight:500;font-size:14.5px}
+.fc .fn small{display:block;color:var(--ink);font-size:13px;margin-top:2px}.fc .fn small i{font-style:normal;color:var(--mut)}
+.fc .ico{border:0;background:none;cursor:pointer;padding:6px;border-radius:8px;color:var(--mut);display:grid}
+.fc .ico:hover{background:#fff}.fc .ico.del{color:var(--err)}
+.rodfc{display:flex;justify-content:space-between;align-items:center;margin-top:6px}
+.addfc{display:flex;align-items:center;gap:8px;border:0;background:none;cursor:pointer;font-size:14px;color:var(--ink);padding:6px 0}
+.addfc:disabled{opacity:.4;cursor:not-allowed}
+.kv{display:flex;flex-wrap:wrap;gap:18px 40px;border-top:1px solid var(--line);padding-top:16px;margin-top:16px}
+.kv small{display:block;color:var(--mut);font-size:13px}.kv b{font-size:15px}
+.cartao-vis{width:300px;max-width:100%;aspect-ratio:1.6;border-radius:16px;padding:18px 20px;color:#fff;display:flex;flex-direction:column;justify-content:space-between;
+  background:linear-gradient(135deg,#0b1220 0%,#1f2937 55%,#3f6212 100%);box-shadow:0 10px 30px #0b122033;flex:none}
+.cartao-vis .chipc{width:38px;height:28px;border-radius:6px;background:linear-gradient(135deg,#e8d38a,#b8963c)}
+.cartao-vis .num{font-size:18px;letter-spacing:3px;font-weight:600}.cartao-vis small{opacity:.7;font-size:11px;letter-spacing:1px}
+.cartao-vis .band{font-weight:700;text-transform:uppercase;font-size:13px;letter-spacing:1px}
+.varchips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.varchips button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:4px 10px;font-size:12px;cursor:pointer;font-family:ui-monospace,Menlo,monospace}
+.varchips button:hover{border-color:var(--co)}
+iframe.previa{width:100%;height:520px;border:1px solid var(--line);border-radius:12px;background:#f4f5f7;margin-top:12px}
 .vazio{text-align:center;color:var(--mut);padding:30px}
 @media(max-width:640px){.tabela thead{display:none}.tabela tr{display:grid;grid-template-columns:1fr auto;padding:10px 0;border-bottom:1px solid var(--line)}.tabela td{border:0;padding:2px 0}.tabela td.r{text-align:right}}
 /* produtos meta */
 .prod{display:flex;gap:12px;padding:12px 0;border-top:1px solid var(--line);align-items:center;flex-wrap:wrap}
 .prod img,.prod .ph{width:44px;height:44px;border-radius:8px;object-fit:cover;background:#eef0f4;flex:none}
 .prod .t{flex:1;min-width:160px}
+/* produtos */
+.prods{display:grid;gap:12px;margin-top:14px}
+.pcard{display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:14px;align-items:start}
+.pcard img,.pcard .ph{width:64px;height:64px;border-radius:12px;object-fit:cover;background:#eef0ea}
+.pcard .meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:4px;font-size:13px;color:var(--mut)}
+.pcard .vend{text-align:right;white-space:nowrap}.pcard .vend b{display:block;font:700 18px "Space Grotesk",sans-serif}
+.vars{grid-column:1/-1;border-top:1px solid var(--line);margin-top:4px}
+.var{display:grid;grid-template-columns:minmax(0,1fr) auto auto auto;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}.var:last-child{border-bottom:0}
+.var .pr{font-weight:600;white-space:nowrap}
+@media(max-width:640px){.pcard{grid-template-columns:52px minmax(0,1fr)}.pcard img,.pcard .ph{width:52px;height:52px}.pcard .vend{grid-column:2;text-align:left}.var{grid-template-columns:minmax(0,1fr) auto}}
+.filtros{display:flex;gap:10px;flex-wrap:wrap}.filtros input{flex:1;min-width:200px}.filtros select{width:auto}
+.cupomLinha{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) minmax(0,.8fr) minmax(0,.9fr) auto auto;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)}
+.cupomLinha input,.cupomLinha select{height:40px;padding:0 10px;font-size:14px}
+.cupomLinha .x{border:0;background:none;color:var(--err);cursor:pointer;font-size:18px;padding:4px 6px}
+.cupomCab{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) minmax(0,.8fr) minmax(0,.9fr) auto auto;gap:8px;font-size:12px;color:var(--mut);margin-top:6px}
+@media(max-width:700px){.cupomLinha{grid-template-columns:1fr 1fr}.cupomCab{display:none}}
 /* gaveta */
 .fundo{position:fixed;inset:0;background:#0b0d1266;z-index:20;display:flex;justify-content:flex-end}
 .gaveta{background:#fff;width:min(520px,100%);height:100%;overflow:auto;padding:24px}
@@ -147,21 +255,39 @@ td.r,th.r{text-align:right;white-space:nowrap}tbody tr{cursor:pointer}tbody tr:h
   <div class="saldo"><small>Receita nos últimos 30 dias</small><b id="saldoLat">R$ 0,00</b></div>
   <nav class="abas" id="abas">
     <a href="#inicio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>Dashboard</a>
-    <a href="#pedidos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2 11h11l2-8H6"/><circle cx="9" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/></svg>Vendas</a>
+    <div class="grupo" id="grpVendas">
+      <button type="button" class="pai" id="paiVendas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2 11h11l2-8H6"/><circle cx="9" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/></svg>Vendas<svg class="seta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+      <div class="subm">
+        <a href="#pedidos">Pedidos</a><a href="#reembolsos">Pedidos de reembolso</a><a href="#abandonados">Checkout abandonado</a><a href="#recuperacao">Recuperação manual</a><a href="#links">Links de pagamento</a>
+      </div>
+    </div>
+    <div class="grupo" id="grpLog">
+      <button type="button" class="pai" id="paiLog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 6h13v10H1zM14 10h4l3 3v3h-7"/><circle cx="5" cy="18" r="1.8"/><circle cx="17.5" cy="18" r="1.8"/></svg>Logística<svg class="seta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+      <div class="subm">
+        <a href="#frete-gratis">Frete Grátis por Região</a><a href="#fretes">Fretes Customizados</a><a href="#frete-planilha">Frete por planilha</a><a href="#embalagem">Embalagem</a>
+      </div>
+    </div>
+    <a href="#produtos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M3 7l9 5 9-5M12 12v10"/></svg>Produtos</a>
     <a href="#integracoes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 7V3M15 7V3M7 7h10v4a5 5 0 0 1-10 0zM12 16v5"/></svg>Integrações</a>
     <a href="#checkout"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg>Checkout</a>
+    <a href="#emails"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>E-mails</a>
+    <a href="#recompensas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M7 6H4v2a3 3 0 0 0 3 3M17 6h3v2a3 3 0 0 1-3 3"/></svg>Recompensas</a>
+    <a href="#planos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/></svg>Plano e faturas</a>
     <a href="#admin" id="abaAdmin" class="oculto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l8 3v6c0 5-4 8-8 9-4-1-8-4-8-9V6z"/></svg>Admin</a>
   </nav>
   <div class="rodape-lat"><a class="btn sec peq" href="/" target="_blank">Ver site</a></div>
 </aside>
 <div>
 <header class="barra">
+  <a class="trofeu" href="#recompensas" id="trofeu" title="Trilha de recompensas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M7 6H4v2a3 3 0 0 0 3 3M17 6h3v2a3 3 0 0 1-3 3"/></svg><span class="tb"><i id="trofeuBarra" style="width:0"></i></span><b id="trofeuTxt">0/5</b></a>
   <span class="chip cinza" id="chipAmbiente">Simulação</span>
   <div class="quem"><div class="avatar" id="avatar">L</div><div><b id="quemLoja" style="font-size:14px"></b><small>Loja</small></div></div>
   <button class="btn sec peq" id="btnSair">Sair</button>
 </header>
 <main>
+<div id="avisoArmazenamento" class="oculto res err" style="margin-bottom:16px"><b>Os dados não estão salvos em um volume.</b> A cada publicação no Railway, todas as contas, lojas e logins são apagados (por isso todo mundo é deslogado). No Railway, abra o serviço → <b>Settings → Volumes</b> (ou clique com o botão direito no serviço → <b>Attach Volume</b>) e use o Mount Path <code>/data</code>.</div>
 <div class="res err oculto" id="avisoBloqueio" style="margin:0 0 18px">O checkout desta loja está bloqueado pelo administrador da plataforma. Entre em contato com o suporte.</div>
+<div class="res err oculto" id="avisoFatura" style="margin:0 0 18px"><b>Checkout bloqueado por fatura em atraso.</b> Seus clientes não conseguem comprar até a fatura ser paga. <a href="#planos">Pagar agora</a></div>
 <!-- DASHBOARD -->
 <section data-v="inicio">
   <h1 style="margin-bottom:16px">Dashboard</h1>
@@ -176,7 +302,7 @@ td.r,th.r{text-align:right;white-space:nowrap}tbody tr{cursor:pointer}tbody tr:h
     <div class="card kpi"><div class="t"><span>Total de vendas</span><button class="olhinho" id="olhoVendas" aria-label="Mostrar ou esconder valores">👁</button></div><div class="v" id="kVendas">—</div><small style="color:var(--mut)" id="kVendasSub"></small></div>
     <div class="card kpi"><div class="t"><span>Ticket médio</span></div><div class="v" id="kTicket">—</div><small style="color:var(--mut)">por pedido pago</small></div>
     <div class="card kpi"><div class="t"><span>Pedidos pagos</span></div><div class="v" id="kPagos">—</div><small style="color:var(--mut)" id="kConv"></small></div>
-    <div class="card kpi"><div class="t"><span>Painel de conquistas</span></div><div style="font-weight:600;margin-top:8px" id="kMeta">—</div><div class="trilha"><i id="kTrilha" style="width:0"></i></div><div class="marcos"><span id="kMarcoA"></span><span id="kMarcoB"></span></div></div>
+    <a class="card kpi" href="#recompensas" style="text-decoration:none;color:inherit"><div class="t"><span>Painel de conquistas</span><small style="color:var(--mut)">Ver trilha ›</small></div><div style="font-weight:600;margin-top:8px" id="kMeta">—</div><div class="trilha"><i id="kTrilha" style="width:0"></i></div><div class="marcos"><span id="kMarcoA"></span><span id="kMarcoB"></span></div></a>
   </div>
   <div class="card" style="margin-top:14px">
     <div class="cab"><h2 style="margin:0">Receita total</h2><span class="desc" style="margin:0" id="totalGraf"></span></div>
@@ -194,16 +320,22 @@ td.r,th.r{text-align:right;white-space:nowrap}tbody tr{cursor:pointer}tbody tr:h
 
 <!-- INTEGRAÇÕES (lista) -->
 <section data-v="integracoes">
-  <h1>Integrações</h1><p class="sub">Conecte sua loja e seu meio de pagamento.</p>
-  <div class="grid3">
-    <a class="card integ" href="#shopify">
-      <div class="marca"><div class="ic" style="background:#eef7e3"><svg width="20" height="22" viewBox="0 0 20 22"><path d="M3 6l2-4h10l2 4v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z" fill="#95bf47"/><path d="M7 6V5a3 3 0 0 1 6 0v1" stroke="#fff" stroke-width="1.6" fill="none"/></svg></div><h3>Shopify</h3><span class="chip cinza" id="stShopifyLista">Inativo</span></div>
-      <p class="desc" style="margin:0">Leva o carrinho da loja para o checkout e cria os pedidos pagos.</p>
-    </a>
-    <a class="card integ" href="#cielo">
-      <div class="marca"><div class="ic" style="background:#eef0ea"><svg width="22" height="16" viewBox="0 0 22 16"><rect x="1" y="1" width="20" height="14" rx="3" fill="#111827"/><path d="M1 5h20" stroke="#fff" stroke-width="2"/></svg></div><h3>Cielo</h3><span class="chip cinza" id="stCieloLista">Simulação</span></div>
-      <p class="desc" style="margin:0">Cartão de crédito parcelado e Pix, direto na sua conta Cielo.</p>
-    </a>
+  <h1>Meus apps</h1><p class="sub">Gerencie as integrações da sua loja</p>
+  <div class="card apps">
+    <div class="cat"><h3>E-commerce</h3>
+      <a class="approw" href="#shopify"><span class="alogo" style="--lc:#5e8e3e"><img src="/logos?app=shopify" alt="" loading="lazy" onerror="if(!this.dataset.f){this.dataset.f=1;this.src='https://www.google.com/s2/favicons?domain=shopify.com&amp;sz=128'}else this.remove()"><i>S</i></span><span class="an"><b>Shopify</b><span class="chip cinza" id="stShopifyLista">Inativo</span><small>Leva o carrinho para o checkout e cria os pedidos pagos</small></span><span class="cfg">Configurar</span></a>
+    </div>
+    <div class="cat"><h3>Pagamentos</h3>
+      <a class="approw" href="#cielo"><span class="alogo" style="--lc:#00aeef"><img src="/logos?app=cielo" alt="" loading="lazy" onerror="if(!this.dataset.f){this.dataset.f=1;this.src='https://www.google.com/s2/favicons?domain=cielo.com.br&amp;sz=128'}else this.remove()"><i>C</i></span><span class="an"><b>Cielo</b><span class="chip cinza" id="stCieloLista">Inativo</span><span class="chip ok emuso oculto" data-gw="cielo">Em uso</span><small>Cartão parcelado e Pix direto na sua conta Cielo</small></span><span class="cfg">Configurar</span></a>
+      <a class="approw" href="#appmax"><span class="alogo" style="--lc:#111"><img src="/logos?app=appmax" alt="" loading="lazy" onerror="if(!this.dataset.f){this.dataset.f=1;this.src='https://www.google.com/s2/favicons?domain=appmax.com.br&amp;sz=128'}else this.remove()"><i>A</i></span><span class="an"><b>Appmax</b><span class="chip cinza" id="stAppmaxLista">Inativo</span><span class="chip ok emuso oculto" data-gw="appmax">Em uso</span><small>Cartão com antifraude e Pix · conecta com um clique</small></span><span class="cfg">Configurar</span></a>
+      <a class="approw" href="#pagarme"><span class="alogo" style="--lc:#65a30d"><img src="/logos?app=pagarme" alt="" loading="lazy" onerror="if(!this.dataset.f){this.dataset.f=1;this.src='https://www.google.com/s2/favicons?domain=pagar.me&amp;sz=128'}else this.remove()"><i>P</i></span><span class="an"><b>Pagar.me</b><span class="chip cinza" id="stPagarmeLista">Inativo</span><span class="chip ok emuso oculto" data-gw="pagarme">Em uso</span><small>Cartão parcelado e Pix pela API v5 (Stone)</small></span><span class="cfg">Configurar</span></a>
+      <div class="gw"><span>Gateway do checkout</span>
+        <select id="gwSel"><option value="cielo">Cielo</option><option value="appmax">Appmax</option><option value="pagarme">Pagar.me</option></select>
+        <button class="btn pri peq" id="salvarGw">Usar este</button><span class="chip cinza" id="gwModo"></span></div>
+    </div>
+    <div class="cat"><h3>Logística</h3>
+      <a class="approw" href="#fretes"><span class="alogo" style="--lc:#111"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M1 6h13v10H1zM14 10h4l3 3v3h-7"/><circle cx="5" cy="18" r="1.8"/><circle cx="17.5" cy="18" r="1.8"/></svg></span><span class="an"><b>Fretes próprios</b><span class="chip cinza" id="stFretesLista">Inativo</span><small>Frete grátis por região, fretes customizados e planilha por CEP</small></span><span class="cfg">Configurar</span></a>
+    </div>
   </div>
 </section>
 
@@ -214,7 +346,7 @@ td.r,th.r{text-align:right;white-space:nowrap}tbody tr{cursor:pointer}tbody tr:h
   <div class="grid2">
     <div class="col">
       <div class="card">
-        <div class="marca"><div class="ic" style="background:#eef7e3"><svg width="20" height="22" viewBox="0 0 20 22"><path d="M3 6l2-4h10l2 4v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z" fill="#95bf47"/><path d="M7 6V5a3 3 0 0 1 6 0v1" stroke="#fff" stroke-width="1.6" fill="none"/></svg></div><h3>Shopify</h3><span class="chip cinza" id="stShopify">Inativo</span></div>
+        <div class="marca"><span class="alogo" style="--lc:#5e8e3e"><img src="/logos?app=shopify" alt="" loading="lazy" onerror="if(!this.dataset.f){this.dataset.f=1;this.src='https://www.google.com/s2/favicons?domain=shopify.com&amp;sz=128'}else this.remove()"><i>S</i></span><h3>Shopify</h3><span class="chip cinza" id="stShopify">Inativo</span></div>
         <p class="desc">Conecte sua loja Shopify para integrar o checkout e automatizar o processamento de pagamentos.</p>
         <a href="/#int-shopify" target="_blank">Como integrar</a>
       </div>
@@ -271,7 +403,7 @@ td.r,th.r{text-align:right;white-space:nowrap}tbody tr{cursor:pointer}tbody tr:h
   <div class="grid2">
     <div class="col">
       <div class="card">
-        <div class="marca"><div class="ic" style="background:#eef0ea"><svg width="22" height="16" viewBox="0 0 22 16"><rect x="1" y="1" width="20" height="14" rx="3" fill="#111827"/><path d="M1 5h20" stroke="#fff" stroke-width="2"/></svg></div><h3>Cielo</h3><span class="chip cinza" id="stCielo">Simulação</span></div>
+        <div class="marca"><span class="alogo" style="--lc:#00aeef"><img src="/logos?app=cielo" alt="" loading="lazy" onerror="if(!this.dataset.f){this.dataset.f=1;this.src='https://www.google.com/s2/favicons?domain=cielo.com.br&amp;sz=128'}else this.remove()"><i>C</i></span><h3>Cielo</h3><span class="chip cinza" id="stCielo">Simulação</span></div>
         <p class="desc">Sem credenciais, o checkout roda em simulação: cartões terminados em 0, 1 ou 4 são aprovados e o Pix tem botão de teste.</p>
         <a href="/#int-cielo" target="_blank">Como integrar</a>
       </div>
@@ -297,6 +429,73 @@ td.r,th.r{text-align:right;white-space:nowrap}tbody tr{cursor:pointer}tbody tr:h
       <label class="l">Pix</label><label class="tog"><input type="checkbox" id="ciPix"><span class="tr"></span><span data-txt>Inativo</span></label>
       <div style="margin-top:20px"><button class="btn sec" id="testarCielo">Testar credenciais</button></div>
       <div id="resCielo"></div>
+    </div>
+  </div>
+</section>
+
+<!-- APPMAX -->
+<section data-v="appmax">
+  <a class="voltar" href="#integracoes">‹ Voltar</a>
+  <div class="cab"><div><h1>Appmax</h1><p class="sub">Cartão de crédito e Pix pela sua conta Appmax</p></div></div>
+  <div id="avisoAppmax"></div>
+  <div class="grid2">
+    <div class="col">
+      <div class="card">
+        <div class="marca"><span class="alogo" style="--lc:#111"><img src="/logos?app=appmax" alt="" loading="lazy" onerror="if(!this.dataset.f){this.dataset.f=1;this.src='https://www.google.com/s2/favicons?domain=appmax.com.br&amp;sz=128'}else this.remove()"><i>A</i></span><h3>Appmax</h3><span class="chip cinza" id="stAppmax">Inativo</span></div>
+        <p class="desc" id="txtAppmax">Clique em Conectar: você entra na sua conta Appmax, autoriza o Fluxofy e volta para cá já conectado. Não precisa copiar chaves.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <a class="btn pri" id="btnConectarAppmax" href="/appmax/conectar">Conectar Appmax</a>
+          <button class="btn sec" id="testarAppmax">Testar conexão</button>
+          <button class="btn sec" id="desconectarAppmax">Desconectar</button>
+        </div>
+        <div id="resAppmax"></div>
+      </div>
+      <div class="card">
+        <b>Como funciona</b>
+        <p class="desc" style="margin-bottom:0">Os dados do cartão vão do navegador do cliente direto para a Appmax, que devolve um token. O Fluxofy nunca vê o número do cartão. Pagamentos em análise antifraude aparecem como pendentes e são confirmados automaticamente quando a Appmax aprova.</p>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Credenciais manuais</h2>
+      <p class="desc">Só se o botão Conectar não estiver disponível. Use as credenciais que a Appmax gerou para o app Fluxofy na sua conta.</p>
+      <div class="lin2">
+        <div><label class="l">Client ID</label><input id="amId" autocomplete="off"></div>
+        <div><label class="l">Client Secret</label><div class="campo-olho"><input id="amSecret" type="password" autocomplete="new-password"><button class="olho" type="button" data-olho="amSecret">👁</button></div></div>
+      </div>
+      <label class="l">External ID <span class="info" title="Identificador da instalação, usado pelo script de cartão da Appmax. Preenchido automaticamente ao conectar pelo botão.">i</span></label><input id="amExt" autocomplete="off">
+      <div style="margin-top:20px"><button class="btn pri" id="salvarAppmax">Salvar credenciais</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGAR.ME -->
+<section data-v="pagarme">
+  <a class="voltar" href="#integracoes">‹ Voltar</a>
+  <div class="cab"><div><h1>Pagar.me</h1><p class="sub">Chaves da API v5 da sua conta Pagar.me</p></div><button class="btn pri" id="salvarPagarme">Salvar</button></div>
+  <div class="grid2">
+    <div class="col">
+      <div class="card">
+        <div class="marca"><span class="alogo" style="--lc:#65a30d"><img src="/logos?app=pagarme" alt="" loading="lazy" onerror="if(!this.dataset.f){this.dataset.f=1;this.src='https://www.google.com/s2/favicons?domain=pagar.me&amp;sz=128'}else this.remove()"><i>P</i></span><h3>Pagar.me</h3><span class="chip cinza" id="stPagarme">Inativo</span></div>
+        <p class="desc">No painel da Pagar.me, abra <b>Configurações → Chaves de API</b> e copie a chave pública (pk_…) e a chave secreta (sk_…). Para testar, use as chaves de teste (pk_test_ e sk_test_).</p>
+      </div>
+      <div class="card">
+        <b>1. Libere o domínio do checkout</b>
+        <p class="desc">Em <b>Configurações → Domínios</b> (ou nas configurações da conta), cadastre este domínio. Sem isso, a Pagar.me bloqueia o cartão no checkout.</p>
+        <div class="code" id="codDominioPgm"></div>
+      </div>
+      <div class="card">
+        <b>2. Cadastre o webhook</b>
+        <p class="desc">Em <b>Configurações → Webhooks</b>, crie um webhook com esta URL e marque os eventos de pedido (order.paid, order.payment_failed, order.canceled) e de cobrança (charge.paid, charge.refunded, charge.payment_failed). É ele que marca o Pix como pago na hora.</p>
+        <div class="code" id="codWebhookPgm"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Chaves</h2>
+      <label class="l" style="margin-top:0">Chave pública</label><input id="pgPk" autocomplete="off" placeholder="pk_…">
+      <label class="l">Chave secreta</label><div class="campo-olho"><input id="pgSk" type="password" autocomplete="new-password" placeholder="sk_…"><button class="olho" type="button" data-olho="pgSk">👁</button></div>
+      <p class="desc" style="margin-top:8px">A chave secreta fica guardada criptografada e nunca aparece inteira de novo.</p>
+      <div style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap"><button class="btn sec" id="testarPagarme">Testar chaves</button><button class="btn sec" id="desconectarPagarme">Remover chaves</button></div>
+      <div id="resPagarme"></div>
     </div>
   </div>
 </section>
@@ -330,6 +529,214 @@ td.r,th.r{text-align:right;white-space:nowrap}tbody tr{cursor:pointer}tbody tr:h
       <p class="dica">Deixe 0 para frete grátis em todas as compras.</p>
     </div>
   </div>
+  <div class="grid2" style="margin-top:18px">
+    <div class="card">
+      <div class="cab"><h2 style="margin:0">Cupons de desconto</h2><button class="btn sec peq" id="addCupom" type="button">+ Adicionar cupom</button></div>
+      <p class="desc">O cliente digita o código no resumo do checkout. O desconto vale sobre os produtos, não sobre o frete.</p>
+      <div id="listaCupons"></div>
+      <button class="btn pri" id="salvarCupons" style="margin-top:14px">Salvar cupons</button>
+    </div>
+    <div class="card">
+      <h2>Depoimento no checkout</h2>
+      <p class="desc" style="margin-top:-6px">Mostra a avaliação de um cliente real embaixo do resumo do pedido. Use só depoimentos verdadeiros, com autorização do cliente.</p>
+      <label class="tog"><input type="checkbox" id="dpAtivo"><span class="tr"></span><span data-txt>Inativo</span></label>
+      <label class="l">Nome do cliente</label><input id="dpNome" maxlength="60" placeholder="Ex.: Mariana S.">
+      <label class="l">Depoimento</label><textarea id="dpTexto" maxlength="280" placeholder="O que o cliente disse sobre a loja"></textarea>
+      <label class="l">Estrelas</label><select id="dpEstrelas"><option>5</option><option>4</option><option>3</option><option>2</option><option>1</option></select>
+      <button class="btn pri" id="salvarDepo" style="margin-top:14px">Salvar depoimento</button>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUTOS -->
+<section data-v="produtos">
+  <div class="cab"><div><h1>Produtos</h1><p class="sub">Catálogo da sua loja Shopify, lido em tempo real · vendas pelo checkout nos últimos 30 dias</p></div><a class="btn sec" href="#shopify">Configurar Shopify</a></div>
+  <div class="card filtros">
+    <input id="pBusca" placeholder="Buscar produto pelo nome">
+    <select id="pStatus"><option value="">Todos os status</option><option value="ACTIVE">Ativos</option><option value="DRAFT">Rascunhos</option><option value="ARCHIVED">Arquivados</option></select>
+    <select id="pOrdem"><option value="vendas">Mais vendidos</option><option value="nome">Nome</option><option value="recentes">Atualizados recentemente</option></select>
+    <button class="btn pri" id="pBuscar">Buscar</button>
+  </div>
+  <div class="prods" id="pLista"></div>
+</section>
+
+<!-- REEMBOLSOS -->
+<section data-v="reembolsos">
+  <div class="cab"><div><h1>Pedidos de reembolso</h1><p class="sub">Reembolsos feitos pelo painel, estornados no gateway (Cielo ou Appmax)</p></div><button class="btn sec" id="atualizarReemb">Atualizar</button></div>
+  <div class="res" style="background:var(--zone);color:var(--ink);margin:0 0 14px">Para reembolsar uma venda, abra <a href="#pedidos">Pedidos</a>, clique no pedido pago e use <b>Reembolsar</b>. Pode ser o valor total ou parcial.</div>
+  <div class="card" style="padding:8px 16px">
+    <table class="tabela"><thead><tr><th>Pedido</th><th>Cliente</th><th>Pagamento</th><th>Status</th><th class="r">Reembolsado</th><th class="r">Total</th></tr></thead><tbody id="tbReemb"></tbody></table>
+  </div>
+</section>
+
+<!-- CHECKOUT ABANDONADO -->
+<section data-v="abandonados">
+  <div class="cab"><div><h1>Checkout abandonado</h1><p class="sub">Clientes que preencheram o contato no checkout e não pagaram</p></div>
+    <div class="periodo"><select id="abDias"><option value="7">Últimos 7 dias</option><option value="30" selected>Últimos 30 dias</option><option value="90">Últimos 90 dias</option></select></div></div>
+  <div class="kpis" id="abKpis"></div>
+  <div class="card" style="padding:8px 16px;margin-top:14px">
+    <table class="tabela"><thead><tr><th>Cliente</th><th>Carrinho</th><th>Situação</th><th class="r">Valor</th><th></th></tr></thead><tbody id="tbAband"></tbody></table>
+  </div>
+</section>
+
+<!-- RECUPERAÇÃO MANUAL -->
+<section data-v="recuperacao">
+  <div class="cab"><div><h1>Recuperação manual</h1><p class="sub">Chame no WhatsApp ou por e-mail quem não concluiu a compra. O link leva de volta ao checkout já preenchido.</p></div></div>
+  <div class="grid2">
+    <div class="card">
+      <h2>Mensagem padrão</h2>
+      <textarea id="recMsg"></textarea>
+      <p class="dica">Use {nome}, {loja}, {valor} e {link}. O {link} é obrigatório.</p>
+      <button class="btn pri" id="salvarRecMsg" style="margin-top:10px">Salvar mensagem</button>
+    </div>
+    <div class="card">
+      <h2>Fila de contatos</h2>
+      <label class="tog" style="margin:0"><input type="checkbox" id="recSoNovos" checked><span class="tr"></span><span>Mostrar só quem ainda não foi contatado</span></label>
+      <p class="desc" id="recResumo"></p>
+    </div>
+  </div>
+  <div class="fila" id="recFila"></div>
+</section>
+
+<!-- LINKS DE PAGAMENTO -->
+<section data-v="links">
+  <div class="cab"><div><h1>Links de pagamento</h1><p class="sub">Cobre qualquer valor com um link, sem precisar de produto na Shopify</p></div></div>
+  <div class="grid2">
+    <div class="card">
+      <h2>Novo link</h2>
+      <label class="l" style="margin-top:0">Nome do que está vendendo</label><input id="lkTitulo" placeholder="Ex.: Consultoria de 1 hora">
+      <label class="l">Valor (R$)</label><input id="lkValor" inputmode="decimal" placeholder="150,00">
+      <label class="l">Descrição (opcional)</label><input id="lkDesc" placeholder="Aparece no resumo do checkout">
+      <label class="l">Pedir endereço de entrega</label><label class="tog"><input type="checkbox" id="lkEnd"><span class="tr"></span><span data-txt>Inativo</span></label>
+      <button class="btn pri" id="criarLink" style="margin-top:18px;width:100%">Criar link</button>
+    </div>
+    <div class="card" style="padding:8px 16px">
+      <table class="tabela"><thead><tr><th>Link</th><th class="r">Valor</th><th class="r">Vendas</th><th></th></tr></thead><tbody id="tbLinks"></tbody></table>
+    </div>
+  </div>
+</section>
+
+<!-- LOGÍSTICA: FRETE GRÁTIS POR REGIÃO -->
+<section data-v="frete-gratis">
+  <div class="cab"><div><h1>Frete Grátis por Região</h1><p class="sub">Frete grátis para os estados que você escolher, a partir de um valor de pedido</p></div><button class="btn pri" id="salvarRegioes">Salvar</button></div>
+  <div class="grid2">
+    <div class="col"><div class="card"><h2>Simular frete</h2><p class="desc">Veja o que o cliente vai ver no checkout.</p>
+      <div class="lin2"><div><label class="l" style="margin-top:0">CEP</label><input class="simCep" inputmode="numeric" placeholder="01310-100"></div><div><label class="l" style="margin-top:0">Valor do pedido (R$)</label><input class="simValor" inputmode="decimal" placeholder="150,00"></div></div>
+      <button class="btn sec simBtn" style="margin-top:12px;width:100%">Simular</button><div class="simres"></div></div>
+      <div class="card"><b>Como funciona</b><p class="desc" style="margin-bottom:0">Se o CEP do cliente for de um estado da regra e o pedido atingir o valor mínimo, a opção de entrega mais barata fica grátis. O estado é identificado pelo CEP.</p></div>
+    </div>
+    <div><div id="listaRegioes"></div><button class="btn sec" id="novaRegiao" style="width:100%">+ Nova regra de frete grátis</button></div>
+  </div>
+</section>
+
+<!-- LOGÍSTICA: FRETES CUSTOMIZADOS -->
+<section data-v="fretes">
+  <div class="estreito">
+  <h1>Fretes customizados</h1><p class="sub">Crie e gerencie fretes com valor e prazo definidos por você.</p>
+  <div class="card">
+    <h2 style="margin-top:0">Frete customizado</h2>
+    <div id="listaFretes"></div>
+    <div class="rodfc"><button class="addfc" id="novoFrete"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>Adicionar frete customizado</button><span class="desc" id="contFretes">0/10</span></div>
+  </div>
+  <p class="desc" style="margin:14px 2px">O cliente vê no checkout os fretes ativos que valem para o estado e o valor do pedido dele. Sem nenhum, vale o frete padrão de <a href="#checkout">Checkout</a>.</p>
+  <div class="card"><h2>Simular frete</h2><p class="desc">Veja o que o cliente vai ver no checkout.</p>
+      <div class="lin2"><div><label class="l" style="margin-top:0">CEP</label><input class="simCep" inputmode="numeric" placeholder="01310-100"></div><div><label class="l" style="margin-top:0">Valor do pedido (R$)</label><input class="simValor" inputmode="decimal" placeholder="150,00"></div></div>
+      <button class="btn sec simBtn" style="margin-top:12px;width:100%">Simular</button><div class="simres"></div></div>
+  </div>
+</section>
+
+<!-- LOGÍSTICA: FRETE POR PLANILHA -->
+<section data-v="frete-planilha">
+  <div class="cab"><div><h1>Frete por planilha</h1><p class="sub">Preço e prazo por faixa de CEP, importados de uma planilha</p></div><button class="btn pri" id="salvarPlanilha">Salvar planilha</button></div>
+  <div class="grid2">
+    <div class="col"><div class="card"><h2>Simular frete</h2><p class="desc">Veja o que o cliente vai ver no checkout.</p>
+      <div class="lin2"><div><label class="l" style="margin-top:0">CEP</label><input class="simCep" inputmode="numeric" placeholder="01310-100"></div><div><label class="l" style="margin-top:0">Valor do pedido (R$)</label><input class="simValor" inputmode="decimal" placeholder="150,00"></div></div>
+      <button class="btn sec simBtn" style="margin-top:12px;width:100%">Simular</button><div class="simres"></div></div>
+      <div class="card"><b>Formato</b><p class="desc">Uma linha por faixa, colunas separadas por ponto e vírgula:<br><code>cep_inicio;cep_fim;valor;prazo_dias;nome;pedido_minimo</code><br>O pedido mínimo é opcional. No Excel ou Google Planilhas, salve como <b>CSV</b>.</p>
+        <button class="btn sec peq" id="baixarModelo">Baixar modelo</button></div>
+    </div>
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><h2 style="margin:0">Planilha</h2><span class="chip cinza" id="infoPlanilha">Nenhuma faixa</span></div>
+      <label class="btn sec peq" style="margin:12px 0"><input type="file" id="arqPlanilha" accept=".csv,.txt,text/csv" hidden>Importar arquivo CSV</label>
+      <textarea class="csv" id="txtPlanilha" spellcheck="false" placeholder="01000000;19999999;18,90;3;Entrega SP&#10;80000000;87999999;24,90;5;Entrega Sul"></textarea>
+      <p class="desc" style="margin:8px 0 0">Para apagar a planilha, deixe o campo vazio e salve.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LOGÍSTICA: EMBALAGEM -->
+<section data-v="embalagem">
+  <div class="cab"><div><h1>Embalagem</h1><p class="sub">Caixas que você usa para enviar os pedidos</p></div><button class="btn pri" id="salvarEmbalagens">Salvar</button></div>
+  <div class="grid2">
+    <div class="card"><b>Para que serve</b><p class="desc" style="margin-bottom:0">A embalagem padrão é a mesma usada na integração com a Shopify e serve de base para medidas e peso dos envios.</p></div>
+    <div><div id="listaEmbalagens"></div><button class="btn sec" id="novaEmbalagem" style="width:100%">+ Nova embalagem</button></div>
+  </div>
+</section>
+
+<!-- PLANO E FATURAS -->
+<section data-v="planos">
+  <div class="estreito" style="max-width:1000px">
+  <h1>Plano e faturas</h1><p class="sub">Seu plano, cartão de cobrança e histórico das faturas</p>
+  <div class="res warn oculto" id="avisoCobranca" style="margin-bottom:16px">A cobrança da plataforma ainda não foi ativada. As faturas aparecem aqui, mas ainda não podem ser pagas pelo painel.</div>
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:flex-start">
+      <div><small class="desc">Seu plano</small><h2 style="margin:4px 0 0" id="plNome">–</h2></div>
+      <span class="chip cinza" id="plChip"></span>
+    </div>
+    <div class="kv">
+      <div><small>Mensalidade</small><b id="plMens">–</b></div>
+      <div><small>Comissão por pedido pago</small><b id="plCom">–</b></div>
+      <div><small>Ciclo atual</small><b id="plCiclo">–</b></div>
+      <div><small>Vendas aprovadas no ciclo</small><b id="plVendas">–</b></div>
+      <div><small>Prévia da próxima fatura</small><b id="plPrev">–</b></div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <h2 style="margin-top:0">Cartão de cobrança</h2>
+    <p class="desc">As faturas são cobradas automaticamente neste cartão no fim de cada ciclo.</p>
+    <div id="plCartao"></div>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <h2 style="margin-top:0">Dados de cobrança</h2>
+    <p class="desc">Usados para emitir a cobrança das faturas.</p>
+    <div class="lin3"><div><label class="l" style="margin-top:0">Nome ou razão social</label><input id="cbNome"></div>
+      <div><label class="l" style="margin-top:0">CPF ou CNPJ</label><input id="cbDoc" inputmode="numeric"></div>
+      <div><label class="l" style="margin-top:0">Telefone com DDD</label><input id="cbTel" inputmode="tel"></div></div>
+    <button class="btn sec" id="salvarCb" style="margin-top:14px">Salvar dados</button>
+  </div>
+  <div class="card" style="margin-top:16px;padding-bottom:8px">
+    <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center">
+      <div><h2 style="margin:0">Faturas</h2><p class="desc" style="margin:4px 0 0">Histórico das cobranças</p></div>
+      <button class="btn pri oculto" id="pagarAgora">Pagar fatura agora</button>
+    </div>
+    <table class="tabela" style="margin-top:12px"><thead><tr><th>Período</th><th class="r">Vendas</th><th class="r">Comissão</th><th class="r">Total</th><th>Vencimento</th><th>Status</th><th></th></tr></thead><tbody id="tbFaturas"></tbody></table>
+  </div>
+  </div>
+</section>
+
+<!-- E-MAILS TRANSACIONAIS -->
+<section data-v="emails">
+  <div class="estreito">
+  <h1>E-mails transacionais</h1><p class="sub">E-mails enviados automaticamente para seus clientes e para você</p>
+  <div class="res warn oculto" id="emAvisoEnvio" style="margin-bottom:14px">O envio de e-mails ainda não foi ativado pela plataforma. Por enquanto eles aparecem no histórico como <b>simulados</b>, sem chegar ao cliente.</div>
+  <div class="res warn oculto" id="emAvisoShopify" style="margin-bottom:14px">A Shopify também está enviando a confirmação do pedido (Integrações › Shopify). Para o cliente não receber dois e-mails, desative <b>Pedido aprovado</b> aqui ou a confirmação na Shopify.</div>
+  <div class="card">
+    <h2 style="margin-top:0">Remetente</h2>
+    <div class="lin3"><div><label class="l" style="margin-top:0">Nome do remetente</label><input id="emNome" placeholder="Nome da sua loja"></div>
+      <div><label class="l" style="margin-top:0">Responder para</label><input id="emResp" type="email" placeholder="contato@sualoja.com.br"></div>
+      <div><label class="l" style="margin-top:0">Seu e-mail para avisos de venda</label><input id="emLoj" type="email"></div></div>
+    <p class="desc" style="margin:10px 0 0" id="emDe"></p>
+    <button class="btn sec" id="salvarRem" style="margin-top:12px">Salvar remetente</button>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <h2 style="margin-top:0">E-mails</h2>
+    <div id="listaEmails"></div>
+  </div>
+  <div class="card" style="margin-top:16px;padding-bottom:8px">
+    <h2 style="margin-top:0">Histórico</h2><p class="desc" style="margin-top:-6px">Últimos 60 e-mails</p>
+    <table class="tabela"><thead><tr><th>Quando</th><th>E-mail</th><th>Para</th><th>Status</th></tr></thead><tbody id="tbEmails"></tbody></table>
+  </div>
+  </div>
 </section>
 
 <!-- PEDIDOS -->
@@ -340,18 +747,70 @@ td.r,th.r{text-align:right;white-space:nowrap}tbody tr{cursor:pointer}tbody tr:h
   </div>
 </section>
 
+<!-- RECOMPENSAS -->
+<section data-v="recompensas">
+  <div class="cab"><div><h1>Recompensas</h1><p class="sub">Acompanhe o seu progresso na Trilha de Recompensas!</p></div><button class="btn sec" id="verRegulamento">Ver regulamento</button></div>
+  <div class="rkpis">
+    <div class="card rkpi"><small style="color:var(--mut)">Faturamento</small><div class="grande" id="rFat">—</div><div class="barra2"><i id="rFatBarra" style="width:0"></i></div><small style="color:var(--mut)" id="rFatTxt"></small></div>
+    <div class="card rkpi"><small style="color:var(--mut)">Nível atual</small><div class="grande" id="rNivel">—</div><div class="barra2"><i id="rNivelBarra" style="width:0"></i></div><small style="color:var(--mut)" id="rNivelTxt"></small></div>
+  </div>
+  <div class="trilhaR" id="rTrilha"></div>
+  <div class="passosR" id="rPassos"></div>
+</section>
+
 <!-- ADMIN DA PLATAFORMA -->
 <section data-v="admin">
   <div class="cab"><div><h1>Admin da plataforma</h1><p class="sub">Todas as lojas e pedidos · últimos 30 dias</p></div><button class="btn sec" id="atualizarAdmin">Atualizar</button></div>
+  <div class="card" style="margin-bottom:16px"><h2 style="margin-top:0">Envio de e-mails (Resend)</h2>
+    <p class="desc">Os e-mails transacionais de todas as lojas saem por esta conta. Crie a conta em resend.com, verifique o seu domínio e gere uma chave de API.</p>
+    <div class="lin2"><div><label class="l" style="margin-top:0">E-mail remetente (do domínio verificado)</label><input id="admEmRem" placeholder="nao-responda@seudominio.com.br"></div>
+      <div><label class="l" style="margin-top:0">Chave de API</label><div class="campo-olho"><input id="admEmKey" type="password" placeholder="re_…" autocomplete="new-password"><button class="olho" type="button" data-olho="admEmKey">👁</button></div></div></div>
+    <div style="display:flex;gap:10px;margin-top:12px;align-items:center"><button class="btn pri" id="admEmSalvar">Salvar</button><span class="chip cinza" id="admEmChip"></span></div>
+  </div>
+  <div class="card" style="margin-bottom:16px"><h2 style="margin-top:0">Logotipos dos apps</h2>
+    <p class="desc">Envie o logotipo de cada app (PNG, JPG, WEBP ou SVG, até 500 KB, de preferência quadrado). Ele aparece em Meus apps para todas as lojas. Sem arquivo, o painel usa o ícone do site da empresa.</p>
+    <div id="admLogos" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px"></div></div>
+  <div class="grid2" style="grid-template-columns:minmax(0,1fr) minmax(0,1fr);margin-bottom:16px">
+    <div class="card"><h2 style="margin-top:0">Conta de cobrança (Pagar.me)</h2>
+      <p class="desc">Conta Pagar.me da plataforma, onde caem as faturas dos lojistas. Sem ela, nenhuma loja é bloqueada e as faturas não podem ser pagas pelo painel.</p>
+      <label class="l" style="margin-top:0">Chave pública</label><input id="cobPk" placeholder="pk_…" autocomplete="off">
+      <label class="l">Chave secreta</label><div class="campo-olho"><input id="cobSk" type="password" placeholder="sk_…" autocomplete="new-password"><button class="olho" type="button" data-olho="cobSk">👁</button></div>
+      <label class="l">Dias para pagar depois do fim do ciclo</label><input id="cobDias" inputmode="numeric" style="max-width:120px">
+      <p class="desc" style="margin:6px 0 0">Passado esse prazo, o checkout da loja é bloqueado até a fatura ser paga.</p>
+      <label class="l">Webhook (cadastre na sua conta Pagar.me)</label><div class="code" id="cobWebhook"></div>
+      <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap"><button class="btn pri" id="salvarCob">Salvar</button><button class="btn sec" id="testarCob">Testar chaves</button><span class="chip cinza" id="cobChip"></span></div>
+      <div id="resCob"></div>
+    </div>
+    <div class="card"><h2 style="margin-top:0">Planos</h2>
+      <p class="desc">A comissão é calculada sobre as vendas aprovadas (descontando reembolsos) de cada ciclo mensal.</p>
+      <div id="admPlanos"></div>
+      <div style="display:flex;gap:10px;margin-top:10px;flex-wrap:wrap"><button class="btn sec peq" id="novoPlano">+ Novo plano</button><button class="btn pri peq" id="salvarPlanos">Salvar planos</button></div>
+    </div>
+  </div>
+  <div class="card" style="margin-bottom:16px;padding:8px 16px">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:12px 0 4px"><h2 style="margin:0">Faturas das lojas</h2><button class="btn sec peq" id="rodarCob">Fechar ciclos e cobrar agora</button></div>
+    <table class="tabela"><thead><tr><th>Loja</th><th>Período</th><th class="r">Vendas</th><th class="r">Total</th><th>Vencimento</th><th>Status</th><th></th></tr></thead><tbody id="admFaturas"></tbody></table>
+  </div>
   <div class="grid3" id="admResumo" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr))"></div>
   <div class="card" style="margin-top:16px;padding:8px 16px">
     <h2 style="margin:12px 0 4px">Lojas</h2>
     <div style="margin:8px 0"><input id="admBusca" placeholder="Buscar por loja, dono ou e-mail"></div>
-    <table class="tabela"><thead><tr><th>Loja</th><th>Dono</th><th>Shopify</th><th>Cielo</th><th class="r">Pedidos 30d</th><th class="r">Receita 30d</th><th></th></tr></thead><tbody id="admLojas"></tbody></table>
+    <table class="tabela"><thead><tr><th>Loja</th><th>Dono</th><th>Shopify</th><th>Plano</th><th class="r">Pedidos 30d</th><th class="r">Receita 30d</th><th></th></tr></thead><tbody id="admLojas"></tbody></table>
   </div>
   <div class="card" style="margin-top:16px;padding:8px 16px">
     <h2 style="margin:12px 0 4px">Últimos pedidos (todas as lojas)</h2>
     <table class="tabela"><thead><tr><th>Pedido</th><th>Loja</th><th>Pagamento</th><th>Status</th><th>Shopify</th><th class="r">Total</th></tr></thead><tbody id="admPedidos"></tbody></table>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <div class="cab"><h2 style="margin:0">Trilha de recompensas</h2><button class="btn sec peq" id="addNivel" type="button">+ Nível</button></div>
+    <p class="desc">Vale para todas as lojas. O faturamento conta pedidos pagos pelo checkout, descontados os reembolsos.</p>
+    <div id="admNiveis"></div>
+    <label class="l">Regulamento</label><textarea id="admRegul" style="min-height:140px"></textarea>
+    <button class="btn pri" id="salvarTrilha" style="margin-top:12px">Salvar trilha</button>
+  </div>
+  <div class="card" style="margin-top:16px;padding:8px 16px">
+    <h2 style="margin:12px 0 4px">Conquistas das lojas</h2>
+    <table class="tabela"><thead><tr><th>Loja</th><th>Nível</th><th>Atingido em</th><th>Prêmio</th></tr></thead><tbody id="admConquistas"></tbody></table>
   </div>
 </section>
 </main>
@@ -404,11 +863,14 @@ async function iniciar() {
   $("telaEntrada").classList.add("oculto"); $("telaPainel").classList.remove("oculto");
   $("quemLoja").textContent = eu.loja?.nome || "";
   souAdmin = !!eu.admin; $("abaAdmin").classList.toggle("oculto", !souAdmin);
-  $("avisoBloqueio").classList.toggle("oculto", !eu.loja?.bloqueada);
+  $("avisoArmazenamento").classList.toggle("oculto", !(souAdmin && eu.armazenamentoTemporario));
+  $("avisoBloqueio").classList.toggle("oculto", !eu.loja?.bloqueada || eu.loja?.motivoBloqueio === "fatura");
+  $("avisoFatura").classList.toggle("oculto", !(eu.loja?.bloqueada && eu.loja?.motivoBloqueio === "fatura"));
   $("ola").textContent = `Olá, ${eu.usuario.nome.split(" ")[0]} 👋`;
   $("avatar").textContent = (eu.loja?.nome || eu.usuario.nome).trim().charAt(0).toUpperCase();
   estado = await api("/api/painel/config");
-  preencher(); rota();
+  preencher(); rota(); carregarRecompensas(false).catch(() => {});
+  if ((location.hash.slice(1) || "inicio") !== "inicio") carregarResumo(); // atualiza a receita do menu lateral
 }
 
 function preencher() {
@@ -417,7 +879,35 @@ function preencher() {
   const shChip = s.shopify ? (s.shopifyConectadoEm ? ["Ativo", "ok"] : ["Não testado", "warn"]) : ["Inativo", "cinza"];
   for (const id of ["stShopify", "stShopifyLista"]) { $(id).textContent = shChip[0]; $(id).className = "chip " + shChip[1]; }
   const ciChip = s.cielo === "simulacao" ? ["Simulação", "cinza"] : s.cielo === "production" ? ["Produção", "ok"] : ["Sandbox", "warn"];
-  for (const id of ["stCielo", "stCieloLista", "chipAmbiente"]) { $(id).textContent = ciChip[0]; $(id).className = "chip " + ciChip[1]; }
+  for (const id of ["stCielo", "stCieloLista"]) { $(id).textContent = ciChip[0]; $(id).className = "chip " + ciChip[1]; }
+  const amChip = s.appmax ? (s.appmaxAmbiente === "production" ? ["Produção", "ok"] : ["Sandbox", "warn"]) : ["Inativo", "cinza"];
+  for (const id of ["stAppmax", "stAppmaxLista"]) { $(id).textContent = amChip[0]; $(id).className = "chip " + amChip[1]; }
+  const pgChip = s.pagarme ? (s.pagarmeTeste ? ["Teste", "warn"] : ["Produção", "ok"]) : ["Inativo", "cinza"];
+  for (const id of ["stPagarme", "stPagarmeLista"]) { $(id).textContent = pgChip[0]; $(id).className = "chip " + pgChip[1]; }
+  const ativo = { appmax: amChip, pagarme: pgChip }[s.gateway] || ciChip;
+  $("chipAmbiente").textContent = s.simulacao ? "Simulação" : `${{ appmax: "Appmax", pagarme: "Pagar.me" }[s.gateway] || "Cielo"} · ${ativo[0]}`;
+  $("chipAmbiente").className = "chip " + (s.simulacao ? "cinza" : ativo[1]);
+  $("gwSel").value = s.gateway;
+  document.querySelectorAll(".emuso").forEach((x) => x.classList.toggle("oculto", x.dataset.gw !== s.gateway || s.simulacao));
+  const lgc = c.logistica || {}, temFrete = [lgc.gratisRegioes, lgc.customizados, lgc.planilha].some((l) => (l || []).length);
+  $("stFretesLista").textContent = temFrete ? "Ativo" : "Inativo"; $("stFretesLista").className = "chip " + (temFrete ? "ok" : "cinza");
+  $("gwModo").textContent = s.simulacao ? "Sem credenciais: checkout em simulação" : ["Sandbox", "Teste"].includes(ativo[0]) ? "Ambiente de testes" : "Recebendo pagamentos reais";
+  $("gwModo").className = "chip " + (s.simulacao ? "cinza" : ativo[1]);
+  // pagar.me
+  $("pgPk").value = c.pagarme.chavePublica || ""; $("pgSk").value = "";
+  $("pgSk").placeholder = c.pagarme.chaveSecretaSalvo ? `Salva (${c.pagarme.chaveSecreta}). Deixe vazio para manter` : "sk_…";
+  $("desconectarPagarme").classList.toggle("oculto", !s.pagarme);
+  codigo("codWebhookPgm", u.webhookPagarme); codigo("codDominioPgm", location.host);
+  // appmax
+  $("amId").value = c.appmax.clientId || ""; $("amExt").value = c.appmax.externalId || "";
+  $("amSecret").value = ""; $("amSecret").placeholder = c.appmax.clientSecretSalvo ? `Salvo (${c.appmax.clientSecret})` : "";
+  $("btnConectarAppmax").textContent = s.appmax ? "Reconectar" : "Conectar Appmax";
+  $("btnConectarAppmax").classList.toggle("oculto", !s.appmaxPlataforma);
+  $("desconectarAppmax").classList.toggle("oculto", !s.appmax);
+  $("txtAppmax").textContent = s.appmax
+    ? `Conectada${s.appmaxConectadoEm ? " em " + new Date(s.appmaxConectadoEm).toLocaleDateString("pt-BR") : ""}.${s.gateway === "appmax" ? " É o gateway ativo do seu checkout." : " Para usar, escolha Appmax em Integrações › Gateway de pagamento."}`
+    : s.appmaxPlataforma ? "Clique em Conectar: você entra na sua conta Appmax, autoriza o Fluxofy e volta para cá já conectado. Não precisa copiar chaves."
+    : "A conexão com um clique ainda não foi ativada nesta plataforma. Use as credenciais manuais ao lado.";
   // shopify
   $("shLoja").value = c.shopify.loja; $("shId").value = c.shopify.clientId;
   $("shSecret").value = ""; $("shSecret").placeholder = c.shopify.clientSecretSalvo ? `Salvo (${c.shopify.clientSecret}). Deixe vazio para manter` : "";
@@ -438,6 +928,8 @@ function preencher() {
   const op = (n) => Array.from({ length: 12 }, (_, i) => `<option ${i + 1 === n ? "selected" : ""}>${i + 1}</option>`).join("");
   $("ckMax").innerHTML = op(c.checkout.maxParcelas); $("ckSem").innerHTML = op(c.checkout.parcelasSemJuros);
   $("ckJuros").value = c.checkout.jurosMes; $("ckSoft").value = c.checkout.softDescriptor; $("ckFrete").value = c.checkout.freteFixo; $("ckGratis").value = c.checkout.freteGratisAcima;
+  cupons = (c.cupons || []).map((x) => ({ ...x, minimo: x.minimoCentavos ? x.minimoCentavos / 100 : "" })); desenharCupons();
+  const dp = c.depoimento || {}; $("dpAtivo").checked = !!dp.ativo; $("dpNome").value = dp.nome || ""; $("dpTexto").value = dp.texto || ""; $("dpEstrelas").value = String(dp.estrelas || 5);
   $("abrirCheckout").href = s.shopify ? u.checkout : "/checkout?itens=111:2,222:1"; $("abrirCheckoutIni").href = s.shopify ? u.checkout : "/checkout?itens=111:2,222:1";
   $("urlCheckoutIni").textContent = u.checkout;
   document.querySelectorAll(".tog input").forEach(atualizarTog);
@@ -447,7 +939,7 @@ function codigo(id, texto) {
   $(id).innerHTML = `<button class="copiar" type="button">Copiar</button>${esc(texto)}`;
   $(id).querySelector(".copiar").onclick = async (e) => { try { await navigator.clipboard.writeText(texto); e.target.textContent = "Copiado"; } catch { e.target.textContent = "Selecione e copie"; } setTimeout(() => (e.target.textContent = "Copiar"), 1600); };
 }
-function atualizarTog(inp) { inp.parentElement.querySelector("[data-txt]").textContent = inp.checked ? "Ativo" : "Inativo"; }
+function atualizarTog(inp) { const t = inp.parentElement.querySelector("[data-txt]"); if (t) t.textContent = inp.checked ? "Ativo" : "Inativo"; }
 document.querySelectorAll(".tog input").forEach((i) => (i.onchange = () => atualizarTog(i)));
 document.querySelectorAll("[data-olho]").forEach((b) => (b.onclick = () => { const i = $(b.dataset.olho); i.type = i.type === "password" ? "text" : "password"; }));
 $("mkCor").oninput = () => ($("mkCorTxt").value = $("mkCor").value);
@@ -482,7 +974,10 @@ async function carregarResumo() {
     $("kPagos").textContent = r.pagos;
     $("kConv").textContent = r.pedidos ? `${Math.round((r.pagos / r.pedidos) * 100)}% de aprovação` : "sem pedidos no período";
     if ($("periodo").value === "30") $("saldoLat").textContent = brl(r.receita);
-    const i = Math.max(MARCOS.findIndex((m) => r.receitaTotal < m), 1), de = MARCOS[i - 1], ate = MARCOS[i];
+    if (!recEstado) await carregarRecompensas(false).catch(() => {});
+    const metas = recEstado ? [0, ...recEstado.niveis.map((n) => n.metaCentavos)] : MARCOS;
+    let i = metas.findIndex((m) => r.receitaTotal < m); if (i === -1) i = metas.length - 1; i = Math.max(i, 1);
+    const de = metas[i - 1], ate = metas[i];
     $("kMeta").textContent = `${brl(r.receitaTotal)} vendidos`;
     $("kTrilha").style.width = Math.min(100, ((r.receitaTotal - de) / (ate - de)) * 100) + "%";
     $("kMarcoA").textContent = de ? curto(de) : "Início"; $("kMarcoB").textContent = curto(ate);
@@ -533,6 +1028,31 @@ $("salvarCielo").onclick = () => salvar($("salvarCielo"), "cielo", {
   ambiente: $("ciAmb").value, merchantId: $("ciMid").value, merchantKey: $("ciKey").value, sopClientId: $("ciSid").value, sopClientSecret: $("ciSsec").value,
   cartao: $("ciCartao").checked, pix: $("ciPix").checked,
 }, "Cielo salva. Clique em Testar credenciais.");
+$("salvarPagarme").onclick = () => salvar($("salvarPagarme"), "pagarme", { chavePublica: $("pgPk").value.trim(), chaveSecreta: $("pgSk").value.trim() }, "Pagar.me salva. Clique em Testar chaves.");
+$("desconectarPagarme").onclick = () => { if (confirm("Remover as chaves da Pagar.me? Se ela for o gateway ativo, o checkout volta para a Cielo.")) salvar($("desconectarPagarme"), "pagarme", { chavePublica: "", chaveSecreta: "" }, "Chaves removidas"); };
+$("testarPagarme").onclick = async () => {
+  ocupado($("testarPagarme"), true); $("resPagarme").innerHTML = "";
+  try {
+    const r = await api("/api/painel/pagarme/testar", "POST", {});
+    $("resPagarme").innerHTML = r.ok ? `<div class="res ok">Chaves aceitas pela Pagar.me (${r.ambiente === "teste" ? "ambiente de testes" : "produção"}).${estado.status.gateway === "pagarme" ? "" : " Para usar, escolha Pagar.me em Integrações › Gateway de pagamento."}</div>` : `<div class="res err">${esc(r.motivo)}</div>`;
+  } catch (e) { $("resPagarme").innerHTML = `<div class="res err">${esc(e.message)}</div>`; } finally { ocupado($("testarPagarme"), false); }
+};
+$("salvarGw").onclick = () => salvar($("salvarGw"), "gateway", { gateway: $("gwSel").value }, "Gateway atualizado");
+$("salvarAppmax").onclick = () => salvar($("salvarAppmax"), "appmax", { clientId: $("amId").value, clientSecret: $("amSecret").value, externalId: $("amExt").value }, "Appmax salva. Clique em Testar conexão.");
+$("desconectarAppmax").onclick = () => { if (confirm("Desconectar a Appmax? Se ela for o gateway ativo, o checkout volta para a Cielo.")) salvar($("desconectarAppmax"), "appmax_desconectar", {}, "Appmax desconectada"); };
+$("testarAppmax").onclick = async () => {
+  ocupado($("testarAppmax"), true); $("resAppmax").innerHTML = "";
+  try {
+    const r = await api("/api/painel/appmax/testar", "POST", {});
+    $("resAppmax").innerHTML = r.ok ? `<div class="res ok">Conexão aceita pela Appmax.${r.externalId ? "" : " Falta o External ID: reconecte pelo botão para o cartão funcionar."}</div>` : `<div class="res err">${esc(r.motivo)}</div>`;
+  } catch (e) { $("resAppmax").innerHTML = `<div class="res err">${esc(e.message)}</div>`; } finally { ocupado($("testarAppmax"), false); }
+};
+{ // volta da instalação na Appmax
+  const r = new URLSearchParams(location.search).get("appmax");
+  const msg = { ok: ["ok", "Appmax conectada com sucesso."], erro: ["err", "A Appmax não concluiu a conexão. Tente de novo em alguns minutos."],
+    invalido: ["err", "Link de retorno inválido ou expirado. Clique em Conectar de novo."], "sem-app": ["err", "A conexão com um clique ainda não foi ativada nesta plataforma."] }[r];
+  if (msg) { $("avisoAppmax").innerHTML = `<div class="res ${msg[0]}" style="margin-bottom:16px">${msg[1]}</div>`; history.replaceState(null, "", "/painel" + location.hash); }
+}
 $("salvarCheckout").onclick = async () => {
   // lê os dois blocos antes de salvar (salvar recarrega o formulário)
   const marca = { nome: $("mkNome").value, cor: $("mkCorTxt").value };
@@ -543,6 +1063,27 @@ $("salvarCheckout").onclick = async () => {
   if (await salvar($("salvarCheckout"), "marca", marca, "Salvo")) await salvar($("salvarCheckout"), "checkout", checkout, "Checkout salvo");
   $("quemLoja").textContent = estado.loja.nome;
 };
+
+// ---------- cupons e depoimento ----------
+let cupons = [];
+function desenharCupons() {
+  $("listaCupons").innerHTML = cupons.length ? `<div class="cupomCab"><span>Código</span><span>Tipo</span><span>Desconto</span><span>Mínimo (R$)</span><span>Ativo</span><span></span></div>` + cupons.map((c, i) => `<div class="cupomLinha" data-i="${i}">
+      <input data-k="codigo" value="${esc(c.codigo)}" placeholder="BEMVINDO10" style="text-transform:uppercase">
+      <select data-k="tipo"><option value="percentual" ${c.tipo === "percentual" ? "selected" : ""}>% do pedido</option><option value="fixo" ${c.tipo === "fixo" ? "selected" : ""}>R$ fixo</option></select>
+      <input data-k="valor" inputmode="decimal" value="${c.valor ?? ""}" placeholder="${c.tipo === "fixo" ? "20" : "10"}">
+      <input data-k="minimo" inputmode="decimal" value="${c.minimo ?? ""}" placeholder="0">
+      <label class="tog" style="margin:0"><input type="checkbox" data-k="ativo" ${c.ativo !== false ? "checked" : ""}><span class="tr"></span></label>
+      <button class="x" type="button" data-rm="${i}" aria-label="Remover">✕</button></div>`).join("")
+    : `<p class="desc">Nenhum cupom ainda.</p>`;
+  $("listaCupons").querySelectorAll(".cupomLinha [data-k]").forEach((el) => (el.oninput = el.onchange = () => {
+    const c = cupons[el.closest(".cupomLinha").dataset.i];
+    c[el.dataset.k] = el.type === "checkbox" ? el.checked : el.value;
+  }));
+  $("listaCupons").querySelectorAll("[data-rm]").forEach((b) => (b.onclick = () => { cupons.splice(Number(b.dataset.rm), 1); desenharCupons(); }));
+}
+$("addCupom").onclick = () => { cupons.push({ codigo: "", tipo: "percentual", valor: "", minimo: "", ativo: true }); desenharCupons(); };
+$("salvarCupons").onclick = () => salvar($("salvarCupons"), "cupons", { cupons: cupons.map((c) => ({ ...c, valor: String(c.valor).replace(",", "."), minimo: String(c.minimo || 0).replace(",", ".") })) }, "Cupons salvos");
+$("salvarDepo").onclick = () => salvar($("salvarDepo"), "depoimento", { ativo: $("dpAtivo").checked, nome: $("dpNome").value, texto: $("dpTexto").value, estrelas: $("dpEstrelas").value }, "Depoimento salvo");
 
 // ---------- testes ----------
 $("testarShopify").onclick = async () => {
@@ -587,7 +1128,7 @@ $("btnBuscaProd").onclick = async () => {
 $("buscaProd").onkeydown = (e) => { if (e.key === "Enter") $("btnBuscaProd").click(); };
 
 // ---------- pedidos ----------
-const ST = { pago: ["Pago", "ok"], pendente: ["Aguardando", "warn"], autorizado: ["Autorizado", "warn"], recusado: ["Recusado", "err"], criado: ["Criado", "cinza"] };
+const ST = { reembolsado: ["Reembolsado", "cinza"], pago: ["Pago", "ok"], pendente: ["Aguardando", "warn"], autorizado: ["Autorizado", "warn"], recusado: ["Recusado", "err"], criado: ["Criado", "cinza"] };
 async function carregarPedidos() {
   $("tbPedidos").innerHTML = `<tr><td colspan="6" class="vazio">Carregando…</td></tr>`;
   const lista = await api("/api/painel/pedidos");
@@ -596,7 +1137,7 @@ async function carregarPedidos() {
     const st = ST[p.status] || [p.status, "cinza"];
     const sh = p.shopifyPago ? `<span class="chip ok">${esc(p.shopify)}</span>` : p.erroShopify ? `<span class="chip err">Erro</span>` : p.shopify ? `<span class="chip warn">${esc(p.shopify)} pendente</span>` : "—";
     return `<tr data-id="${p.id}"><td><b>${p.id}</b><br><small style="color:var(--mut)">${data(p.criadoEm)}</small></td><td>${esc(p.cliente)}<br><small style="color:var(--mut)">${esc(p.email)}</small></td>
-      <td>${p.metodo === "pix" ? "Pix" : `Cartão ${p.parcelas}x`}</td><td><span class="chip ${st[1]}">${st[0]}</span></td><td>${sh}</td><td class="r"><b>${brl(p.totalCentavos)}</b></td></tr>`;
+      <td>${p.metodo === "pix" ? "Pix" : `Cartão ${p.parcelas}x`}</td><td><span class="chip ${st[1]}">${st[0]}</span>${p.reembolsoCentavos && p.status !== "reembolsado" ? ' <span class="chip warn">Reemb. parcial</span>' : ""}</td><td>${sh}</td><td class="r"><b>${brl(p.totalCentavos)}</b></td></tr>`;
   }).join("");
   $("tbPedidos").querySelectorAll("tr[data-id]").forEach((tr) => (tr.onclick = () => abrirPedido(tr.dataset.id)));
 }
@@ -610,14 +1151,245 @@ async function abrirPedido(id) {
     <div class="caixa">${p.itens.map((i) => `${i.quantidade}× ${esc(i.nome)} <span style="float:right">${brl(i.precoCentavos * i.quantidade)}</span>`).join("<br>")}${p.freteCentavos ? `<br>Frete <span style="float:right">${brl(p.freteCentavos)}</span>` : ""}</div>
     <div class="caixa"><b>Shopify:</b> ${p.shopifyPago ? `pedido ${esc(p.shopifyPedido)} pago` : p.shopifyPedido ? `pedido ${esc(p.shopifyPedido)} pendente` : "ainda não enviado"}${p.erroShopify ? `<div class="res err">${esc(p.erroShopify)}</div>` : ""}
       ${p.status === "pago" && p.enviarParaShopify && !p.shopifyPago ? `<div style="margin-top:10px"><button class="btn pri peq" id="reproc">Enviar para a Shopify agora</button></div>` : ""}</div>
+    ${p.reembolsoCentavos ? `<div class="caixa"><b>Reembolsado:</b> ${brl(p.reembolsoCentavos)} em ${data(p.reembolsadoEm)}</div>` : ""}
+    ${p.status === "pago" && p.totalCentavos > p.reembolsoCentavos ? `<div class="caixa"><b>Reembolsar</b><p class="desc" style="margin:4px 0 8px">O valor é estornado no gateway do pedido: no cartão volta na fatura do cliente; no Pix, para a conta de origem.</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><input id="vlReemb" inputmode="decimal" style="max-width:160px" value="${((p.totalCentavos - p.reembolsoCentavos) / 100).toFixed(2).replace(".", ",")}"><button class="btn sec" id="btnReemb" style="border-color:var(--err);color:var(--err)">Reembolsar</button></div></div>` : ""}
     <h3 style="margin:18px 0 6px">Histórico</h3>${p.eventos.map((v) => `<div class="ev"><b>${esc(v.tipo)}</b>${esc(v.detalhe || "")} <small style="color:var(--mut)">· ${data(v.criado_em)}</small></div>`).join("")}`);
   $("fecharG").onclick = fecharGaveta;
+  if ($("btnReemb")) $("btnReemb").onclick = () => {
+    const v = Math.round(Number($("vlReemb").value.replace(/\./g, "").replace(",", ".")) * 100);
+    if (!(v > 0)) return toast("Valor inválido");
+    const caixa = $("btnReemb").parentElement;
+    caixa.innerHTML = `<span>Confirmar reembolso de <b>${brl(v)}</b> para ${esc(p.cliente.nome)}? Não dá para desfazer.</span><button class="btn sec peq" id="cancReemb">Cancelar</button><button class="btn pri peq" style="background:var(--err)" id="confReemb">Confirmar reembolso</button>`;
+    $("cancReemb").onclick = () => abrirPedido(p.id);
+    $("confReemb").onclick = async (e) => {
+      ocupado(e.target, true);
+      try { await api("/api/painel/pedido/reembolsar", "POST", { id: p.id, valorCentavos: v }); toast("Reembolso feito"); abrirPedido(p.id); carregarPedidos(); }
+      catch (err) { toast(err.message); ocupado(e.target, false); }
+    };
+  };
   if ($("reproc")) $("reproc").onclick = async () => { const r = await api("/api/painel/pedido/reprocessar?id=" + p.id, "POST", {}); toast(r.shopifyPago ? `Enviado: ${r.shopify}` : "Ainda com erro"); abrirPedido(p.id); carregarPedidos(); };
 }
 function gaveta(html) { $("gaveta").innerHTML = html; $("fundo").classList.remove("oculto"); }
 function fecharGaveta() { $("fundo").classList.add("oculto"); }
 $("fundo").onclick = (e) => { if (e.target === $("fundo")) fecharGaveta(); };
 document.addEventListener("keydown", (e) => { if (e.key === "Escape") fecharGaveta(); });
+
+// ---------- reembolsos ----------
+async function carregarReembolsos() {
+  const l = await api("/api/painel/reembolsos");
+  $("tbReemb").innerHTML = l.length ? l.map((p) => { const st = ST[p.status] || [p.status, "cinza"];
+    return `<tr data-id="${p.id}"><td><b>${p.id}</b><br><small style="color:var(--mut)">${data(p.reembolsadoEm)}</small></td><td>${esc(p.cliente)}<br><small style="color:var(--mut)">${esc(p.email)}</small></td>
+      <td>${p.metodo === "pix" ? "Pix" : "Cartão"}</td><td><span class="chip ${st[1]}">${p.status === "reembolsado" ? "Total" : "Parcial"}</span></td><td class="r"><b>${brl(p.reembolsoCentavos)}</b></td><td class="r">${brl(p.totalCentavos)}</td></tr>`; }).join("")
+    : `<tr><td colspan="6" class="vazio">Nenhum reembolso ainda.</td></tr>`;
+  $("tbReemb").querySelectorAll("tr[data-id]").forEach((tr) => (tr.onclick = () => abrirPedido(tr.dataset.id)));
+}
+$("atualizarReemb").onclick = () => carregarReembolsos().catch((e) => toast(e.message));
+
+// ---------- checkout abandonado / recuperação ----------
+let abDados = null;
+const desde = (iso) => { const m = Math.round((Date.now() - new Date(iso)) / 60000); return m < 60 ? `há ${m} min` : m < 1440 ? `há ${Math.round(m / 60)} h` : `há ${Math.round(m / 1440)} d`; };
+async function carregarAbandonos() {
+  abDados = await api("/api/painel/abandonos?dias=" + $("abDias").value);
+  const r = abDados.resumo, taxa = r.total ? Math.round((r.recuperados / r.total) * 100) : 0;
+  $("abKpis").innerHTML = [["Abandonos", r.total, "no período"], ["Recuperados", r.recuperados, brl(r.valorRecuperado) + " vendidos"], ["Taxa de recuperação", taxa + "%", "dos abandonos viraram venda"], ["Em aberto", brl(r.valorAberto), `${r.abertos} carrinho${r.abertos === 1 ? "" : "s"}`]]
+    .map(([t, v, d]) => `<div class="card kpi"><div class="t"><span>${t}</span></div><div class="v">${v}</div><small style="color:var(--mut)">${d}</small></div>`).join("");
+  $("tbAband").innerHTML = abDados.itens.length ? abDados.itens.map((a) => {
+    const sit = a.status === "recuperado" ? '<span class="chip ok">Recuperado</span>' : a.pedidoStatus === "pendente" ? '<span class="chip warn">Pix não pago</span>' : a.pedidoStatus === "recusado" ? '<span class="chip err">Cartão recusado</span>' : '<span class="chip warn">Abandonou</span>';
+    return `<tr style="cursor:default"><td><b>${esc(a.cliente.nome || "Sem nome")}</b><br><small style="color:var(--mut)">${esc(a.cliente.email || "")}${a.cliente.telefone ? " · " + esc(a.cliente.telefone) : ""}</small></td>
+      <td>${esc(a.carrinho.resumo || "")}<br><small style="color:var(--mut)">${desde(a.atualizadoEm)}</small></td><td>${sit}${a.contatadoEm ? ' <span class="chip cinza">Contatado</span>' : ""}</td>
+      <td class="r"><b>${brl(a.totalCentavos)}</b></td><td class="r">${a.status === "aberto" ? '<a class="btn sec peq" href="#recuperacao">Recuperar</a>' : ""}</td></tr>`;
+  }).join("") : `<tr><td colspan="5" class="vazio">Nenhum checkout abandonado no período.</td></tr>`;
+}
+$("abDias").onchange = () => carregarAbandonos().catch((e) => toast(e.message));
+
+function montarMensagem(a) {
+  return ($("recMsg").value || abDados.mensagem).replaceAll("{nome}", (a.cliente.nome || "").split(" ")[0] || "tudo bem").replaceAll("{loja}", abDados.nomeLoja)
+    .replaceAll("{valor}", brl(a.totalCentavos)).replaceAll("{link}", a.link);
+}
+async function carregarRecuperacao() {
+  abDados = await api("/api/painel/abandonos?dias=30");
+  if (!$("recMsg").dataset.carregado) { $("recMsg").value = abDados.mensagem; $("recMsg").dataset.carregado = "1"; }
+  desenharFila();
+}
+function desenharFila() {
+  const abertos = abDados.itens.filter((a) => a.status === "aberto");
+  const lista = $("recSoNovos").checked ? abertos.filter((a) => !a.contatadoEm) : abertos;
+  $("recResumo").textContent = `${abertos.length} carrinho${abertos.length === 1 ? "" : "s"} em aberto nos últimos 30 dias · ${abertos.filter((a) => !a.contatadoEm).length} sem contato · ${brl(abertos.reduce((s, a) => s + a.totalCentavos, 0))} em jogo`;
+  $("recFila").innerHTML = lista.length ? lista.map((a) => {
+    const msg = montarMensagem(a), tel = (a.cliente.telefone || "").replace(/\D/g, "");
+    const wa = tel ? `https://wa.me/${tel.length <= 11 ? "55" + tel : tel}?text=${encodeURIComponent(msg)}` : "";
+    const mail = a.cliente.email ? `mailto:${a.cliente.email}?subject=${encodeURIComponent("Seu carrinho na " + abDados.nomeLoja)}&body=${encodeURIComponent(msg)}` : "";
+    return `<div class="card contato"><div><b>${esc(a.cliente.nome || "Sem nome")}</b> <small style="color:var(--mut)">· ${desde(a.atualizadoEm)}</small>${a.contatadoEm ? ' <span class="chip cinza">Contatado</span>' : ""}
+        <div class="desc" style="margin:4px 0">${esc(a.carrinho.resumo || "")} · <b style="color:var(--ink)">${brl(a.totalCentavos)}</b></div>
+        <small style="color:var(--mut)">${esc(a.cliente.email || "sem e-mail")} · ${esc(a.cliente.telefone || "sem WhatsApp")}</small></div>
+      <div class="acoes">${wa ? `<a class="btn wa" href="${wa}" target="_blank" data-contato="${a.id}">WhatsApp</a>` : ""}${mail ? `<a class="btn sec" href="${mail}" data-contato="${a.id}">E-mail</a>` : ""}
+        <button class="btn sec" data-copia="${esc(msg)}">Copiar mensagem</button>
+        <button class="btn sec" data-marcar="${a.id}" data-v="${a.contatadoEm ? 0 : 1}">${a.contatadoEm ? "Desmarcar" : "Marcar contatado"}</button></div></div>`;
+  }).join("") : `<div class="card vazio">${abertos.length ? "Todos os carrinhos em aberto já foram contatados." : "Nenhum carrinho em aberto. Quando um cliente preencher o contato e não pagar, ele aparece aqui."}</div>`;
+  const marcar = async (id, v) => { await api("/api/painel/abandono/contatado", "POST", { id, contatado: v }); const a = abDados.itens.find((x) => x.id === id); if (a) a.contatadoEm = v ? new Date().toISOString() : null; desenharFila(); };
+  $("recFila").querySelectorAll("[data-contato]").forEach((el) => el.addEventListener("click", () => setTimeout(() => marcar(el.dataset.contato, true), 300)));
+  $("recFila").querySelectorAll("[data-marcar]").forEach((b) => (b.onclick = () => marcar(b.dataset.marcar, b.dataset.v === "1")));
+  $("recFila").querySelectorAll("[data-copia]").forEach((b) => (b.onclick = async () => { try { await navigator.clipboard.writeText(b.dataset.copia); b.textContent = "Copiada"; } catch { b.textContent = "Erro ao copiar"; } setTimeout(() => (b.textContent = "Copiar mensagem"), 1600); }));
+}
+$("recSoNovos").onchange = () => abDados && desenharFila();
+$("recMsg").oninput = () => abDados && desenharFila();
+$("salvarRecMsg").onclick = async () => { if (await salvar($("salvarRecMsg"), "recuperacao", { mensagem: $("recMsg").value }, "Mensagem salva")) { abDados.mensagem = $("recMsg").value; } };
+
+// ---------- links de pagamento ----------
+async function carregarLinks() {
+  const l = await api("/api/painel/links");
+  $("tbLinks").innerHTML = l.length ? l.map((k) => `<tr style="cursor:default"><td><b>${esc(k.titulo)}</b> ${k.ativo ? "" : '<span class="chip cinza">Desativado</span>'}<br><small style="color:var(--mut)">${k.pedirEndereco ? "Com entrega · " : ""}criado ${data(k.criadoEm).split(",")[0]}</small></td>
+      <td class="r"><b>${brl(k.valorCentavos)}</b></td><td class="r">${k.vendas}<br><small style="color:var(--mut)">${brl(k.receita)}</small></td>
+      <td class="r" style="white-space:nowrap"><button class="btn sec peq" data-cp="${esc(k.url)}">Copiar</button> <a class="btn sec peq" href="${esc(k.url)}" target="_blank">Abrir</a> <button class="btn sec peq" data-at="${k.id}" data-v="${k.ativo ? 0 : 1}">${k.ativo ? "Desativar" : "Ativar"}</button></td></tr>`).join("")
+    : `<tr><td colspan="4" class="vazio">Nenhum link ainda. Crie o primeiro ao lado.</td></tr>`;
+  $("tbLinks").querySelectorAll("[data-cp]").forEach((b) => (b.onclick = async () => { try { await navigator.clipboard.writeText(b.dataset.cp); b.textContent = "Copiado"; } catch { b.textContent = "Erro"; } setTimeout(() => (b.textContent = "Copiar"), 1600); }));
+  $("tbLinks").querySelectorAll("[data-at]").forEach((b) => (b.onclick = async () => { await api("/api/painel/links/ativo", "POST", { id: b.dataset.at, ativo: b.dataset.v === "1" }); carregarLinks(); }));
+}
+$("criarLink").onclick = async () => {
+  ocupado($("criarLink"), true);
+  try {
+    await api("/api/painel/links", "POST", { titulo: $("lkTitulo").value, valor: $("lkValor").value, descricao: $("lkDesc").value, pedirEndereco: $("lkEnd").checked });
+    ["lkTitulo", "lkValor", "lkDesc"].forEach((id) => ($(id).value = "")); toast("Link criado"); carregarLinks();
+  } catch (e) { toast(e.message); } finally { ocupado($("criarLink"), false); }
+};
+
+// ---------- produtos ----------
+let produtosCache = [];
+const STP = { ACTIVE: ["Ativo", "ok"], DRAFT: ["Rascunho", "warn"], ARCHIVED: ["Arquivado", "cinza"] };
+async function carregarProdutos() {
+  $("pLista").innerHTML = `<div class="card vazio">Carregando produtos da Shopify…</div>`;
+  try {
+    const r = await api("/api/painel/produtos?q=" + encodeURIComponent($("pBusca").value));
+    if (!r.conectada) {
+      $("pLista").innerHTML = `<div class="card vazio"><h2>Conecte sua loja Shopify</h2><p class="desc">Os produtos aparecem aqui assim que a integração estiver ativa.</p><a class="btn pri" href="#shopify">Conectar Shopify</a></div>`;
+      return;
+    }
+    produtosCache = r.produtos; desenharProdutos();
+  } catch (e) { $("pLista").innerHTML = `<div class="res err">${esc(e.message)}</div>`; }
+}
+function desenharProdutos() {
+  let lista = produtosCache.filter((p) => !$("pStatus").value || p.status === $("pStatus").value);
+  const ordem = $("pOrdem").value;
+  if (ordem === "vendas") lista = [...lista].sort((a, b) => b.vendidos30 - a.vendidos30 || a.titulo.localeCompare(b.titulo));
+  if (ordem === "nome") lista = [...lista].sort((a, b) => a.titulo.localeCompare(b.titulo));
+  if (!lista.length) return ($("pLista").innerHTML = `<div class="card vazio">Nenhum produto encontrado.</div>`);
+  $("pLista").innerHTML = lista.map((p) => {
+    const st = STP[p.status] || [p.status, "cinza"];
+    const vars = p.variantes.map((v) => `<div class="var">
+        <div>${v.titulo === "Default Title" ? "Padrão" : esc(v.titulo)} ${v.disponivel ? "" : '<span class="chip err">Esgotado</span>'}<br><small style="color:var(--mut)">${v.vendidos30} vendido${v.vendidos30 === 1 ? "" : "s"} · ${brl(v.receita30)}</small></div>
+        <span class="pr">${brl(v.precoCentavos)}</span>
+        <button class="btn sec peq" data-copiar="${esc(v.link)}">Copiar link</button>
+        <a class="btn sec peq" href="${esc(v.link)}" target="_blank">Abrir</a></div>`).join("");
+    return `<div class="card pcard">${p.imagem ? `<img src="${esc(p.imagem)}" alt="">` : '<div class="ph"></div>'}
+      <div><b style="font-size:16px">${esc(p.titulo)}</b><div class="meta"><span class="chip ${st[1]}">${st[0]}</span><span>${p.variantes.length} variante${p.variantes.length === 1 ? "" : "s"}</span>${p.estoque != null ? `<span>${p.estoque} em estoque</span>` : ""}</div></div>
+      <div class="vend"><small style="color:var(--mut)">Vendas 30 dias</small><b>${p.vendidos30}</b><small style="color:var(--mut)">${brl(p.receita30)}</small></div>
+      <div class="vars">${vars}</div></div>`;
+  }).join("");
+  $("pLista").querySelectorAll("[data-copiar]").forEach((b) => (b.onclick = async () => {
+    try { await navigator.clipboard.writeText(b.dataset.copiar); b.textContent = "Copiado"; } catch { b.textContent = "Erro ao copiar"; }
+    setTimeout(() => (b.textContent = "Copiar link"), 1600);
+  }));
+}
+$("pBuscar").onclick = carregarProdutos;
+$("pBusca").onkeydown = (e) => { if (e.key === "Enter") carregarProdutos(); };
+$("pStatus").onchange = desenharProdutos; $("pOrdem").onchange = desenharProdutos;
+
+// ---------- recompensas ----------
+let recEstado = null;
+const metaCurta = (c) => { const r = c / 100; if (r >= 1e6) { const m = r / 1e6; return `${m.toLocaleString("pt-BR")} ${m === 1 ? "MILHÃO" : "MILHÕES"}`; } return r >= 1e3 ? `${(r / 1e3).toLocaleString("pt-BR")} MIL` : r.toLocaleString("pt-BR"); };
+const TIERS = [["#cd7f32", "#7a4515"], ["#dfe5ee", "#8892a3"], ["#f5c542", "#a8720c"], ["#9be7ff", "#3b82a8"], ["#bef264", "#4d7c0f"], ["#f9a8d4", "#9d174d"], ["#c4b5fd", "#5b21b6"]];
+function svgCartao(n, i, bloqueado) {
+  const [c1, c2] = TIERS[i % TIERS.length], id = "g" + i;
+  return `<svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Nível ${n.nivel}: R$ ${metaCurta(n.metaCentavos)}">
+    <defs><linearGradient id="${id}f" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b2230"/><stop offset="1" stop-color="#05070b"/></linearGradient>
+      <linearGradient id="${id}m" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient>
+      <radialGradient id="${id}l" cx=".5" cy=".38" r=".55"><stop offset="0" stop-color="${c1}" stop-opacity=".35"/><stop offset="1" stop-color="${c1}" stop-opacity="0"/></radialGradient></defs>
+    <rect width="200" height="250" fill="url(#${id}f)"/><rect width="200" height="250" fill="url(#${id}l)"/>
+    <g transform="translate(78 16)"><rect width="12" height="12" rx="3" fill="#111827" stroke="#ffffff55"/><path d="M6 6h6v6H6z" fill="#84cc16"/><text x="16" y="10" fill="#fff" font-size="9" font-family="Inter,sans-serif" font-weight="600">Fluxofy</text></g>
+    <g transform="translate(100 92)">
+      <circle r="44" fill="none" stroke="url(#${id}m)" stroke-width="2" opacity=".5"/>
+      <path d="M-24 -26h48v20a24 24 0 0 1-48 0z" fill="url(#${id}m)"/>
+      <path d="M-24 -20h-10v6a14 14 0 0 0 14 14M24 -20h10v6a14 14 0 0 1-14 14" fill="none" stroke="url(#${id}m)" stroke-width="4"/>
+      <rect x="-5" y="18" width="10" height="10" fill="url(#${id}m)"/><rect x="-18" y="28" width="36" height="7" rx="2" fill="url(#${id}m)"/>
+      <text y="-6" text-anchor="middle" fill="#00000066" font-size="16" font-weight="800" font-family="Inter,sans-serif">${n.nivel}</text>
+    </g>
+    <text x="100" y="178" text-anchor="middle" fill="${bloqueado ? "#9aa1b2" : "#fff"}" font-family="'Space Grotesk',Inter,sans-serif" font-weight="700" font-size="${metaCurta(n.metaCentavos).length > 9 ? 22 : 28}"><tspan font-size="13" dy="-2">R$ </tspan><tspan dy="2">${metaCurta(n.metaCentavos)}</tspan></text>
+    <text x="100" y="196" text-anchor="middle" fill="#ffffff80" font-size="8" letter-spacing="3" font-family="Inter,sans-serif">FATURADOS</text>
+    <rect x="30" y="210" width="140" height="20" rx="4" fill="url(#${id}m)" opacity="${bloqueado ? .35 : .9}"/>
+    <text x="100" y="224" text-anchor="middle" fill="#111" font-size="9.5" font-weight="700" font-family="Inter,sans-serif">${esc(n.nome || "Nível " + n.nivel).slice(0, 26)}</text>
+  </svg>`;
+}
+async function carregarRecompensas(desenhar) {
+  recEstado = await api("/api/painel/recompensas");
+  const r = recEstado;
+  $("trofeuTxt").textContent = `${r.nivelAtual}/${r.total}`;
+  $("trofeuBarra").style.width = (r.nivelAtual / r.total) * 100 + "%";
+  if (!desenhar) return;
+  const ant = r.nivelAtual ? r.niveis[r.nivelAtual - 1].metaCentavos : 0;
+  const prox = r.proxima ? r.proxima.metaCentavos : r.faturamento;
+  const pct = r.proxima ? Math.min(100, Math.max(0, ((r.faturamento - ant) / (prox - ant)) * 100)) : 100;
+  $("rFat").innerHTML = `${brl(r.faturamento)} <small>/ R$ ${r.proxima ? metaCurta(prox) : metaCurta(r.niveis[r.total - 1].metaCentavos)}</small>`;
+  $("rFatBarra").style.width = (r.proxima ? Math.min(100, (r.faturamento / prox) * 100) : 100) + "%";
+  $("rFatTxt").textContent = r.proxima ? `Faltam ${brl(r.proxima.faltam)} para desbloquear o próximo nível!` : "Você completou toda a trilha. Parabéns!";
+  $("rNivel").innerHTML = `${String(r.nivelAtual).padStart(2, "0")} <small>/ ${String(r.total).padStart(2, "0")}</small>`;
+  $("rNivelBarra").style.width = (r.nivelAtual / r.total) * 100 + "%";
+  $("rNivelTxt").textContent = r.proxima ? "Continue faturando para avançar!" : "Nível máximo alcançado.";
+  const cad = '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
+  $("rTrilha").style.setProperty("--n", r.total); $("rPassos").style.setProperty("--n", r.total);
+  $("rTrilha").innerHTML = `<div class="mascote" aria-hidden="true"><svg viewBox="0 0 160 170"><defs><linearGradient id="mt" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#bef264"/><stop offset="1" stop-color="#4d7c0f"/></linearGradient></defs>
+      <ellipse cx="80" cy="158" rx="46" ry="8" fill="#0000001a"/><path d="M40 20h80v40a40 40 0 0 1-80 0z" fill="url(#mt)"/><path d="M40 30H18v12a24 24 0 0 0 24 24M120 30h22v12a24 24 0 0 1-24 24" fill="none" stroke="#4d7c0f" stroke-width="8"/>
+      <rect x="70" y="98" width="20" height="26" fill="#4d7c0f"/><rect x="46" y="122" width="68" height="16" rx="4" fill="#111827"/><path d="M62 34a18 18 0 0 0 10 30" stroke="#fff" stroke-opacity=".5" stroke-width="5" fill="none" stroke-linecap="round"/></svg></div>`
+    + r.niveis.map((n, i) => { const ok = !!n.conquista, atual = !ok && n.nivel === r.nivelAtual + 1;
+      return `<div class="cartaoR ${atual ? "atual" : ""}" data-n="${i}">${svgCartao(n, i, !ok)}${ok ? `<span class="feito">✓ Conquistado</span>` : `<div class="cad"><span>${cad}</span></div>`}</div>`; }).join("");
+  $("rTrilha").querySelectorAll(".cartaoR").forEach((el) => (el.onclick = () => {
+    const n = r.niveis[el.dataset.n];
+    gaveta(`<div style="display:flex;justify-content:space-between;align-items:center"><h2 style="margin:0">Nível ${n.nivel}: ${esc(n.nome || "")}</h2><button class="btn sec peq" id="fecharG">Fechar</button></div>
+      <div style="max-width:240px;margin:16px auto;border-radius:14px;overflow:hidden">${svgCartao(n, Number(el.dataset.n), !n.conquista)}</div>
+      <div class="caixa"><b>Meta:</b> ${brl(n.metaCentavos)} faturados</div><div class="caixa"><b>Prêmio:</b> ${esc(n.premio || "A definir")}</div>
+      <div class="caixa">${n.conquista ? `<b style="color:var(--ok)">Conquistado em ${data(n.conquista.atingidoEm)}</b>${n.conquista.entregueEm ? `<br>Prêmio enviado em ${data(n.conquista.entregueEm)}` : "<br>Prêmio em preparação."}` : `Faltam <b>${brl(Math.max(n.metaCentavos - r.faturamento, 0))}</b> para conquistar.`}</div>`);
+    $("fecharG").onclick = fecharGaveta;
+  }));
+  const passos = [`<div class="passoR ok"><i>✓</i>00</div>`];
+  r.niveis.forEach((n, i) => {
+    const de = i ? r.niveis[i - 1].metaCentavos : 0, f = Math.min(100, Math.max(0, ((r.faturamento - de) / (n.metaCentavos - de)) * 100));
+    passos.push(`<div class="trecho"><i style="width:${f}%"></i></div><div class="passoR ${n.conquista ? "ok" : ""}"><i>${n.conquista ? "✓" : "🔒︎"}</i>${String(n.nivel).padStart(2, "0")}</div>`);
+  });
+  $("rPassos").innerHTML = `<div></div><div class="lin">${passos.join("")}</div>`;
+}
+$("verRegulamento").onclick = () => {
+  gaveta(`<div style="display:flex;justify-content:space-between;align-items:center"><h2 style="margin:0">Regulamento</h2><button class="btn sec peq" id="fecharG">Fechar</button></div>
+    <div class="desc" style="white-space:pre-wrap;margin-top:14px">${esc(recEstado?.regulamento || "")}</div>
+    <h3 style="margin:18px 0 8px">Níveis e prêmios</h3>${(recEstado?.niveis || []).map((n) => `<div class="caixa"><b>Nível ${n.nivel} · ${brl(n.metaCentavos)}</b><br>${esc(n.premio || "A definir")}</div>`).join("")}`);
+  $("fecharG").onclick = fecharGaveta;
+};
+
+// ---------- admin: trilha ----------
+let admNiveis = [];
+function desenharNiveisAdmin() {
+  $("admNiveis").innerHTML = `<div class="nivelLinha" style="font-size:12px;color:var(--mut);border:0"><span>Nível</span><span>Meta (R$)</span><span>Nome</span><span>Prêmio</span><span></span></div>` +
+    admNiveis.map((n, i) => `<div class="nivelLinha" data-i="${i}"><b>${String(i + 1).padStart(2, "0")}</b><input data-k="meta" inputmode="decimal" value="${esc(n.meta)}"><input data-k="nome" value="${esc(n.nome)}" maxlength="40"><input data-k="premio" value="${esc(n.premio)}" maxlength="120"><button class="olho" style="position:static;transform:none;color:var(--err)" data-rm="${i}" type="button" aria-label="Remover">✕</button></div>`).join("");
+  $("admNiveis").querySelectorAll("[data-k]").forEach((el) => (el.oninput = () => (admNiveis[el.closest(".nivelLinha").dataset.i][el.dataset.k] = el.value)));
+  $("admNiveis").querySelectorAll("[data-rm]").forEach((b) => (b.onclick = () => { admNiveis.splice(Number(b.dataset.rm), 1); desenharNiveisAdmin(); }));
+}
+async function carregarTrilhaAdmin() {
+  const d = await api("/api/admin/recompensas");
+  admNiveis = d.config.niveis.map((n) => ({ meta: (n.metaCentavos / 100).toLocaleString("pt-BR"), nome: n.nome, premio: n.premio }));
+  $("admRegul").value = d.config.regulamento; desenharNiveisAdmin();
+  $("admConquistas").innerHTML = d.conquistas.length ? d.conquistas.map((c) => `<tr style="cursor:default"><td><b>${esc(c.loja)}</b><br><small style="color:var(--mut)">${esc(c.email)}</small></td>
+      <td>Nível ${c.nivel}<br><small style="color:var(--mut)">${brl(c.metaCentavos)}</small></td><td>${data(c.atingidoEm)}</td>
+      <td>${c.entregueEm ? `<span class="chip ok">Entregue</span> ` : ""}<button class="btn sec peq" data-ent="${c.lojaId}|${c.nivel}" data-v="${c.entregueEm ? 0 : 1}">${c.entregueEm ? "Desmarcar" : "Marcar entregue"}</button></td></tr>`).join("")
+    : `<tr><td colspan="4" class="vazio">Nenhuma loja atingiu um nível ainda.</td></tr>`;
+  $("admConquistas").querySelectorAll("[data-ent]").forEach((b) => (b.onclick = async () => {
+    const [lojaId, nivel] = b.dataset.ent.split("|"); await api("/api/admin/conquista/entregue", "POST", { lojaId, nivel: Number(nivel), entregue: b.dataset.v === "1" }); carregarTrilhaAdmin();
+  }));
+}
+$("addNivel").onclick = () => { admNiveis.push({ meta: "", nome: "", premio: "" }); desenharNiveisAdmin(); };
+$("salvarTrilha").onclick = async () => {
+  ocupado($("salvarTrilha"), true);
+  try { await api("/api/admin/recompensas", "PUT", { niveis: admNiveis, regulamento: $("admRegul").value }); toast("Trilha salva"); carregarTrilhaAdmin(); carregarRecompensas(false); }
+  catch (e) { toast(e.message); } finally { ocupado($("salvarTrilha"), false); }
+};
 
 // ---------- admin ----------
 async function carregarAdmin() {
@@ -640,10 +1412,13 @@ function desenharLojas() {
     <td><b>${esc(l.nome)}</b>${l.bloqueada ? ' <span class="chip err">Bloqueada</span>' : ""}<br><small style="color:var(--mut)">${esc(l.slug)} · desde ${data(l.criadoEm).split(",")[0]}</small></td>
     <td>${esc(l.dono)}<br><small style="color:var(--mut)">${esc(l.email)}</small></td>
     <td><span class="chip ${chipSh[l.shopify]}">${l.shopify}</span>${l.shopifyLoja ? `<br><small style="color:var(--mut)">${esc(l.shopifyLoja)}</small>` : ""}</td>
-    <td><span class="chip ${chipCi[l.cielo][1]}">${chipCi[l.cielo][0]}</span></td>
+    <td><select class="selPlano" data-loja="${l.id}" style="min-height:32px;padding:0 8px;max-width:150px">${planosAdm.map((p) => `<option value="${esc(p.id)}" ${p.id === l.plano ? "selected" : ""}>${esc(p.nome)}</option>`).join("")}</select></td>
     <td class="r">${l.pedidos30}</td><td class="r"><b>${brl(l.receita30)}</b></td>
     <td class="r"><button class="btn sec peq" data-bloq="${l.id}" data-nome="${esc(l.nome)}" data-acao="${l.bloqueada ? 0 : 1}">${l.bloqueada ? "Desbloquear" : "Bloquear"}</button></td></tr>`).join("")
     : `<tr><td colspan="7" class="vazio">Nenhuma loja encontrada.</td></tr>`;
+  $("admLojas").querySelectorAll(".selPlano").forEach((s) => (s.onchange = async () => {
+    try { await api("/api/admin/loja/plano", "PUT", { id: s.dataset.loja, plano: s.value }); toast("Plano da loja alterado"); } catch (e) { toast(e.message); }
+  }));
   $("admLojas").querySelectorAll("[data-bloq]").forEach((b) => (b.onclick = () => {
     const bloquear = b.dataset.acao === "1";
     gaveta(`<h2>${bloquear ? "Bloquear" : "Desbloquear"} ${b.dataset.nome}?</h2><p class="desc">${bloquear ? "O checkout desta loja deixa de aceitar compras até você desbloquear. O lojista vê um aviso no painel." : "O checkout volta a aceitar compras."}</p>
@@ -655,6 +1430,403 @@ function desenharLojas() {
 $("admBusca").oninput = desenharLojas;
 $("atualizarAdmin").onclick = () => carregarAdmin().catch((e) => toast(e.message));
 
+
+// ---------- logística ----------
+const UFS = ["AC","AL","AM","AP","BA","CE","DF","ES","GO","MA","MG","MS","MT","PA","PB","PE","PI","PR","RJ","RN","RO","RR","RS","SC","SE","SP","TO"];
+const REGIOES = { "Sudeste": ["ES","MG","RJ","SP"], "Sul": ["PR","RS","SC"], "Centro-Oeste": ["DF","GO","MS","MT"], "Nordeste": ["AL","BA","CE","MA","PB","PE","PI","RN","SE"], "Norte": ["AC","AM","AP","PA","RO","RR","TO"], "Brasil todo": UFS };
+const reais = (c) => c ? (c / 100).toFixed(2).replace(".", ",") : "";
+let regioes = [], fretes = [], embalagens = [];
+function chipsUf(sel) {
+  return `<div class="ufs">${UFS.map((u) => `<button type="button" data-uf="${u}" class="${sel.includes(u) ? "on" : ""}">${u}</button>`).join("")}</div>
+    <div class="atalhos">${Object.keys(REGIOES).map((r) => `<button type="button" data-reg="${r}">${r}</button>`).join("")}<button type="button" data-reg="">Limpar</button></div>`;
+}
+function ligarChips(box, obj) {
+  box.querySelectorAll("[data-uf]").forEach((b) => (b.onclick = () => { const u = b.dataset.uf; obj.ufs = obj.ufs.includes(u) ? obj.ufs.filter((x) => x !== u) : [...obj.ufs, u]; b.classList.toggle("on"); }));
+  box.querySelectorAll("[data-reg]").forEach((b) => (b.onclick = () => {
+    const l = REGIOES[b.dataset.reg] || [];
+    obj.ufs = b.dataset.reg ? [...new Set([...obj.ufs, ...l])] : [];
+    box.querySelectorAll("[data-uf]").forEach((x) => x.classList.toggle("on", obj.ufs.includes(x.dataset.uf)));
+  }));
+}
+function ligarCampos(box, obj) {
+  box.querySelectorAll("[data-k]").forEach((i) => (i.oninput = i.onchange = () => { obj[i.dataset.k] = i.type === "checkbox" ? i.checked : i.value; }));
+}
+const tog = (k, v) => `<label class="tog" style="margin:0"><input type="checkbox" data-k="${k}" ${v ? "checked" : ""}><span class="tr"></span><span>Ativo</span></label>`;
+
+function desenharRegioes() {
+  $("listaRegioes").innerHTML = regioes.length ? "" : `<div class="card vazio">Nenhuma regra ainda. Ex.: frete grátis no Sudeste acima de R$ 150.</div>`;
+  regioes.forEach((g, i) => {
+    const d = document.createElement("div"); d.className = "regra";
+    d.innerHTML = `<div class="topo"><input class="nome" data-k="nome" value="${esc(g.nome)}" placeholder="Nome da regra">${tog("ativo", g.ativo)}<button class="remover">Remover</button></div>
+      <label class="l">Pedido mínimo (R$) <span class="info" title="Deixe 0 para frete grátis em qualquer valor">i</span></label><input data-k="minimo" inputmode="decimal" value="${esc(g.minimo)}" placeholder="0,00" style="max-width:200px">
+      <label class="l">Estados</label>${chipsUf(g.ufs)}`;
+    ligarCampos(d, g); ligarChips(d, g);
+    d.querySelector(".remover").onclick = () => { regioes.splice(i, 1); desenharRegioes(); };
+    $("listaRegioes").appendChild(d);
+  });
+}
+const MAX_FRETES = 10;
+async function salvarFretesAgora(msg) {
+  try { estado = await api("/api/painel/config", "PUT", { secao: "logistica_custom", dados: { lista: fretes } }); preencher(); toast(msg); }
+  catch (e) { toast(e.message); }
+  carregarLogistica();
+}
+function desenharFretesCustom() {
+  $("contFretes").textContent = `${fretes.length}/${MAX_FRETES}`;
+  $("novoFrete").disabled = fretes.length >= MAX_FRETES;
+  $("listaFretes").innerHTML = fretes.length ? "" : `<div class="vazio">Nenhum frete ainda. Ex.: Sedex R$ 35,00 em até 3 dias.</div>`;
+  fretes.forEach((f, i) => {
+    const d = document.createElement("div"); d.className = "fc";
+    const val = Number(String(f.valor || "0").replace(/\./g, "").replace(",", ".")) || 0;
+    const extra = [f.prazo && (/^\d+$/.test(f.prazo) ? `até ${f.prazo} dias úteis` : f.prazo), f.ufs.length ? f.ufs.length > 5 ? `${f.ufs.length} estados` : f.ufs.join(", ") : ""].filter(Boolean).join(" · ");
+    d.innerHTML = `<label class="tog"><input type="checkbox" ${f.ativo ? "checked" : ""}><span class="tr"></span></label>
+      <div class="fn"><b>${esc(f.nome)}</b><small>${val ? brl(Math.round(val * 100)) : "Grátis"}${extra ? ` <i>· ${esc(extra)}</i>` : ""}</small></div>
+      <button class="ico" title="Editar"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg></button>
+      <button class="ico del" title="Excluir"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg></button>`;
+    d.querySelector("input").onchange = (e) => { f.ativo = e.target.checked; salvarFretesAgora(f.ativo ? `${f.nome} ativado` : `${f.nome} desativado`); };
+    d.querySelector(".ico:not(.del)").onclick = () => editarFrete(i);
+    d.querySelector(".del").onclick = () => {
+      gaveta(`<h2>Excluir "${esc(f.nome)}"?</h2><p class="desc">Ele deixa de aparecer no checkout. Pedidos já feitos não mudam.</p>
+        <div style="display:flex;gap:10px;margin-top:18px"><button class="btn pri" id="confDel">Excluir</button><button class="btn sec" id="fecharG">Cancelar</button></div>`);
+      $("fecharG").onclick = fecharGaveta;
+      $("confDel").onclick = async () => { fretes.splice(i, 1); fecharGaveta(); await salvarFretesAgora("Frete excluído"); };
+    };
+    $("listaFretes").appendChild(d);
+  });
+}
+function editarFrete(i) {
+  const novo = i === -1, f = novo ? { nome: "", prazo: "", valor: "", ufs: [], minimo: "", maximo: "", ativo: true } : { ...fretes[i], ufs: [...fretes[i].ufs] };
+  gaveta(`<div style="display:flex;justify-content:space-between;align-items:center"><h2 style="margin:0">${novo ? "Novo frete" : "Editar frete"}</h2><button class="btn sec peq" id="fecharG">Fechar</button></div>
+    <label class="l">Nome</label><input data-k="nome" value="${esc(f.nome)}" placeholder="Ex.: Sedex, PAC, Motoboy, Retirada na loja">
+    <div class="lin2"><div><label class="l">Valor (R$)</label><input data-k="valor" inputmode="decimal" value="${esc(f.valor)}" placeholder="0,00 = grátis"></div>
+      <div><label class="l">Prazo</label><input data-k="prazo" value="${esc(f.prazo)}" placeholder="5 ou 'No mesmo dia'"></div></div>
+    <div class="lin2"><div><label class="l">Pedido mínimo (R$)</label><input data-k="minimo" inputmode="decimal" value="${esc(f.minimo)}" placeholder="sem mínimo"></div>
+      <div><label class="l">Pedido máximo (R$)</label><input data-k="maximo" inputmode="decimal" value="${esc(f.maximo)}" placeholder="sem máximo"></div></div>
+    <label class="l">Estados atendidos <span class="desc" style="font-weight:400">(nenhum = Brasil todo)</span></label>${chipsUf(f.ufs)}
+    <div class="erro" id="erroFrete" style="color:var(--err);margin-top:10px;font-size:13.5px"></div>
+    <button class="btn pri" id="okFrete" style="width:100%;margin-top:14px">${novo ? "Adicionar frete" : "Salvar alterações"}</button>`);
+  const g = $("gaveta"); ligarCampos(g, f); ligarChips(g, f);
+  $("fecharG").onclick = fecharGaveta;
+  $("okFrete").onclick = async () => {
+    if (!String(f.nome).trim()) return ($("erroFrete").textContent = "Dê um nome para o frete");
+    const antes = JSON.stringify(fretes);
+    if (novo) fretes.push(f); else fretes[i] = f;
+    ocupado($("okFrete"), true);
+    try { estado = await api("/api/painel/config", "PUT", { secao: "logistica_custom", dados: { lista: fretes } }); preencher(); fecharGaveta(); toast(novo ? "Frete adicionado" : "Frete salvo"); carregarLogistica(); }
+    catch (e) { fretes = JSON.parse(antes); $("erroFrete").textContent = e.message; ocupado($("okFrete"), false); }
+  };
+  g.querySelector("[data-k=nome]").focus();
+}
+function desenharEmbalagens() {
+  $("listaEmbalagens").innerHTML = "";
+  embalagens.forEach((e, i) => {
+    const d = document.createElement("div"); d.className = "regra";
+    d.innerHTML = `<div class="topo"><input class="nome" data-k="nome" value="${esc(e.nome)}" placeholder="Nome da caixa">
+        <label style="display:flex;gap:6px;align-items:center;font-size:14px;cursor:pointer"><input type="radio" name="embPadrao" ${e.padrao ? "checked" : ""}> Padrão</label>
+        ${embalagens.length > 1 ? `<button class="remover">Remover</button>` : ""}</div>
+      <div class="lin3"><div><label class="l">Altura (cm)</label><input data-k="alturaCm" inputmode="decimal" value="${esc(e.alturaCm)}"></div>
+        <div><label class="l">Largura (cm)</label><input data-k="larguraCm" inputmode="decimal" value="${esc(e.larguraCm)}"></div>
+        <div><label class="l">Comprimento (cm)</label><input data-k="comprimentoCm" inputmode="decimal" value="${esc(e.comprimentoCm)}"></div>
+        <div><label class="l">Peso da caixa (g)</label><input data-k="pesoGramas" inputmode="numeric" value="${esc(e.pesoGramas)}"></div></div>`;
+    ligarCampos(d, e);
+    d.querySelector("[name=embPadrao]").onchange = () => embalagens.forEach((x, j) => (x.padrao = j === i));
+    const rm = d.querySelector(".remover"); if (rm) rm.onclick = () => { embalagens.splice(i, 1); desenharEmbalagens(); };
+    $("listaEmbalagens").appendChild(d);
+  });
+}
+function carregarLogistica() {
+  const lg = estado.config.logistica || {};
+  regioes = (lg.gratisRegioes || []).map((g) => ({ ...g, ufs: [...g.ufs], minimo: reais(g.minimoCentavos) }));
+  fretes = (lg.customizados || []).map((f) => ({ ...f, ufs: [...(f.ufs || [])], valor: reais(f.valorCentavos) || "0,00", minimo: reais(f.minimoCentavos), maximo: reais(f.maximoCentavos) }));
+  const emb = estado.config.shopify.embalagem;
+  embalagens = (lg.embalagens || [{ ...emb, padrao: true }]).map((e) => ({ ...e }));
+  const pl = lg.planilha || [];
+  const cep = (n) => String(n).padStart(8, "0").replace(/(\d{5})(\d{3})/, "$1-$2");
+  $("txtPlanilha").value = pl.map((l) => [cep(l.cepInicio), cep(l.cepFim), reais(l.valorCentavos) || "0,00", l.prazo, l.nome, reais(l.minimoCentavos)].join(";").replace(/;$/, "")).join("\n");
+  $("infoPlanilha").textContent = pl.length ? `${pl.length} faixa${pl.length > 1 ? "s" : ""}${lg.planilhaAtualizadaEm ? " · " + new Date(lg.planilhaAtualizadaEm).toLocaleDateString("pt-BR") : ""}` : "Nenhuma faixa";
+  $("infoPlanilha").className = "chip " + (pl.length ? "ok" : "cinza");
+  desenharRegioes(); desenharFretesCustom(); desenharEmbalagens();
+}
+$("novaRegiao").onclick = () => { regioes.push({ nome: "Frete grátis", ufs: [], minimo: "", ativo: true }); desenharRegioes(); };
+$("novoFrete").onclick = () => editarFrete(-1);
+$("novaEmbalagem").onclick = () => { embalagens.push({ nome: "Nova caixa", alturaCm: 10, larguraCm: 15, comprimentoCm: 20, pesoGramas: 200, padrao: false }); desenharEmbalagens(); };
+$("salvarRegioes").onclick = () => salvar($("salvarRegioes"), "logistica_regioes", { lista: regioes }, "Frete grátis salvo").then((ok) => ok && carregarLogistica());
+$("salvarEmbalagens").onclick = () => salvar($("salvarEmbalagens"), "embalagens", { lista: embalagens }, "Embalagens salvas").then((ok) => ok && carregarLogistica());
+$("salvarPlanilha").onclick = () => salvar($("salvarPlanilha"), "logistica_planilha", { csv: $("txtPlanilha").value }, "Planilha salva").then((ok) => ok && carregarLogistica());
+$("arqPlanilha").onchange = async (e) => {
+  const f = e.target.files[0]; if (!f) return;
+  if (f.size > 2e6) return toast("Arquivo muito grande (máx. 2 MB)");
+  $("txtPlanilha").value = (await f.text()).replace(/^﻿/, ""); e.target.value = "";
+  toast("Planilha carregada. Confira e clique em Salvar planilha.");
+};
+$("baixarModelo").onclick = () => {
+  const csv = "cep_inicio;cep_fim;valor;prazo_dias;nome;pedido_minimo\n01000-000;19999-999;18,90;3;Entrega SP;\n20000-000;28999-999;22,90;4;Entrega RJ;\n80000-000;99999-999;27,90;6;Entrega Sul;200,00\n";
+  const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob(["﻿" + csv], { type: "text/csv" })); a.download = "modelo-frete.csv"; a.click();
+};
+document.querySelectorAll(".simBtn").forEach((b) => (b.onclick = async () => {
+  const card = b.closest(".card"), out = card.querySelector(".simres");
+  // simula com o que está na tela agora: salva antes se houver mudanças
+  try {
+    const r = await api(`/api/painel/frete/simular?cep=${encodeURIComponent(card.querySelector(".simCep").value)}&valor=${encodeURIComponent(card.querySelector(".simValor").value.replace(/\./g, "").replace(",", ".") || 0)}`);
+    out.innerHTML = `<p class="desc" style="margin:0">Estado: <b>${esc(r.uf || "não identificado")}</b> · usa as regras já salvas</p>` + r.opcoes.map((o) => `<div><span>${esc(o.nome)}<br><small>${esc([o.prazo, o.gratis ? o.motivo : ""].filter(Boolean).join(" · "))}</small></span><b>${o.valorCentavos ? brl(o.valorCentavos) : "Grátis"}</b></div>`).join("");
+  } catch (e) { out.innerHTML = `<div class="res err">${esc(e.message)}</div>`; }
+}));
+$("paiLog").onclick = () => $("grpLog").classList.toggle("aberto");
+
+
+// ---------- admin: logotipos ----------
+const NOMES_APP = { shopify: "Shopify", cielo: "Cielo", appmax: "Appmax", pagarme: "Pagar.me" };
+async function carregarLogos() {
+  const r = await api("/api/admin/logos");
+  $("admLogos").innerHTML = r.apps.map((a) => `<div class="approw" style="margin:0;cursor:default"><span class="alogo">${a.tem ? `<img src="/logos?app=${a.app}&v=${Date.now()}" alt="">` : "<i>?</i>"}</span>
+    <span class="an"><b>${NOMES_APP[a.app]}</b><small>${a.tem ? "Logotipo enviado" : "Usando o ícone do site"}</small></span>
+    <label class="btn sec peq" style="cursor:pointer">Enviar<input type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml" hidden data-app="${a.app}"></label>
+    ${a.tem ? `<button class="remover" data-tirar="${a.app}">Remover</button>` : ""}</div>`).join("");
+  $("admLogos").querySelectorAll("input[type=file]").forEach((i) => (i.onchange = async () => {
+    const f = i.files[0]; if (!f) return;
+    if (f.size > 500 * 1024) return toast("Imagem grande demais (máx. 500 KB)");
+    const dataUrl = await new Promise((ok) => { const fr = new FileReader(); fr.onload = () => ok(fr.result); fr.readAsDataURL(f); });
+    try { await api("/api/admin/logo", "PUT", { app: i.dataset.app, dataUrl }); toast("Logotipo atualizado"); carregarLogos(); } catch (e) { toast(e.message); }
+  }));
+  $("admLogos").querySelectorAll("[data-tirar]").forEach((b) => (b.onclick = async () => {
+    try { await api("/api/admin/logo", "PUT", { app: b.dataset.tirar, dataUrl: null }); toast("Logotipo removido"); carregarLogos(); } catch (e) { toast(e.message); }
+  }));
+}
+
+// ---------- plano e faturas (lojista) ----------
+let plano = null;
+const dataBr = (iso) => new Date(iso).toLocaleDateString("pt-BR");
+const STF = { aberta: ["Em aberto", "warn"], paga: ["Paga", "ok"], isenta: ["Sem cobrança", "cinza"], cancelada: ["Cancelada", "cinza"] };
+function stFatura(f) { if (f.status === "aberta" && f.venceEm < new Date().toISOString()) return ["Vencida", "err"]; return STF[f.status] || [f.status, "cinza"]; }
+async function carregarPlano() { plano = await api("/api/painel/plano"); desenharPlano(); }
+function desenharPlano() {
+  const r = plano;
+  $("avisoCobranca").classList.toggle("oculto", r.cobrancaAtiva);
+  $("plNome").textContent = r.plano.nome;
+  $("plChip").textContent = r.bloqueada && r.motivoBloqueio === "fatura" ? "Checkout bloqueado" : "Ativo"; $("plChip").className = "chip " + (r.bloqueada ? "err" : "ok");
+  $("plMens").textContent = brl(r.plano.mensalidadeCentavos); $("plCom").textContent = String(r.plano.comissaoPct).replace(".", ",") + "%";
+  $("plCiclo").textContent = `${dataBr(r.ciclo.inicio)} a ${dataBr(r.ciclo.fim)}`;
+  $("plVendas").textContent = `${brl(r.ciclo.vendasCentavos)} · ${r.ciclo.pedidos} pedido${r.ciclo.pedidos === 1 ? "" : "s"}`;
+  $("plPrev").textContent = brl(r.ciclo.totalCentavos);
+  $("cbNome").value = r.dados.nome; $("cbDoc").value = r.dados.documento; $("cbTel").value = r.dados.telefone;
+  const c = r.cartao;
+  $("plCartao").innerHTML = c ? `<div style="display:flex;gap:24px;flex-wrap:wrap;align-items:center">
+      <div class="cartao-vis"><div style="display:flex;justify-content:space-between;align-items:center"><span class="chipc"></span><span class="band">${esc(c.bandeira)}</span></div>
+        <div class="num">•••• •••• •••• ${esc(c.ultimos4)}</div><div><small>TITULAR</small><div style="font-weight:600">${esc((c.titular || "").toUpperCase())}</div></div></div>
+      <div style="flex:1;min-width:220px"><p class="desc">Cobramos a fatura mensal neste cartão. Para trocar, pague a próxima fatura com outro cartão e marque "salvar".</p>
+        <button class="btn sec" id="tirarCartao" style="color:var(--err)">Remover cartão</button></div></div>`
+    : `<div class="vazio" style="padding:18px">Nenhum cartão salvo. Ao pagar uma fatura com cartão, você pode salvá-lo para as próximas cobranças automáticas.</div>`;
+  if (c) $("tirarCartao").onclick = async () => { try { plano = await api("/api/painel/plano/cartao/remover", "POST", {}); desenharPlano(); toast("Cartão removido"); } catch (e) { toast(e.message); } };
+  const abertas = r.faturas.filter((f) => f.status === "aberta");
+  $("pagarAgora").classList.toggle("oculto", !abertas.length || !r.cobrancaAtiva);
+  $("pagarAgora").onclick = () => pagarFatura(abertas[abertas.length - 1]);
+  $("tbFaturas").innerHTML = r.faturas.length ? r.faturas.map((f) => { const st = stFatura(f); return `<tr style="cursor:default">
+    <td>${dataBr(f.inicio)} a ${dataBr(f.fim)}<br><small style="color:var(--mut)">${esc(f.plano)} · ${String(f.comissaoPct).replace(".", ",")}%</small></td>
+    <td class="r">${brl(f.vendasCentavos)}<br><small style="color:var(--mut)">${f.pedidos} pedidos</small></td><td class="r">${brl(f.comissaoCentavos)}</td><td class="r"><b>${brl(f.totalCentavos)}</b></td>
+    <td>${f.status === "aberta" ? dataBr(f.venceEm) : f.pagoEm ? "Paga em " + dataBr(f.pagoEm) : "–"}</td><td><span class="chip ${st[1]}">${st[0]}</span></td>
+    <td class="r">${f.status === "aberta" && r.cobrancaAtiva ? `<button class="btn sec peq" data-pagar="${f.id}">Pagar</button>` : ""}</td></tr>`; }).join("")
+    : `<tr><td colspan="7" class="vazio">Nenhuma fatura ainda. A primeira fecha em ${dataBr(r.ciclo.fim)}.</td></tr>`;
+  $("tbFaturas").querySelectorAll("[data-pagar]").forEach((b) => (b.onclick = () => pagarFatura(r.faturas.find((f) => f.id === b.dataset.pagar))));
+}
+$("salvarCb").onclick = async () => {
+  ocupado($("salvarCb"), true);
+  try { plano = await api("/api/painel/plano/dados", "PUT", { nome: $("cbNome").value, documento: $("cbDoc").value, telefone: $("cbTel").value }); desenharPlano(); toast("Dados de cobrança salvos"); }
+  catch (e) { toast(e.message); } finally { ocupado($("salvarCb"), false); }
+};
+let timerFatura = null;
+function pagarFatura(f) {
+  clearInterval(timerFatura);
+  const c = plano.cartao;
+  gaveta(`<div style="display:flex;justify-content:space-between;align-items:center"><h2 style="margin:0">Pagar fatura</h2><button class="btn sec peq" id="fecharG">Fechar</button></div>
+    <p class="desc" style="margin-top:10px">${dataBr(f.inicio)} a ${dataBr(f.fim)} · <b style="color:var(--ink)">${brl(f.totalCentavos)}</b></p>
+    <div style="display:flex;gap:8px;margin:14px 0"><button class="btn pri peq" id="abaPix">Pix</button><button class="btn sec peq" id="abaCartao">Cartão</button></div>
+    <div id="pgPix"><p class="desc">Gere o Pix e pague no app do seu banco. A fatura é baixada sozinha em alguns segundos.</p><button class="btn pri" id="gerarPix" style="width:100%">Gerar Pix</button><div id="pixOut"></div></div>
+    <div id="pgCartao" class="oculto">
+      ${c ? `<button class="btn pri" id="pagarSalvo" style="width:100%">Pagar com o cartão final ${esc(c.ultimos4)}</button><p class="desc" style="text-align:center;margin:12px 0">ou use outro cartão</p>` : ""}
+      <label class="l" style="margin-top:0">Número do cartão</label><input id="fcNum" inputmode="numeric" autocomplete="cc-number">
+      <label class="l">Nome impresso no cartão</label><input id="fcNome" autocomplete="cc-name">
+      <div class="lin2"><div><label class="l">Validade (MM/AAAA)</label><input id="fcVal" inputmode="numeric" placeholder="MM/AAAA" autocomplete="cc-exp"></div><div><label class="l">CVV</label><input id="fcCvv" inputmode="numeric" maxlength="4" autocomplete="cc-csc"></div></div>
+      <label style="display:flex;gap:8px;align-items:center;margin-top:12px;font-size:14px"><input type="checkbox" id="fcSalvar" checked> Salvar este cartão para as próximas faturas</label>
+      <button class="btn pri" id="pagarNovo" style="width:100%;margin-top:14px">Pagar ${brl(f.totalCentavos)}</button>
+    </div>
+    <div id="resFat"></div>`);
+  $("fecharG").onclick = () => { clearInterval(timerFatura); fecharGaveta(); };
+  const aba = (pix) => { $("pgPix").classList.toggle("oculto", !pix); $("pgCartao").classList.toggle("oculto", pix); $("abaPix").className = "btn peq " + (pix ? "pri" : "sec"); $("abaCartao").className = "btn peq " + (pix ? "sec" : "pri"); };
+  $("abaPix").onclick = () => aba(true); $("abaCartao").onclick = () => aba(false);
+  const pronto = (r) => { clearInterval(timerFatura); if (r.plano) { plano = r; desenharPlano(); } $("gaveta").innerHTML = `<div style="text-align:center;padding:40px 10px"><div style="font-size:44px">✓</div><h2>Fatura paga</h2><p class="desc">Obrigado! ${plano.bloqueada ? "" : "Seu checkout está liberado."}</p><button class="btn pri" id="fecharG2">Fechar</button></div>`; $("fecharG2").onclick = fecharGaveta; api("/api/conta/eu").catch(() => {}); carregarPlano().catch(() => {}); };
+  $("gerarPix").onclick = async () => {
+    ocupado($("gerarPix"), true); $("resFat").innerHTML = "";
+    try {
+      const r = await api("/api/painel/fatura/pix", "POST", { id: f.id });
+      $("pixOut").innerHTML = `${r.qrCodeUrl ? `<img src="${esc(r.qrCodeUrl)}" alt="QR Code Pix" style="width:220px;height:220px;display:block;margin:14px auto">` : ""}
+        <label class="l">Pix copia e cola</label><div class="code" id="pixCod"></div><p class="desc" style="margin-top:10px">Aguardando o pagamento…</p>`;
+      codigo("pixCod", r.copiaECola); $("gerarPix").classList.add("oculto");
+      timerFatura = setInterval(async () => { const x = await api("/api/painel/fatura?id=" + f.id).catch(() => null); if (x?.fatura?.status === "paga") pronto(x); }, 5000);
+    } catch (e) { $("resFat").innerHTML = `<div class="res err">${esc(e.message)}</div>`; } finally { ocupado($("gerarPix"), false); }
+  };
+  if (c) $("pagarSalvo").onclick = async () => {
+    ocupado($("pagarSalvo"), true); $("resFat").innerHTML = "";
+    try { pronto(await api("/api/painel/fatura/cartao", "POST", { id: f.id })); } catch (e) { $("resFat").innerHTML = `<div class="res err">${esc(e.message)}</div>`; ocupado($("pagarSalvo"), false); }
+  };
+  $("fcNum").oninput = (e) => { const v = e.target.value.replace(/\D/g, "").slice(0, 19); e.target.value = v.replace(/(\d{4})(?=\d)/g, "$1 "); };
+  $("fcVal").oninput = (e) => { const v = e.target.value.replace(/\D/g, "").slice(0, 6); e.target.value = v.length > 2 ? v.slice(0, 2) + "/" + v.slice(2) : v; };
+  $("pagarNovo").onclick = async () => {
+    $("resFat").innerHTML = "";
+    const num = $("fcNum").value.replace(/\D/g, ""), [mes, ano] = $("fcVal").value.split("/");
+    if (num.length < 13 || !$("fcNome").value.trim() || !/^\d{2}$/.test(mes || "") || !/^\d{4}$/.test(ano || "") || $("fcCvv").value.length < 3)
+      return ($("resFat").innerHTML = `<div class="res err">Confira os dados do cartão</div>`);
+    ocupado($("pagarNovo"), true);
+    try {
+      // o cartão vai direto do navegador para a Pagar.me; o Fluxofy só recebe o token
+      const t = await fetch("https://api.pagar.me/core/v5/tokens?appId=" + encodeURIComponent(plano.chavePublica), { method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type: "card", card: { number: num, holder_name: $("fcNome").value.trim(), exp_month: Number(mes), exp_year: Number(ano), cvv: $("fcCvv").value } }) });
+      const tk = await t.json().catch(() => ({}));
+      if (!t.ok || !tk.id) throw new Error("Dados do cartão inválidos. Confira número, validade e CVV.");
+      ["fcNum", "fcNome", "fcVal", "fcCvv"].forEach((id) => ($(id).value = ""));
+      pronto(await api("/api/painel/fatura/cartao", "POST", { id: f.id, token: tk.id, salvar: $("fcSalvar").checked }));
+    } catch (e) { $("resFat").innerHTML = `<div class="res err">${esc(e.message)}</div>`; ocupado($("pagarNovo"), false); }
+  };
+}
+
+// ---------- admin: cobrança e planos ----------
+let planosAdm = [];
+async function carregarCobrancaAdm() {
+  const r = await api("/api/admin/cobranca");
+  planosAdm = r.planos;
+  if (admLojas.length) desenharLojas();
+  $("cobPk").value = r.chavePublica; $("cobSk").value = ""; $("cobSk").placeholder = r.chaveSecretaSalva ? "Salva. Deixe vazio para manter" : "sk_…";
+  $("cobDias").value = r.diasParaPagar; codigo("cobWebhook", r.webhook);
+  $("cobChip").textContent = r.ativa ? (r.chavePublica.startsWith("pk_test_") ? "Ativa · teste" : "Ativa · produção") : "Desativada";
+  $("cobChip").className = "chip " + (r.ativa ? "ok" : "cinza");
+  desenharPlanosAdm();
+  $("admFaturas").innerHTML = r.faturas.length ? r.faturas.map((f) => { const st = stFatura(f); return `<tr style="cursor:default"><td><b>${esc(f.loja)}</b><br><small style="color:var(--mut)">${esc(f.slug)}</small></td>
+    <td>${dataBr(f.inicio)} a ${dataBr(f.fim)}</td><td class="r">${brl(f.vendasCentavos)}</td><td class="r"><b>${brl(f.totalCentavos)}</b></td>
+    <td>${dataBr(f.venceEm)}${f.tentativas ? `<br><small style="color:var(--mut)">${f.tentativas} tentativa(s)</small>` : ""}</td><td><span class="chip ${st[1]}">${st[0]}</span></td>
+    <td class="r">${f.status === "aberta" ? `<button class="btn sec peq" data-fst="paga" data-id="${f.id}">Marcar paga</button> <button class="btn sec peq" data-fst="isenta" data-id="${f.id}">Isentar</button>` : ""}</td></tr>`; }).join("")
+    : `<tr><td colspan="7" class="vazio">Nenhuma fatura ainda. Elas fecham no fim do ciclo mensal de cada loja.</td></tr>`;
+  $("admFaturas").querySelectorAll("[data-fst]").forEach((b) => (b.onclick = async () => {
+    if (!confirm(b.dataset.fst === "paga" ? "Marcar esta fatura como paga (recebida fora do painel)?" : "Isentar esta fatura? Ela não será cobrada.")) return;
+    try { await api("/api/admin/fatura/status", "POST", { id: b.dataset.id, status: b.dataset.fst }); toast("Fatura atualizada"); carregarCobrancaAdm(); carregarAdmin(); } catch (e) { toast(e.message); }
+  }));
+}
+function desenharPlanosAdm() {
+  $("admPlanos").innerHTML = planosAdm.map((p, i) => `<div class="regra" style="padding:12px" data-i="${i}">
+    <div class="topo"><input class="nome" data-k="nome" value="${esc(p.nome)}" placeholder="Nome do plano">
+      <label style="display:flex;gap:6px;align-items:center;font-size:13.5px"><input type="radio" name="plPadrao" ${p.padrao ? "checked" : ""}> Padrão</label>
+      ${planosAdm.length > 1 ? `<button class="remover">Remover</button>` : ""}</div>
+    <div class="lin2"><div><label class="l">Mensalidade (R$)</label><input data-k="mensalidade" inputmode="decimal" value="${esc(p.mensalidade ?? (p.mensalidadeCentavos / 100).toFixed(2).replace(".", ","))}"></div>
+      <div><label class="l">Comissão por venda (%)</label><input data-k="comissaoPct" inputmode="decimal" value="${esc(String(p.comissaoPct).replace(".", ","))}"></div></div></div>`).join("");
+  $("admPlanos").querySelectorAll(".regra").forEach((d) => {
+    const p = planosAdm[d.dataset.i]; ligarCampos(d, p);
+    d.querySelector("[name=plPadrao]").onchange = () => planosAdm.forEach((x) => (x.padrao = x === p));
+    const rm = d.querySelector(".remover"); if (rm) rm.onclick = () => { planosAdm.splice(d.dataset.i, 1); desenharPlanosAdm(); };
+  });
+}
+$("novoPlano").onclick = () => { planosAdm.push({ nome: "Novo plano", mensalidadeCentavos: 0, comissaoPct: 1, padrao: false }); desenharPlanosAdm(); };
+$("salvarPlanos").onclick = async () => {
+  ocupado($("salvarPlanos"), true);
+  try { await api("/api/admin/planos", "PUT", { planos: planosAdm.map((p) => ({ ...p, mensalidade: p.mensalidade ?? p.mensalidadeCentavos / 100 })) }); toast("Planos salvos"); carregarCobrancaAdm(); carregarAdmin(); }
+  catch (e) { toast(e.message); } finally { ocupado($("salvarPlanos"), false); }
+};
+$("salvarCob").onclick = async () => {
+  ocupado($("salvarCob"), true);
+  try { await api("/api/admin/cobranca", "PUT", { chavePublica: $("cobPk").value.trim(), chaveSecreta: $("cobSk").value.trim(), diasParaPagar: $("cobDias").value }); toast("Conta de cobrança salva"); carregarCobrancaAdm(); }
+  catch (e) { toast(e.message); } finally { ocupado($("salvarCob"), false); }
+};
+$("testarCob").onclick = async () => {
+  ocupado($("testarCob"), true); $("resCob").innerHTML = "";
+  try { const r = await api("/api/admin/cobranca/testar", "POST", {}); $("resCob").innerHTML = r.ok ? `<div class="res ok">Chaves aceitas pela Pagar.me.</div>` : `<div class="res err">${esc(r.motivo)}</div>`; }
+  catch (e) { $("resCob").innerHTML = `<div class="res err">${esc(e.message)}</div>`; } finally { ocupado($("testarCob"), false); }
+};
+$("rodarCob").onclick = async () => {
+  ocupado($("rodarCob"), true);
+  try { await api("/api/admin/cobranca/rodar", "POST", {}); toast("Ciclos fechados e cobranças tentadas"); carregarCobrancaAdm(); carregarAdmin(); }
+  catch (e) { toast(e.message); } finally { ocupado($("rodarCob"), false); }
+};
+
+// ---------- e-mails transacionais ----------
+let em = null;
+const STE = { enviado: ["Enviado", "ok"], simulado: ["Simulado", "cinza"], erro: ["Erro", "err"], enviando: ["Enviando", "warn"] };
+async function carregarEmails() { em = await api("/api/painel/emails"); desenharEmails(); }
+function desenharEmails() {
+  const c = em.config;
+  $("emAvisoEnvio").classList.toggle("oculto", em.envioAtivo);
+  $("emAvisoShopify").classList.toggle("oculto", !(em.shopifyConfirmacao && c.eventos.pedido_aprovado.ativo));
+  $("emNome").value = c.nomeRemetente; $("emResp").value = c.responderPara; $("emLoj").value = c.emailLojista;
+  $("emDe").textContent = em.remetente ? `Os e-mails saem de "${c.nomeRemetente} <${em.remetente}>". As respostas dos clientes vão para o seu e-mail.` : "";
+  $("listaEmails").innerHTML = "";
+  for (const [k, d] of Object.entries(em.eventos)) {
+    const e = c.eventos[k], row = document.createElement("div"); row.className = "fc";
+    row.innerHTML = `<label class="tog"><input type="checkbox" ${e.ativo ? "checked" : ""}><span class="tr"></span></label>
+      <div class="fn"><b>${esc(d.nome)} <span class="chip cinza" style="font-size:11px;padding:1px 8px">${d.para === "lojista" ? "para você" : "para o cliente"}</span>${e.personalizado ? ' <span class="chip ok" style="font-size:11px;padding:1px 8px">editado</span>' : ""}</b>
+        <small><i>${esc(d.descricao)}${d.atraso ? ` Enviado ${e.atrasoMin} min depois.` : ""}</i></small></div>
+      <button class="ico" title="Editar"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg></button>`;
+    row.querySelector("input").onchange = async (ev) => {
+      try { const r = await api("/api/painel/emails", "PUT", { evento: k, ativo: ev.target.checked }); em.config = r.config; desenharEmails(); toast(`${d.nome}: ${ev.target.checked ? "ativado" : "desativado"}`); }
+      catch (x) { toast(x.message); }
+    };
+    row.querySelector(".ico").onclick = () => editarEmail(k);
+    $("listaEmails").appendChild(row);
+  }
+  $("tbEmails").innerHTML = em.historico.length ? em.historico.map((h) => { const st = STE[h.status] || [h.status, "cinza"]; return `<tr style="cursor:default">
+    <td>${new Date(h.criadoEm).toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" })}</td>
+    <td>${esc(em.eventos[h.evento]?.nome || h.evento)}<br><small style="color:var(--mut)">${esc(h.assunto)}</small></td><td>${esc(h.para)}</td>
+    <td><span class="chip ${st[1]}" ${h.erro ? `title="${esc(h.erro)}"` : ""}>${st[0]}</span></td></tr>`; }).join("")
+    : `<tr><td colspan="4" class="vazio">Nenhum e-mail ainda.</td></tr>`;
+}
+function editarEmail(k) {
+  const d = em.eventos[k], e = em.config.eventos[k];
+  gaveta(`<div style="display:flex;justify-content:space-between;align-items:center"><h2 style="margin:0">${esc(d.nome)}</h2><button class="btn sec peq" id="fecharG">Fechar</button></div>
+    <p class="desc" style="margin-top:8px">${esc(d.descricao)}</p>
+    ${d.atraso ? `<label class="l">Enviar quantos minutos depois do abandono</label><input id="emAtraso" inputmode="numeric" value="${e.atrasoMin}" style="max-width:120px">` : ""}
+    <label class="l">Assunto</label><input id="emAssunto" value="${esc(e.assunto)}">
+    <label class="l">Mensagem</label><textarea id="emCorpo" class="csv" style="min-height:260px;font-family:inherit;font-size:14px">${esc(e.corpo)}</textarea>
+    <p class="desc" style="margin:8px 0 0">Clique para inserir uma variável. Para um botão, escreva numa linha só: <code>[Texto do botão](https://…)</code></p>
+    <div class="varchips">${Object.entries(em.variaveis).map(([v, t]) => `<button type="button" title="${esc(t)}" data-v="${v}">{{${v}}}</button>`).join("")}</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px"><button class="btn pri" id="emSalvar">Salvar</button><button class="btn sec" id="emPrevia">Pré-visualizar</button>
+      <button class="btn sec" id="emTeste">Enviar teste para mim</button><button class="btn sec" id="emPadrao">Restaurar padrão</button></div>
+    <div id="emRes"></div><div id="emPrevBox"></div>`);
+  $("fecharG").onclick = fecharGaveta;
+  const ta = $("emCorpo");
+  $("gaveta").querySelectorAll("[data-v]").forEach((b) => (b.onclick = () => {
+    const t = `{{${b.dataset.v}}}`, i = ta.selectionStart ?? ta.value.length;
+    ta.value = ta.value.slice(0, i) + t + ta.value.slice(ta.selectionEnd ?? i); ta.focus(); ta.selectionStart = ta.selectionEnd = i + t.length;
+  }));
+  const dados = () => ({ evento: k, assunto: $("emAssunto").value, corpo: ta.value, ...(d.atraso ? { atrasoMin: $("emAtraso").value } : {}) });
+  $("emSalvar").onclick = async () => {
+    ocupado($("emSalvar"), true);
+    try { const r = await api("/api/painel/emails", "PUT", dados()); em.config = r.config; desenharEmails(); fecharGaveta(); toast("E-mail salvo"); }
+    catch (x) { $("emRes").innerHTML = `<div class="res err">${esc(x.message)}</div>`; ocupado($("emSalvar"), false); }
+  };
+  $("emPrevia").onclick = async () => {
+    try {
+      const r = await api("/api/painel/emails/previa", "POST", dados());
+      $("emPrevBox").innerHTML = `<p class="desc" style="margin:14px 0 0"><b>Assunto:</b> ${esc(r.assunto)} · com dados de exemplo</p><iframe class="previa" sandbox></iframe>`;
+      $("emPrevBox").querySelector("iframe").srcdoc = r.html;
+    } catch (x) { $("emRes").innerHTML = `<div class="res err">${esc(x.message)}</div>`; }
+  };
+  $("emTeste").onclick = async () => {
+    ocupado($("emTeste"), true); $("emRes").innerHTML = "";
+    try { const r = await api("/api/painel/emails/teste", "POST", dados()); $("emRes").innerHTML = `<div class="res ok">Teste enviado para ${esc(r.para)}.</div>`; }
+    catch (x) { $("emRes").innerHTML = `<div class="res err">${esc(x.message)}</div>`; } finally { ocupado($("emTeste"), false); }
+  };
+  $("emPadrao").onclick = () => { $("emAssunto").value = d.assunto; ta.value = d.corpo; toast("Texto padrão restaurado. Clique em Salvar para manter."); };
+}
+$("salvarRem").onclick = async () => {
+  ocupado($("salvarRem"), true);
+  try { const r = await api("/api/painel/emails", "PUT", { remetente: { nomeRemetente: $("emNome").value, responderPara: $("emResp").value, emailLojista: $("emLoj").value } }); em.config = r.config; desenharEmails(); toast("Remetente salvo"); }
+  catch (x) { toast(x.message); } finally { ocupado($("salvarRem"), false); }
+};
+async function carregarEmailAdm() {
+  const r = await api("/api/admin/email");
+  $("admEmRem").value = r.remetente; $("admEmKey").value = ""; $("admEmKey").placeholder = r.chaveSalva ? "Salva. Deixe vazio para manter" : "re_…";
+  $("admEmChip").textContent = r.ativo ? "Ativo" : "Desativado"; $("admEmChip").className = "chip " + (r.ativo ? "ok" : "cinza");
+}
+$("admEmSalvar").onclick = async () => {
+  ocupado($("admEmSalvar"), true);
+  try { await api("/api/admin/email", "PUT", { remetente: $("admEmRem").value, apiKey: $("admEmKey").value }); toast("Envio de e-mails salvo"); carregarEmailAdm(); }
+  catch (x) { toast(x.message); } finally { ocupado($("admEmSalvar"), false); }
+};
 // ---------- rotas ----------
 function rota() {
   if (!estado) return;
@@ -662,14 +1834,29 @@ function rota() {
   let valida = document.querySelector(`section[data-v="${v}"]`) ? v : "inicio";
   if (valida === "admin" && !souAdmin) valida = "inicio";
   document.querySelectorAll("main section").forEach((s) => s.classList.toggle("oculto", s.dataset.v !== valida));
-  const aba = { shopify: "integracoes", cielo: "integracoes" }[valida] || valida;
+  const aba = { shopify: "integracoes", cielo: "integracoes", appmax: "integracoes", pagarme: "integracoes" }[valida] || valida;
   document.querySelectorAll("#abas a").forEach((a) => a.classList.toggle("on", a.getAttribute("href") === "#" + aba));
+  const emVendas = ["pedidos", "reembolsos", "abandonados", "recuperacao", "links"].includes(valida);
+  $("grpVendas").classList.toggle("ativo", emVendas); if (emVendas) $("grpVendas").classList.add("aberto");
+  const emLog = ["frete-gratis", "fretes", "frete-planilha", "embalagem"].includes(valida);
+  $("grpLog").classList.toggle("ativo", emLog); if (emLog) { $("grpLog").classList.add("aberto"); carregarLogistica(); }
   if (valida === "pedidos") carregarPedidos().catch((e) => toast(e.message));
   if (valida === "inicio") carregarResumo();
-  if (valida === "admin") carregarAdmin().catch((e) => toast(e.message));
+  if (valida === "admin") { carregarLogos().catch((e) => toast(e.message)); carregarCobrancaAdm().catch((e) => toast(e.message)); }
+  if (valida === "planos") carregarPlano().catch((e) => toast(e.message));
+  if (valida === "emails") carregarEmails().catch((e) => toast(e.message));
+  if (valida === "admin") carregarEmailAdm().catch((e) => toast(e.message));
+  if (valida === "admin") { carregarAdmin().catch((e) => toast(e.message)); carregarTrilhaAdmin().catch((e) => toast(e.message)); }
+  if (valida === "recompensas") carregarRecompensas(true).catch((e) => toast(e.message));
+  if (valida === "produtos") carregarProdutos();
+  if (valida === "reembolsos") carregarReembolsos().catch((e) => toast(e.message));
+  if (valida === "abandonados") carregarAbandonos().catch((e) => toast(e.message));
+  if (valida === "recuperacao") carregarRecuperacao().catch((e) => toast(e.message));
+  if (valida === "links") carregarLinks().catch((e) => toast(e.message));
   window.scrollTo(0, 0);
 }
 addEventListener("hashchange", rota);
+$("paiVendas").onclick = () => $("grpVendas").classList.toggle("aberto");
 iniciar().catch((e) => toast(e.message));
 }
 </script>
